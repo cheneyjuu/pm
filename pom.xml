@@ -499,7 +499,7 @@
 					<useTestClasspath>true</useTestClasspath>
 
 					<webAppConfig>
-						<contextPath>/${project.artifactId}</contextPath>
+						<contextPath>/</contextPath>
 					</webAppConfig>
 				</configuration>
 			</plugin>

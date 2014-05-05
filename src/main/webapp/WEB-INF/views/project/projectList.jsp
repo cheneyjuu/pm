@@ -43,7 +43,7 @@
             <div class="col-md-10">
                 <div class="row project-list">
                     <div class="col-md-4 well">
-                        <a href="${ctx}/project/index"><h3>项目名称</h3></a>
+                        <h3><a href="${ctx}/project/index">项目名称</a></h3>
                         <em>项目子标题</em>
                         <small class="center-block">2014年5月4日创建</small>
                         <a href="${ctx}/project/index">

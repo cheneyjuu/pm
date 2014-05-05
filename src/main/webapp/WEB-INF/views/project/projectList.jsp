@@ -16,9 +16,6 @@
         .col-md-2{
             /*margin-left: 15px;*/
         }
-        .navbar-collapse{
-            padding: 0;
-        }
         .project-list > div{
             margin-right: 15px;
             padding: 10px;
@@ -35,21 +32,6 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-            <nav class="navbar navbar-default">
-                <ul class="nav navbar-nav">
-                    <li><a href="${ctx}/project/list">项目列表</a></li>
-                    <li><a href="#">日程</a></li>
-                    <li><a href="#">浏览</a></li>
-                    <li><a href="#">时间轴</a></li>
-                    <li><a href="#">用户管理</a></li>
-                    <li><a href="#">个人中心</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
     <div class="container">
         <div class="row">
             <div class="col-md-2">

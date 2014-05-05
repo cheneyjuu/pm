@@ -22,18 +22,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-            <nav class="navbar navbar-default">
-                <ul class="nav navbar-nav">
-                    <li><a href="${ctx}/project/list">项目列表</a></li>
-                    <li><a href="#">日程</a></li>
-                    <li><a href="#">浏览</a></li>
-                    <li><a href="#">时间轴</a></li>
-                    <li><a href="#">用户管理</a></li>
-                    <li><a href="#">个人中心</a></li>
-                </ul>
-            </nav>
-        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
@@ -50,7 +38,7 @@
                 <hr/>
                 <ul class="nav nav-pills">
                     <li class="disabled"><a href="#">新建：</a></li>
-                    <li><a href="#">讨论</a></li>
+                    <li><a href="${ctx}/discuss/index">讨论</a></li>
                     <li><a href="#">TODOS</a></li>
                     <li><a href="#">文件</a></li>
                     <li><a href="#">事件</a></li>
@@ -63,8 +51,8 @@
             </div>
             <div class="panel-footer">
                 <div id="project-operation">
-                    <a href="#">项目设置</a>
-                    <a href="#" class="pull-right">删除项目</a>
+                    <a href="#" class="text-muted">项目设置</a>
+                    <a href="#" class="pull-right text-muted">删除项目</a>
                 </div>
                 <div id="project-setting">
                     <span class="center-block">

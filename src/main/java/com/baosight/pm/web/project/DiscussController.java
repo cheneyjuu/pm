@@ -1,4 +1,4 @@
-package com.baosight.pm.web.discuss;
+package com.baosight.pm.web.project;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +14,6 @@ public class DiscussController {
 
     @RequestMapping (value = "index")
     public String index(){
-        return "discuss/discussForm";
+        return "project/discussForm";
     }
 }

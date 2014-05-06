@@ -40,7 +40,7 @@
                     <li class="disabled"><a href="#">新建：</a></li>
                     <li><a href="${ctx}/discuss/index">讨论</a></li>
                     <li><a href="${ctx}/todolists/index">TODOS</a></li>
-                    <li><a href="#">文件</a></li>
+                    <li><a href="${ctx}/files/index">文件</a></li>
                     <li><a href="#">事件</a></li>
                 </ul>
                 <hr/>

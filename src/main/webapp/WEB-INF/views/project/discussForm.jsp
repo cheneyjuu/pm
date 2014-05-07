@@ -8,19 +8,6 @@
     <script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="${ctx}/static/ueditor/ueditor.all.min.js"></script>
-    <style>
-        .discuss-title{
-            height: 50px;
-            font-size: 24px;
-        }
-        #project-setting{
-            display: none;
-        }
-        .post-btn{
-            margin-top: 15px;
-            width: 100px;
-        }
-    </style>
     <script type="text/javascript">
         $(function(){
             window.UEDITOR_HOME_URL = "${ctx}/static/ueditor/";

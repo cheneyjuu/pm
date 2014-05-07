@@ -13,12 +13,17 @@
         .div-bordered{
             border: 1px solid #cccccc;
             padding: 15px;
-            margin-left: 4%;
-            margin-top: 15px;
-            width: 20%;
+            margin-left: 1%;
+            margin-top: 1%;
+            width: 23.8%;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
         }
         input[type="file"]{
             display: inline;
+        }
+        .file-icon{
+            height: 100px;
         }
     </style>
 </head>
@@ -30,19 +35,15 @@
         </div>
         <div class="panel-body">
             <div class="page-header">
-                <h4>
-                    所有文件
-                    <input type="file" value="添加新文件" class="add-todo"/>
-                    <span class="pull-right">
-                        <small>根据标签查看文件</small>
-                        <a href="#"><span class="label label-info">所有标签</span></a>
-                    </span>
-                </h4>
-
+                <h4>所有文件 <button class="btn btn-default btn-sm" class="add-todo"><span class="glyphicon glyphicon-plus"></span> 添加新文件</button></h4>
+                <span class="pull-right">
+                    <small>根据标签查看文件</small>
+                    <a href="#"><span class="label label-info">所有标签</span></a>
+                </span>
             </div>
             <div class="row">
-                <div class="col-md-4 div-bordered">
-                    <img src="${ctx}/static/images/example/3.jpg" alt="word" class="img-rounded center-block">
+                <div class="div-bordered">
+                    <a href="#"><img src="${ctx}/static/images/example/word.png" alt="word" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
                     <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
@@ -50,8 +51,8 @@
                     <span class="label label-info">圣诞狗</span>
                     <a href="#"><span class="label label-default">添加新标签</span></a>
                 </div>
-                <div class="col-md-4 div-bordered">
-                    <img src="${ctx}/static/images/example/3.jpg" alt="word" class="img-rounded center-block">
+                <div class="div-bordered">
+                    <a href="#"><img src="${ctx}/static/images/example/ppt.png" alt="ppt" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
                     <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
@@ -59,8 +60,8 @@
                     <span class="label label-info">圣诞狗</span>
                     <a href="#"><span class="label label-default">添加新标签</span></a>
                 </div>
-                <div class="col-md-4 div-bordered">
-                    <img src="${ctx}/static/images/example/3.jpg" alt="word" class="img-rounded center-block">
+                <div class="div-bordered">
+                    <a href="#"><img src="${ctx}/static/images/example/excel.png" alt="excel" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
                     <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
@@ -68,8 +69,8 @@
                     <span class="label label-info">圣诞狗</span>
                     <a href="#"><span class="label label-default">添加新标签</span></a>
                 </div>
-                <div class="col-md-4 div-bordered">
-                    <img src="${ctx}/static/images/example/3.jpg" alt="word" class="img-rounded center-block">
+                <div class="div-bordered">
+                    <a href="#"><img src="${ctx}/static/images/example/folder.png" alt="folder" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
                     <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
@@ -77,8 +78,8 @@
                     <span class="label label-info">圣诞狗</span>
                     <a href="#"><span class="label label-default">添加新标签</span></a>
                 </div>
-                <div class="col-md-4 div-bordered">
-                    <img src="${ctx}/static/images/example/3.jpg" alt="word" class="img-rounded center-block">
+                <div class="div-bordered">
+                    <a href="#"><img src="${ctx}/static/images/example/rar.png" alt="rar" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
                     <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>

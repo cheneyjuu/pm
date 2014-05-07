@@ -45,7 +45,7 @@
         </div>
         <div class="panel-body">
             <div class="page-header">
-                <h4>To do lists <button class="btn btn-default btn-sm" class="add-todo">添加To do lists</button></h4>
+                <h4>To do lists <button class="btn btn-default btn-sm" class="add-todo"><span class="glyphicon glyphicon-plus"></span> 添加To do lists</button></h4>
             </div>
             <div class="row">
                 <div class="col-md-9 todo-lists">

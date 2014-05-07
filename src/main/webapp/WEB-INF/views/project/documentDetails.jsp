@@ -40,7 +40,6 @@
     <script>
         $(function(){
             var content = markdown.toHTML($("#text-input").text());
-            console.log(content);
             $("#preview").html(content);
         });
     </script>

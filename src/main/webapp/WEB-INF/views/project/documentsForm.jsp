@@ -13,6 +13,15 @@
             font-family: "Courier New";
             line-height: 1.4em;
         }
+        .clean-padding-l{
+            padding-left: 0;
+        }
+        .clean-padding-r{
+            padding-right: 0;
+        }
+        .well{
+            min-height: 350px;
+        }
     </style>
     <script src="${ctx}/static/plugings/jquery.autogrowtextarea.min.js"></script>
 </head>
@@ -51,19 +60,24 @@
                 <li><a href="javascript:void(0);">自动链接</a></li>
             </ul>
             <hr/>
-            <textarea name="example-code" id="example-code" rows="5" class="form-control">语法示例</textarea>
+            <textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>
             <hr/>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 clean-padding-r">
                     <textarea id="text-input" class="form-control" rows="25" oninput="this.editor.update()">支持 **Markdown** 语法.</textarea>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 clean-padding-l">
                     <div id="preview" class="well"> </div>
                 </div>
             </div>
             <script src="${ctx}/static/markdown/markdown.min.js"></script>
             <hr/>
-
+            <strong>您可以将文档发送给：</strong>
+            <ul>
+                <li><a href="#">项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
+                <li><a href="#">非项目参与人员</a> <small>被邀请的人只能看到此文档</small></li>
+            </ul>
+            <button class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
         </div>
         <div class="panel-footer"></div>
     </div>

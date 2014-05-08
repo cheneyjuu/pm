@@ -34,9 +34,6 @@
             <span class="glyphicon glyphicon-paperclip"></span> 您还可以选择添加附件： <a href="#">从电脑选择 ...</a>
             <hr/>
             <strong>您可以邀请其他人来参与：</strong>
-            <p>
-
-            </p>
             <ul>
                 <li><a href="#">邀请项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
                 <li><a href="#">邀请非项目参与人员</a> <small>被邀请的人只能看到此讨论信息</small></li>

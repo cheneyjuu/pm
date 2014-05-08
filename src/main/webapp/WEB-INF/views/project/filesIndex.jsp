@@ -46,46 +46,46 @@
                     <a href="#"><img src="${ctx}/static/images/example/word.png" alt="word" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                    <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
-                    <span class="label label-info">New</span>
-                    <span class="label label-info">圣诞狗</span>
-                    <a href="#"><span class="label label-default">添加新标签</span></a>
+                    <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
+                    <span class="label label-info text-center">New</span>
+                    <span class="label label-info text-center">圣诞狗</span>
+                    <a href="#"><span class="label label-warning">添加新标签</span></a>
                 </div>
                 <div class="div-bordered">
                     <a href="#"><img src="${ctx}/static/images/example/ppt.png" alt="ppt" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                    <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
+                    <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
                     <span class="label label-info">New</span>
                     <span class="label label-info">圣诞狗</span>
-                    <a href="#"><span class="label label-default">添加新标签</span></a>
+                    <a href="#"><span class="label label-warning">添加新标签</span></a>
                 </div>
                 <div class="div-bordered">
                     <a href="#"><img src="${ctx}/static/images/example/excel.png" alt="excel" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                    <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
+                    <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
                     <span class="label label-info">New</span>
                     <span class="label label-info">圣诞狗</span>
-                    <a href="#"><span class="label label-default">添加新标签</span></a>
+                    <a href="#"><span class="label label-warning">添加新标签</span></a>
                 </div>
                 <div class="div-bordered">
                     <a href="#"><img src="${ctx}/static/images/example/folder.png" alt="folder" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                    <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
+                    <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
                     <span class="label label-info">New</span>
                     <span class="label label-info">圣诞狗</span>
-                    <a href="#"><span class="label label-default">添加新标签</span></a>
+                    <a href="#"><span class="label label-warning">添加新标签</span></a>
                 </div>
                 <div class="div-bordered">
                     <a href="#"><img src="${ctx}/static/images/example/rar.png" alt="rar" class="img-rounded center-block file-icon"></a>
                     <b class="center-block align-center">这个是上传的文件.doc</b>
                     <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                    <a href="#" class=" align-center"><span class="badge">42</span> 个回复</a>
+                    <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
                     <span class="label label-info">New</span>
                     <span class="label label-info">圣诞狗</span>
-                    <a href="#"><span class="label label-default">添加新标签</span></a>
+                    <a href="#"><span class="label label-warning">添加新标签</span></a>
                 </div>
             </div>
         </div>

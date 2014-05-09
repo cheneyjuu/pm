@@ -98,7 +98,7 @@
                                 <div class="pull-right">
                                     <img src="${ctx}/static/images/example/word.png" alt="word" class="img-rounded" style="height: 32px;"/>
                                 </div>
-                                <b>关于公文管理移动开发的几点疑问？</b><span class="text-muted discuss-content">公文管理开发的时间节点。</span>
+                                <a href="#"><b>关于公文管理移动开发的几点疑问？</b><span class="text-muted discuss-content">公文管理开发的时间节点。</span></a>
                             </td>
                             <td><span class="text-muted">5月20日</span></td>
                             <td><span class="badge">42</span></td>

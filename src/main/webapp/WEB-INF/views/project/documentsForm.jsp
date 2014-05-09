@@ -22,6 +22,37 @@
         .well{
             min-height: 350px;
         }
+        /*.table.table-striped{*/
+            /*margin: 20px 0 0 0;*/
+        /*}*/
+        .document-content{
+            background-color: #ccc;
+            margin: 0 0 20px 0;
+        }
+        .glyphicon{
+            display: inline-block;
+            height: 2em;
+            line-height: 2em;
+            padding-left: 0.5em;
+        }
+        .glyphicon:empty{
+            width: 2em;
+        }
+        .glyphicon:hover{
+            background-color: #333;
+            color: #fff;
+        }
+        .tools-table{
+            margin-bottom: 0;
+        }
+        .tools-table > tbody > tr:first-child > td{
+            border-top: none;
+        }
+        #toggleTools{
+            display: inline-block;
+            width: 2em;
+            height: 2em;
+        }
     </style>
     <script src="${ctx}/static/plugings/jquery.autogrowtextarea.min.js"></script>
 </head>
@@ -33,41 +64,58 @@
         </div>
         <div class="panel-body">
             <input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/>
-            <hr/>
-            <ul class="nav nav-pills">
-                <li class="disabled"><a href="#">插入：</a></li>
-                <li class="dropdown">
-                    <a id="drop1" role="button" data-toggle="dropdown" href="#">标题 <b class="caret"></b></a>
-                    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">一级标题</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">二级标题</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">三级标题</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">四级标题</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">五级标题</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">六级标题</a></li>
-                    </ul>
-                </li>
-                <li><a href="javascript:void(0);">段落和换行</a></li>
-                <li><a href="javascript:void(0);">区块引用</a></li>
-                <li><a href="javascript:void(0);">无序列表</a></li>
-                <li><a href="javascript:void(0);">有序列表</a></li>
-                <li><a href="javascript:void(0);">代码区块</a></li>
-                <li><a href="javascript:void(0);">分隔线</a></li>
-                <li><a href="javascript:void(0);">链接</a></li>
-                <li><a href="javascript:void(0);">粗体</a></li>
-                <li><a href="javascript:void(0);">代码</a></li>
-                <li><a href="javascript:void(0);">图片</a></li>
-                <li><a href="javascript:void(0);">自动链接</a></li>
-            </ul>
-            <hr/>
+            <table class="table tools-table">
+                <tr>
+                    <td class="pull-right"><a href="#" id="toggleTools"><span class="caret"></span></a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <ul class="nav nav-pills">
+                            <li class="disabled"><a href="#">插入：</a></li>
+                            <li class="dropdown">
+                                <a id="drop1" role="button" data-toggle="dropdown" href="#">标题 <b class="caret"></b></a>
+                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">一级标题</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">二级标题</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">三级标题</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">四级标题</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">五级标题</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">六级标题</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0);">段落和换行</a></li>
+                            <li><a href="javascript:void(0);">区块引用</a></li>
+                            <li><a href="javascript:void(0);">无序列表</a></li>
+                            <li><a href="javascript:void(0);">有序列表</a></li>
+                            <li><a href="javascript:void(0);">代码区块</a></li>
+                            <li><a href="javascript:void(0);">分隔线</a></li>
+                            <li><a href="javascript:void(0);">链接</a></li>
+                            <li><a href="javascript:void(0);">粗体</a></li>
+                            <li><a href="javascript:void(0);">代码</a></li>
+                            <li><a href="javascript:void(0);">图片</a></li>
+                            <li><a href="javascript:void(0);">自动链接</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <hr class="tools-line"/>
             <textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>
-            <hr/>
-            <div class="row">
-                <div class="col-md-6 clean-padding-r">
+
+            <div class="row document-content">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a href="javascript:void(0);" class="text-muted"><span class="glyphicon glyphicon-resize-full pull-right center-block"></span></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="col-md-6 clean-padding-r clean-padding-l">
                     <textarea id="text-input" class="form-control" rows="25" oninput="this.editor.update()">支持 **Markdown** 语法.</textarea>
                 </div>
-                <div class="col-md-6 clean-padding-l">
-                    <div id="preview" class="well"> </div>
+                <div class="col-md-6 clean-padding-l clean-padding-r">
+                    <div id="preview" class="well"></div>
                 </div>
             </div>
             <script src="${ctx}/static/markdown/markdown.min.js"></script>
@@ -188,6 +236,25 @@
                     $("#example-code").text("Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用尖括号包` < > `起来， Markdown 就会自动把它转成链接。\n\n");
                 });
             }
+        });
+
+        // 隐藏显示语法说明
+        $("#toggleTools").click(function(){
+            $(".tools-table > tbody").children(":last").toggle(function(){
+                $(this).addClass("hidden");
+            }, function(){
+                $(this).removeClass("hidden");
+            });
+            $(".tools-line").toggle(function(){
+                $(this).addClass("hidden");
+            }, function(){
+                $(this).removeClass("hidden");
+            });
+            $("#example-code").toggle(function(){
+                $(this).addClass("hidden");
+            }, function(){
+                $(this).removeClass("hidden");
+            });
         });
     });
 </script>

@@ -86,7 +86,21 @@
 			<version>${springside.version}</version>
 		</dependency>
 
-		<!-- PERSISTENCE begin -->
+        <!-- pegdown -->
+        <dependency>
+            <groupId>org.pegdown</groupId>
+            <artifactId>pegdown</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+
+        <!-- parboiled  -->
+        <dependency>
+            <groupId>org.parboiled</groupId>
+            <artifactId>parboiled-core</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
+        <!-- PERSISTENCE begin -->
 		<!-- hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

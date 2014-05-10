@@ -34,6 +34,6 @@
 		</div>
 		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 	</div>
-	<script src="${ctx}/static/bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

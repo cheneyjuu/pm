@@ -5,8 +5,6 @@
 <html lang="zh-cn">
 <head>
     <title>项目主页</title>
-    <link href="${ctx}/static/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>
     <style>
         .navbar-collapse{
             padding-left: 0;

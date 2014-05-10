@@ -6,6 +6,9 @@
 <head>
     <title>新建文档</title>
     <style>
+        .table>tbody>tr>td{
+            border-bottom: 1px solid #ddd;
+        }
         .code-container > span{
             cursor: pointer;
         }
@@ -22,25 +25,20 @@
         .well{
             min-height: 350px;
         }
-        /*.table.table-striped{*/
-            /*margin: 20px 0 0 0;*/
-        /*}*/
+        .markdown-table{
+            margin-bottom: 0;
+        }
+        .markdown-table > tbody > tr:last-child a{
+            padding-right: 2em;;
+        }
         .document-content{
             background-color: #ccc;
             margin: 0 0 20px 0;
         }
         .glyphicon{
             display: inline-block;
-            height: 2em;
-            line-height: 2em;
-            padding-left: 0.5em;
-        }
-        .glyphicon:empty{
-            width: 2em;
-        }
-        .glyphicon:hover{
-            background-color: #333;
-            color: #fff;
+            /*height: 2em;*/
+            /*line-height: 2em;*/
         }
         .tools-table{
             margin-bottom: 0;
@@ -53,6 +51,9 @@
             width: 2em;
             height: 2em;
         }
+        #preview{
+            min-height: 490px;
+        }
     </style>
     <script src="${ctx}/static/plugings/jquery.autogrowtextarea.min.js"></script>
 </head>
@@ -61,9 +62,6 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3><a href="${ctx}/project/index">项目名称</a></h3>
-        </div>
-        <div class="panel-body">
-            <input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/>
             <table class="table tools-table">
                 <tr>
                     <td class="pull-right"><a href="#" id="toggleTools"><span class="caret"></span></a></td>
@@ -100,25 +98,31 @@
             </table>
             <hr class="tools-line"/>
             <textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>
+        </div>
+        <div class="panel-body">
 
             <div class="row document-content">
-                <table class="table table-striped">
+                <table class="table markdown-table">
                     <tbody>
                     <tr>
+                        <td><input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/></td>
+                    </tr>
+                    <tr>
                         <td>
-                            <a href="javascript:void(0);" class="text-muted"><span class="glyphicon glyphicon-resize-full pull-right center-block"></span></a>
+                            <a href="javascript:void(0)" class="text-muted pull-right resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a>
+                            <a href="javascript:void(0);" class="text-muted pull-right resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <div class="col-md-6 clean-padding-r clean-padding-l">
-                    <textarea id="text-input" class="form-control" rows="25" oninput="this.editor.update()">支持 **Markdown** 语法.</textarea>
+                    <textarea id="text-input" class="form-control" rows="25" oninput="this.editor.update()"></textarea>
                 </div>
                 <div class="col-md-6 clean-padding-l clean-padding-r">
                     <div id="preview" class="well"></div>
                 </div>
             </div>
-            <script src="${ctx}/static/markdown/markdown.min.js"></script>
+            <%--<script src="${ctx}/static/markdown/markdown.min.js"></script>--%>
             <hr/>
             <strong>您可以将文档发送给：</strong>
             <ul>
@@ -132,14 +136,14 @@
 </div>
 
 <script>
-    function Editor(input, preview) {
-        this.update = function () {
-            preview.innerHTML = markdown.toHTML(input.value);
-        };
-        input.editor = this;
-        this.update();
-    }
-    new Editor(document.getElementById("text-input"), document.getElementById("preview"));
+//    function Editor(input, preview) {
+//        this.update = function () {
+//            preview.innerHTML = markdown.toHTML(input.value);
+//        };
+//        input.editor = this;
+//        this.update();
+//    }
+//    new Editor(document.getElementById("text-input"), document.getElementById("preview"));
 
     $(function(){
 
@@ -158,7 +162,7 @@
         }
         document.getElementById('text-input').onkeydown = onTextareaKeydown;
 
-        $("#text-input").autoGrow();
+//        $("#text-input").autoGrow();
 
         // 标题点击事件,循环标题
         $("#menu1").children().each(function(index){
@@ -254,6 +258,53 @@
                 $(this).addClass("hidden");
             }, function(){
                 $(this).removeClass("hidden");
+            });
+        });
+
+        // 全屏
+        var client_height = window.document.body.clientHeight - 500;
+        var currentWidth = $(".container").width();
+        var currentHeight = $("#text-input").height();
+        $(".resize-full").click(function(){
+            // 给preview加滚动条
+            $("#preview").css("overflow-y","scroll");
+            $(".container").animate({
+                width:'100%',
+                padding: 0
+            });
+            $("#text-input").animate({height: client_height});
+            $("#preview").animate({height: client_height});
+            $(".panel-body").animate({padding: "0"});
+            $(".panel-heading").hide();
+            $(".navbar").hide();
+            $("#footer").hide();
+        });
+        $(".resize-small").click(function(){
+            $(".container").animate({
+                width: currentWidth + 30,
+                padding: "0 15"
+            });
+            $("#text-input").animate({height: currentHeight});
+            $("#preview").animate({height: currentHeight});
+            $(".panel-body").animate({padding: 15});
+            $(".panel-heading").show();
+            $(".navbar").show();
+            $("#footer").show();
+        });
+
+        var txt;
+        $("#text-input").keyup(function(){
+            txt = $("#text-input").val();
+//            console.log($("#preview").innerHeight());
+            $.ajax({
+                type: 'POST',
+                url : '${ctx}/markdown/convert',
+                data: {str : txt},
+                success : function(rt){
+                    $("#preview").html(rt);
+                    $("table").addClass("table").addClass("table-bordered");
+                }
+
             });
         });
     });

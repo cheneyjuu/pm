@@ -12,9 +12,13 @@
         .code-container > span{
             cursor: pointer;
         }
-        #text-input,#preview,#example-code{
-            font-family: "Courier New";
-            line-height: 1.4em;
+        #text-input{
+            min-height: 700px;
+        }
+        #text-input{
+            line-height: 1.6em;
+            border: 0;
+            border-radius: 0;
         }
         .clean-padding-l{
             padding-left: 0;
@@ -23,22 +27,20 @@
             padding-right: 0;
         }
         .well{
-            min-height: 350px;
+            border: 0;
+            border-radius: 0;
         }
-        .markdown-table{
-            margin-bottom: 0;
+        .panel-heading{
+            padding-bottom: 0;
         }
-        .markdown-table > tbody > tr:last-child a{
-            padding-right: 2em;;
+        .panel-body{
+            padding: 0;
         }
         .document-content{
-            background-color: #ccc;
             margin: 0 0 20px 0;
         }
         .glyphicon{
             display: inline-block;
-            /*height: 2em;*/
-            /*line-height: 2em;*/
         }
         .tools-table{
             margin-bottom: 0;
@@ -48,75 +50,126 @@
         }
         #toggleTools{
             display: inline-block;
-            width: 2em;
-            height: 2em;
+            text-decoration: none;
+            color: GrayText;
+            font-size: .8em;
         }
         #preview{
-            min-height: 490px;
+            min-height: 795px;
+            overflow-y: scroll;
+            height: 795px;
+            line-height: 1.6em;
+        }
+        .toolbar {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            border-bottom: 1px solid #d9d9d9;
+            background-color: #dedede;
+        }
+        .toolbar li {
+            display: inline-block;
+            cursor: pointer;
+        }
+        .toolbar a {
+            padding: 11px 14px;
+            display: inline-block;
+            line-height: 17px;
+        }
+        .input-no-bordered{
+            width: 100%;
+            padding: 10px 20px 10px 30px;
+            margin-bottom: 0;
+            border-bottom: 1px dotted #d9d9d9;
+            font-family: Georgia,"Times New Roman",Times,"Songti SC","SimSun",serif;
+            font-size: 30px;
+            font-weight: normal;
+            line-height: 30px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+        }
+        .title{
+            border: 0;
+            height: 50;
+            line-height: 20px;
+        }
+        .submit-container{
+            padding: 15px;
         }
     </style>
-    <script src="${ctx}/static/plugings/jquery.autogrowtextarea.min.js"></script>
+    <link rel="stylesheet" href="${ctx}/static/font-icon/fontello-embedded.css"/>
+    <%--<script src="${ctx}/static/plugings/jquery.autogrowtextarea.min.js"></script>--%>
 </head>
 <body>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3><a href="${ctx}/project/index">项目名称</a></h3>
-            <table class="table tools-table">
-                <tr>
-                    <td class="pull-right"><a href="#" id="toggleTools"><span class="caret"></span></a></td>
-                </tr>
-                <tr>
-                    <td>
-                        <ul class="nav nav-pills">
-                            <li class="disabled"><a href="#">插入：</a></li>
-                            <li class="dropdown">
-                                <a id="drop1" role="button" data-toggle="dropdown" href="#">标题 <b class="caret"></b></a>
-                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">一级标题</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">二级标题</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">三级标题</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">四级标题</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">五级标题</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">六级标题</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);">段落和换行</a></li>
-                            <li><a href="javascript:void(0);">区块引用</a></li>
-                            <li><a href="javascript:void(0);">无序列表</a></li>
-                            <li><a href="javascript:void(0);">有序列表</a></li>
-                            <li><a href="javascript:void(0);">代码区块</a></li>
-                            <li><a href="javascript:void(0);">分隔线</a></li>
-                            <li><a href="javascript:void(0);">链接</a></li>
-                            <li><a href="javascript:void(0);">粗体</a></li>
-                            <li><a href="javascript:void(0);">代码</a></li>
-                            <li><a href="javascript:void(0);">图片</a></li>
-                            <li><a href="javascript:void(0);">自动链接</a></li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-            <hr class="tools-line"/>
-            <textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>
+            <h3><a href="${ctx}/project/index">项目名称</a><a href="#" id="toggleTools" class="pull-right"><span class="icon-help"></span> 帮助</a></h3>
+            <div class="help-container">
+                <table class="table tools-table">
+                    <tr>
+                        <td>
+                            <ul class="nav nav-pills">
+                                <li class="disabled"><a href="#">插入：</a></li>
+                                <li class="dropdown">
+                                    <a id="drop1" role="button" data-toggle="dropdown" href="#">标题 <b class="caret"></b></a>
+                                    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">一级标题</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">二级标题</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">三级标题</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">四级标题</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">五级标题</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">六级标题</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:void(0);">段落和换行</a></li>
+                                <li><a href="javascript:void(0);">区块引用</a></li>
+                                <li><a href="javascript:void(0);">无序列表</a></li>
+                                <li><a href="javascript:void(0);">有序列表</a></li>
+                                <li><a href="javascript:void(0);">代码区块</a></li>
+                                <li><a href="javascript:void(0);">分隔线</a></li>
+                                <li><a href="javascript:void(0);">链接</a></li>
+                                <li><a href="javascript:void(0);">粗体</a></li>
+                                <li><a href="javascript:void(0);">代码</a></li>
+                                <li><a href="javascript:void(0);">图片</a></li>
+                                <li><a href="javascript:void(0);">自动链接</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                <textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>
+            </div>
         </div>
         <div class="panel-body">
 
             <div class="row document-content">
-                <table class="table markdown-table">
-                    <tbody>
-                    <tr>
-                        <td><input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="javascript:void(0)" class="text-muted pull-right resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a>
-                            <a href="javascript:void(0);" class="text-muted pull-right resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <%--<table class="table markdown-table">--%>
+                    <%--<tbody>--%>
+                    <%--<tr>--%>
+                        <%--<td><input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td>--%>
+                            <%--<a href="javascript:void(0)" class="text-muted pull-right resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a>--%>
+                            <%--<a href="javascript:void(0);" class="text-muted pull-right resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                    <%--</tbody>--%>
+                <%--</table>--%>
                 <div class="col-md-6 clean-padding-r clean-padding-l">
-                    <textarea id="text-input" class="form-control" rows="25" oninput="this.editor.update()"></textarea>
+                    <input class="input-no-bordered title" type="text"/>
+                    <ul class="toolbar">
+                        <li class="pull-right"><a href="javascript:void(0)" class="text-muted resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a></li>
+                        <li class="pull-right"><a href="javascript:void(0);" class="text-muted resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a></li>
+                    </ul>
+                    <textarea id="text-input" class="form-control" rows="25"></textarea>
                 </div>
                 <div class="col-md-6 clean-padding-l clean-padding-r">
                     <div id="preview" class="well"></div>
@@ -124,12 +177,14 @@
             </div>
             <%--<script src="${ctx}/static/markdown/markdown.min.js"></script>--%>
             <hr/>
-            <strong>您可以将文档发送给：</strong>
-            <ul>
-                <li><a href="#">项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
-                <li><a href="#">非项目参与人员</a> <small>被邀请的人只能看到此文档</small></li>
-            </ul>
-            <button class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
+            <div class="submit-container">
+                <strong>您可以将文档发送给：</strong>
+                <ul>
+                    <li><a href="#">项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
+                    <li><a href="#">非项目参与人员</a> <small>被邀请的人只能看到此文档</small></li>
+                </ul>
+                <button class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
+            </div>
         </div>
         <div class="panel-footer"></div>
     </div>
@@ -243,41 +298,30 @@
         });
 
         // 隐藏显示语法说明
+        $(".help-container").hide();
         $("#toggleTools").click(function(){
-            $(".tools-table > tbody").children(":last").toggle(function(){
-                $(this).addClass("hidden");
-            }, function(){
-                $(this).removeClass("hidden");
-            });
-            $(".tools-line").toggle(function(){
-                $(this).addClass("hidden");
-            }, function(){
-                $(this).removeClass("hidden");
-            });
-            $("#example-code").toggle(function(){
-                $(this).addClass("hidden");
-            }, function(){
-                $(this).removeClass("hidden");
-            });
+            $(".help-container").toggle();
         });
 
         // 全屏
-        var client_height = window.document.body.clientHeight - 500;
+        var is_full_screen = 0;
+        var client_height = window.document.body.clientHeight - 350;
         var currentWidth = $(".container").width();
         var currentHeight = $("#text-input").height();
         $(".resize-full").click(function(){
             // 给preview加滚动条
-            $("#preview").css("overflow-y","scroll");
+//            $("#preview").css("overflow-y","scroll");
             $(".container").animate({
                 width:'100%',
                 padding: 0
             });
             $("#text-input").animate({height: client_height});
-            $("#preview").animate({height: client_height});
+            $("#preview").animate({height: client_height+95});
             $(".panel-body").animate({padding: "0"});
             $(".panel-heading").hide();
             $(".navbar").hide();
             $("#footer").hide();
+            is_full_screen = 1;
         });
         $(".resize-small").click(function(){
             $(".container").animate({
@@ -286,16 +330,16 @@
             });
             $("#text-input").animate({height: currentHeight});
             $("#preview").animate({height: currentHeight});
-            $(".panel-body").animate({padding: 15});
+            $(".panel-body").css("padding-left", "15").css("padding-right", "15");
             $(".panel-heading").show();
             $(".navbar").show();
             $("#footer").show();
+            is_full_screen = 0;
         });
 
         var txt;
         $("#text-input").keyup(function(){
             txt = $("#text-input").val();
-//            console.log($("#preview").innerHeight());
             $.ajax({
                 type: 'POST',
                 url : '${ctx}/markdown/convert',

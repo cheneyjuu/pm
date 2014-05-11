@@ -57,12 +57,13 @@
         #preview{
             min-height: 795px;
             overflow-y: scroll;
-            height: 795px;
+            height: 805px;
             line-height: 1.6em;
         }
         .toolbar {
             padding: 0;
             margin: 0;
+            height: 40px;
             list-style-type: none;
             border-bottom: 1px solid #d9d9d9;
             background-color: #dedede;
@@ -84,7 +85,7 @@
             font-family: Georgia,"Times New Roman",Times,"Songti SC","SimSun",serif;
             font-size: 30px;
             font-weight: normal;
-            line-height: 30px;
+            line-height: 35px;
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
             box-shadow: none;
@@ -97,8 +98,7 @@
         }
         .title{
             border: 0;
-            height: 50;
-            line-height: 20px;
+            height: 65px;
         }
         .submit-container{
             padding: 15px;
@@ -108,7 +108,7 @@
     <%--<script src="${ctx}/static/plugings/jquery.autogrowtextarea.min.js"></script>--%>
 </head>
 <body>
-<div class="container">
+<div class="container markdown">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3><a href="${ctx}/project/index">项目名称</a><a href="#" id="toggleTools" class="pull-right"><span class="icon-help"></span> 帮助</a></h3>
@@ -150,21 +150,8 @@
         <div class="panel-body">
 
             <div class="row document-content">
-                <%--<table class="table markdown-table">--%>
-                    <%--<tbody>--%>
-                    <%--<tr>--%>
-                        <%--<td><input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/></td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td>--%>
-                            <%--<a href="javascript:void(0)" class="text-muted pull-right resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a>--%>
-                            <%--<a href="javascript:void(0);" class="text-muted pull-right resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a>--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                    <%--</tbody>--%>
-                <%--</table>--%>
                 <div class="col-md-6 clean-padding-r clean-padding-l">
-                    <input class="input-no-bordered title" type="text"/>
+                    <input class="input-no-bordered title" type="text" placeholder="请输入标题..."/>
                     <ul class="toolbar">
                         <li class="pull-right"><a href="javascript:void(0)" class="text-muted resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a></li>
                         <li class="pull-right"><a href="javascript:void(0);" class="text-muted resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a></li>
@@ -175,7 +162,6 @@
                     <div id="preview" class="well"></div>
                 </div>
             </div>
-            <%--<script src="${ctx}/static/markdown/markdown.min.js"></script>--%>
             <hr/>
             <div class="submit-container">
                 <strong>您可以将文档发送给：</strong>
@@ -307,30 +293,20 @@
         var is_full_screen = 0;
         var client_height = window.document.body.clientHeight - 350;
         var currentWidth = $(".container").width();
-        var currentHeight = $("#text-input").height();
+        var markdownHeight = $("#text-input").height();
+        var previewHeight = $("#preview").height();
         $(".resize-full").click(function(){
-            // 给preview加滚动条
-//            $("#preview").css("overflow-y","scroll");
-            $(".container").animate({
-                width:'100%',
-                padding: 0
-            });
             $("#text-input").animate({height: client_height});
-            $("#preview").animate({height: client_height+95});
-            $(".panel-body").animate({padding: "0"});
+            $("#preview").animate({height: client_height+105});
             $(".panel-heading").hide();
             $(".navbar").hide();
             $("#footer").hide();
             is_full_screen = 1;
         });
         $(".resize-small").click(function(){
-            $(".container").animate({
-                width: currentWidth + 30,
-                padding: "0 15"
-            });
-            $("#text-input").animate({height: currentHeight});
-            $("#preview").animate({height: currentHeight});
-            $(".panel-body").css("padding-left", "15").css("padding-right", "15");
+            $("#text-input").animate({height: markdownHeight});
+            $("#preview").animate({height: previewHeight+38});
+            $("#preview").css("margin-bottom","0").css("padding", "0");
             $(".panel-heading").show();
             $(".navbar").show();
             $("#footer").show();
@@ -348,7 +324,6 @@
                     $("#preview").html(rt);
                     $("table").addClass("table").addClass("table-bordered");
                 }
-
             });
         });
     });

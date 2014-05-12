@@ -6,16 +6,16 @@
 <head>
     <title>项目列表</title>
     <link href="${ctx}/static/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>
-    <script>
-        $(function(){
+    <%--<script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>--%>
+    <%--<script>--%>
+        <%--$(function(){--%>
 
-        });
-    </script>
+        <%--});--%>
+    <%--</script>--%>
     <style>
-        .col-md-2{
+        /*.col-md-2{*/
             /*margin-left: 15px;*/
-        }
+        /*}*/
         .project-list > div{
             margin-right: 15px;
             padding: 10px;

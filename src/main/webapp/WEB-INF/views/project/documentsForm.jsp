@@ -6,11 +6,14 @@
 <head>
     <title>新建文档</title>
     <style>
-        .table>tbody>tr>td{
-            border-bottom: 1px solid #ddd;
-        }
+        /*.table>tbody>tr>td{*/
+            /*border-bottom: 1px solid #ddd;*/
+        /*}*/
         .code-container > span{
             cursor: pointer;
+        }
+        .help-container{
+            margin-bottom: 15px;
         }
         #text-input{
             min-height: 700px;
@@ -42,6 +45,9 @@
         .glyphicon{
             display: inline-block;
         }
+        .resize-full,.resize-small{
+            text-decoration: none;
+        }
         .tools-table{
             margin-bottom: 0;
         }
@@ -59,6 +65,7 @@
             overflow-y: scroll;
             height: 805px;
             line-height: 1.6em;
+            background-color: #fdfcf8;
         }
         .toolbar {
             padding: 0;
@@ -66,7 +73,7 @@
             height: 40px;
             list-style-type: none;
             border-bottom: 1px solid #d9d9d9;
-            background-color: #dedede;
+            background-color: #bab7ab;
         }
         .toolbar li {
             display: inline-block;
@@ -111,7 +118,7 @@
 <div class="container markdown">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3><a href="${ctx}/project/index">项目名称</a><a href="#" id="toggleTools" class="pull-right"><span class="icon-help"></span> 帮助</a></h3>
+            <h3><a href="${ctx}/project/index">项目名称</a><a href="javascript:void(0);" id="toggleTools" class="pull-right"><span class="icon-help"></span> 帮助</a></h3>
             <div class="help-container">
                 <table class="table tools-table">
                     <tr>
@@ -151,7 +158,7 @@
 
             <div class="row document-content">
                 <div class="col-md-6 clean-padding-r clean-padding-l">
-                    <input class="input-no-bordered title" type="text" placeholder="请输入标题..."/>
+                    <input class="input-no-bordered title" id="title" type="text" placeholder="请输入标题..."/>
                     <ul class="toolbar">
                         <li class="pull-right"><a href="javascript:void(0)" class="text-muted resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a></li>
                         <li class="pull-right"><a href="javascript:void(0);" class="text-muted resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a></li>
@@ -286,7 +293,7 @@
         // 隐藏显示语法说明
         $(".help-container").hide();
         $("#toggleTools").click(function(){
-            $(".help-container").toggle();
+            $(".help-container").slideToggle();
         });
 
         // 全屏
@@ -303,25 +310,30 @@
             $("#footer").hide();
             is_full_screen = 1;
         });
+        // 恢复
         $(".resize-small").click(function(){
             $("#text-input").animate({height: markdownHeight});
             $("#preview").animate({height: previewHeight+38});
-            $("#preview").css("margin-bottom","0").css("padding", "0");
+            $("#preview").css("margin-bottom","0").css("padding-left", "15").css("padding-right", "15");
             $(".panel-heading").show();
             $(".navbar").show();
             $("#footer").show();
             is_full_screen = 0;
         });
 
-        var txt;
+        $("#title").keyup(function(){
+            $("#preview").html("<h1 class='text-center'>"+$("#title").val()+"</h1>");
+        });
+        var txt, title;
         $("#text-input").keyup(function(){
+            title = "<h1 class='text-center'>"+$("#title").val()+"</h1>";
             txt = $("#text-input").val();
             $.ajax({
                 type: 'POST',
                 url : '${ctx}/markdown/convert',
                 data: {str : txt},
                 success : function(rt){
-                    $("#preview").html(rt);
+                    $("#preview").html(title + rt);
                     $("table").addClass("table").addClass("table-bordered");
                 }
             });

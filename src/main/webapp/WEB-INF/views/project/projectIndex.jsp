@@ -46,36 +46,56 @@
         .todo-table > tbody > tr >td:first-child{
             padding-left: 20px;
         }
+        .project-container .panel-heading h3, .project-container .panel-heading .col-md-4{
+            margin-top: 10px;
+        }
+        .project-container .panel-heading p{
+            text-indent: 1em;
+        }
+        .project-container .panel-heading p:before{
+            content: " - ";
+        }
+        .project-container .panel-heading .col-md-4 a{
+            padding-right: 25px;
+        }
+        .panel-default{
+            border-left: 0;
+            border-right: 0;
+            border-top: 1px solid darkred;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container project-container">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-7">
                         <h3>项目名称</h3>
+                        <p class="text-muted">项目描述。反对使用信黑，信黑是非常漂亮，也是我见过最漂亮的中文字，但这是版权字，请不要在web中使用。反对使用信黑，信黑是非常漂亮，也是我见过最漂亮的中文字，但这是版权字，请不要在web中使用。</p>
                     </div>
-                    <div class="col-md-2">
-                        <a href="#">邀请成员</a>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <a href="#" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-user"></span> 邀请成员</a>
+                        <a href="#" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-cog"></span> 设置项目</a>
+                        <a href="#" class="text-danger clean-link-decoration"><span class="glyphicon glyphicon-cog"></span> 删除项目</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12"><small>项目描述</small></div>
-                </div>
-                <hr/>
-                <ul class="nav nav-pills">
-                    <li class="disabled"><a href="#">新建：</a></li>
-                    <li><a href="${ctx}/discuss/index">讨论</a></li>
-                    <li><a href="${ctx}/todolists/index">TODOS</a></li>
-                    <li><a href="${ctx}/files/index">文件</a></li>
-                    <li><a href="${ctx}/documents/list">文档</a></li>
-                    <%--<li><a href="#">事件</a></li>--%>
-                </ul>
-                <hr/>
             </div>
 
             <div class="panel-body">
+                <section class="under-line">
+                    <ul class="nav nav-pills">
+                        <li class="disabled text-left"><a href="#" class="clean-link-decoration">新建：</a></li>
+                        <li><a href="${ctx}/discuss/index" class="clean-link-decoration">讨论</a></li>
+                        <li><a href="${ctx}/todolists/index" class="clean-link-decoration">TODOS</a></li>
+                        <li><a href="${ctx}/files/index" class="clean-link-decoration">文件</a></li>
+                        <li><a href="${ctx}/documents/list" class="clean-link-decoration">文档</a></li>
+                        <%--<li><a href="#">事件</a></li>--%>
+                    </ul>
+                </section>
                 <section>
                     <h4><a href="#" class="text-danger">最近更新</a></h4>
                     <ul class="list-unstyled">
@@ -99,7 +119,7 @@
                                 <a href="#"><b>关于公文管理移动开发的几点疑问？</b><span class="text-muted discuss-content">公文管理开发的时间节点。</span></a>
                             </td>
                             <td><span class="text-muted">5月20日</span></td>
-                            <td><span class="badge">42</span></td>
+                            <td><a href="javascript:void(0);" class="clean-link-decoration"><span class="badge">42 条回复</span></a></td>
                         </tr>
                         <tr>
                             <td><img src="${ctx}/static/images/example/08-023618_517.jpg" alt="user head" class="img-circle user-head"/></td>
@@ -108,7 +128,7 @@
                                 <b>关于公文管理移动开发的几点疑问？</b><span class="text-muted discuss-content">公文管理开发的时间节点。</span>
                             </td>
                             <td><span class="text-muted">5月20日</span></td>
-                            <td><span class="badge">42</span></td>
+                            <td><a href="javascript:void(0);" class="clean-link-decoration"><span class="badge">2 条回复</span></a></td>
                         </tr>
                     </table>
                 </section>
@@ -170,47 +190,67 @@
                         <div class="div-bordered">
                             <a href="#"><img src="${ctx}/static/images/example/word.png" alt="word" class="img-rounded center-block file-icon"></a>
                             <b class="center-block align-center">这个是上传的文件.doc</b>
-                            <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                            <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
-                            <span class="label label-info text-center">New</span>
-                            <span class="label label-info text-center">圣诞狗</span>
-                            <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            <p class="text-center">
+                                <small class="text-muted">张三于2014年5月05日添加</small>
+                                <a href="#" class="clean-link-decoration"><span class="badge">42 条回复</span></a>
+                            </p>
+                            <div class="text-center">
+                                <span class="label label-info">New</span>
+                                <span class="label label-info">圣诞狗</span>
+                                <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            </div>
                         </div>
                         <div class="div-bordered">
                             <a href="#"><img src="${ctx}/static/images/example/ppt.png" alt="ppt" class="img-rounded center-block file-icon"></a>
                             <b class="center-block align-center">这个是上传的文件.doc</b>
-                            <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                            <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
-                            <span class="label label-info">New</span>
-                            <span class="label label-info">圣诞狗</span>
-                            <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            <p class="text-center">
+                                <small class="text-muted">张三于2014年5月05日添加</small>
+                                <a href="#" class="clean-link-decoration"><span class="badge">42 条回复</span></a>
+                            </p>
+                            <div class="text-center">
+                                <span class="label label-info">New</span>
+                                <span class="label label-info">圣诞狗</span>
+                                <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            </div>
                         </div>
                         <div class="div-bordered">
                             <a href="#"><img src="${ctx}/static/images/example/excel.png" alt="excel" class="img-rounded center-block file-icon"></a>
                             <b class="center-block align-center">这个是上传的文件.doc</b>
-                            <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                            <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
-                            <span class="label label-info">New</span>
-                            <span class="label label-info">圣诞狗</span>
-                            <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            <p class="text-center">
+                                <small class="text-muted">张三于2014年5月05日添加</small>
+                                <a href="#" class="clean-link-decoration"><span class="badge">42 条回复</span></a>
+                            </p>
+                            <div class="text-center">
+                                <span class="label label-info">New</span>
+                                <span class="label label-info">圣诞狗</span>
+                                <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            </div>
                         </div>
                         <div class="div-bordered">
                             <a href="#"><img src="${ctx}/static/images/example/folder.png" alt="folder" class="img-rounded center-block file-icon"></a>
                             <b class="center-block align-center">这个是上传的文件.doc</b>
-                            <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                            <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
-                            <span class="label label-info">New</span>
-                            <span class="label label-info">圣诞狗</span>
-                            <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            <p class="text-center">
+                                <small class="text-muted">张三于2014年5月05日添加</small>
+                                <a href="#" class="clean-link-decoration"><span class="badge">42 条回复</span></a>
+                            </p>
+                            <div class="text-center">
+                                <span class="label label-info">New</span>
+                                <span class="label label-info">圣诞狗</span>
+                                <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            </div>
                         </div>
                         <div class="div-bordered">
                             <a href="#"><img src="${ctx}/static/images/example/rar.png" alt="rar" class="img-rounded center-block file-icon"></a>
                             <b class="center-block align-center">这个是上传的文件.doc</b>
-                            <small class="text-muted center-block align-center">张三于2014年5月05日添加</small>
-                            <a href="#" class="center-block text-center"><span class="badge">42 条回复</span></a>
-                            <span class="label label-info">New</span>
-                            <span class="label label-info">圣诞狗</span>
-                            <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            <p class="text-center">
+                                <small class="text-muted">张三于2014年5月05日添加</small>
+                                <a href="#" class="clean-link-decoration"><span class="badge">42 条回复</span></a>
+                            </p>
+                            <div class="text-center">
+                                <span class="label label-info">New</span>
+                                <span class="label label-info">圣诞狗</span>
+                                <a href="#"><span class="label label-warning">添加新标签</span></a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -220,21 +260,21 @@
                     </header>
                 </section>
             </div>
-            <div class="panel-footer">
-                <div id="project-operation">
-                    <a href="#" class="text-muted">项目设置</a>
-                    <a href="#" class="pull-right text-muted">删除项目</a>
-                </div>
-                <div id="project-setting">
-                    <span class="center-block">
-                        <label for="open"><input name="settingName" id="open" type="radio" checked="checked"/> <strong>开启</strong></label>
-                        <label for="close"><input name="settingName" id="close" type="radio"/> <strong>关闭</strong></label>
-                    </span>
-                    <span class="center-block">
-                        <a href="#" class="btn btn-primary btn-sm">保存</a> 或 <a href="#" class="btn btn-default btn-sm">取消</a>
-                    </span>
-                </div>
-            </div>
+            <%--<div class="panel-footer">--%>
+                <%--<div id="project-operation">--%>
+                    <%--<a href="#" class="text-muted">项目设置</a>--%>
+                    <%--<a href="#" class="pull-right text-muted">删除项目</a>--%>
+                <%--</div>--%>
+                <%--<div id="project-setting">--%>
+                    <%--<span class="center-block">--%>
+                        <%--<label for="open"><input name="settingName" id="open" type="radio" checked="checked"/> <strong>开启</strong></label>--%>
+                        <%--<label for="close"><input name="settingName" id="close" type="radio"/> <strong>关闭</strong></label>--%>
+                    <%--</span>--%>
+                    <%--<span class="center-block">--%>
+                        <%--<a href="#" class="btn btn-primary btn-sm">保存</a> 或 <a href="#" class="btn btn-default btn-sm">取消</a>--%>
+                    <%--</span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
     </div>
     <script>

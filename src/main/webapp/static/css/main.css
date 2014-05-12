@@ -1,5 +1,57 @@
 body{
-    font-family: "Hiragino Sans GB W3","Courier New","微软雅黑","MicroSoft YaHei",Georgia,"Times New Roman",Times,"Kai","Kaiti SC","KaiTi","BiauKai","楷体","楷体_GB2312",serif;
+    font-family: "Hiragino Sans GB W3", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-color: #fcfaf2;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+    font-family: "Hiragino Sans GB W3", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
+    -webkit-font-smoothing:antialiased;
+}
+a{
+    color: #181816;
+}
+a:hover{
+    text-decoration: none;
+    border-bottom: 1px solid #7c7a72;
+    color: #5b5b55;
+}
+a.clean-link-decoration{
+    border-bottom: none;
+    text-decoration: none;
+}
+.under-line{
+    border-bottom: 1px solid darkred;
+}
+/*nav*/
+#header{
+    height: 60px;
+    margin-bottom: 15px;
+}
+#header ul{
+    height: 100%;
+}
+#header ul li{
+    line-height: 2em;
+    font-size: 1.2em;
+}
+#header ul li > a{
+    font-weight: 500;
+}
+.nav>li>a:hover, .nav>li>a:focus{
+    background-color: #fcfaf2;
+}
+.navbar-default{
+    background-color: #f9f5e5;
+    border: none;
+}
+.panel-default>.panel-heading{
+    background-color: #fcfaf2;
+}
+.badge{
+    background-color: #acacac;
+}
+.text-muted{
+    color: #2c2c2c;
 }
 .container{
     width: 100%;

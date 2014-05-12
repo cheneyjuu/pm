@@ -305,8 +305,9 @@
         $(".resize-full").click(function(){
             $("#text-input").animate({height: client_height});
             $("#preview").animate({height: client_height+105});
+            $("#header").animate({height: 0});
             $(".panel-heading").hide();
-            $(".navbar").hide();
+            $(".nav-pills").hide();
             $("#footer").hide();
             is_full_screen = 1;
         });
@@ -315,8 +316,9 @@
             $("#text-input").animate({height: markdownHeight});
             $("#preview").animate({height: previewHeight+38});
             $("#preview").css("margin-bottom","0").css("padding-left", "15").css("padding-right", "15");
+            $("#header").animate({height: 60});
             $(".panel-heading").show();
-            $(".navbar").show();
+            $(".nav-pills").show();
             $("#footer").show();
             is_full_screen = 0;
         });

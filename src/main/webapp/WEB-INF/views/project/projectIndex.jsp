@@ -43,6 +43,10 @@
         header{
             margin-bottom: 20px;
         }
+        .table>tbody>tr>td{
+            border: 0;
+            border-bottom: 1px solid #ddd;
+        }
         .todo-table > tbody > tr >td:first-child{
             padding-left: 20px;
         }
@@ -59,9 +63,6 @@
             padding-right: 25px;
         }
         .panel-default{
-            border-left: 0;
-            border-right: 0;
-            border-top: 1px solid darkred;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
@@ -85,28 +86,29 @@
                 </div>
             </div>
 
+            <section class="under-line fn-pp-1">
+                <ul class="nav nav-pills">
+                    <li class="disabled text-left"><a href="#" class="clean-link-decoration">新建：</a></li>
+                    <li><a href="${ctx}/discuss/index" class="clean-link-decoration">讨论</a></li>
+                    <li><a href="${ctx}/todolists/index" class="clean-link-decoration">TODOS</a></li>
+                    <li><a href="${ctx}/files/index" class="clean-link-decoration">文件</a></li>
+                    <li><a href="${ctx}/documents/list" class="clean-link-decoration">文档</a></li>
+                    <%--<li><a href="#">事件</a></li>--%>
+                </ul>
+            </section>
+
             <div class="panel-body">
-                <section class="under-line">
-                    <ul class="nav nav-pills">
-                        <li class="disabled text-left"><a href="#" class="clean-link-decoration">新建：</a></li>
-                        <li><a href="${ctx}/discuss/index" class="clean-link-decoration">讨论</a></li>
-                        <li><a href="${ctx}/todolists/index" class="clean-link-decoration">TODOS</a></li>
-                        <li><a href="${ctx}/files/index" class="clean-link-decoration">文件</a></li>
-                        <li><a href="${ctx}/documents/list" class="clean-link-decoration">文档</a></li>
-                        <%--<li><a href="#">事件</a></li>--%>
-                    </ul>
-                </section>
-                <section>
-                    <h4><a href="#" class="text-danger">最近更新</a></h4>
+                <section class="fn-mb-5">
+                    <h4 class="fn-mb-1 f-ff1"><a href="#" class="text-danger">最近更新</a></h4>
                     <ul class="list-unstyled">
                         <li><b>2013年5月05日</b> 1923416@qq.com创建了一个文档：<a href="#"> <span>XXX需求文档</span></a></li>
                         <li><b>2013年5月08日</b> 张三设置了任务截止日期为2013年06月30日：<a href="#">公文管理移动开发</a></li>
                         <li><b>2013年5月08日</b> 张三分配了一条任务给李四：<a href="#">公文管理移动开发</a></li>
                     </ul>
                 </section>
-                <section>
+                <section class="fn-mb-5">
                     <header>
-                        <h4><a href="#" class="text-danger">讨论</a><button class="btn btn-default btn-sm discuss-btn"><span class="glyphicon glyphicon-edit"></span> 发布一条讨论</button></h4>
+                        <h4 class="f-ff1"><a href="#" class="text-danger">讨论</a><button class="btn btn-default btn-sm discuss-btn"><span class="glyphicon glyphicon-edit"></span> 发布一条讨论</button></h4>
                     </header>
                     <table class="table discuss-table">
                         <tr>
@@ -132,9 +134,9 @@
                         </tr>
                     </table>
                 </section>
-                <section>
+                <section class="fn-mb-5">
                     <header>
-                        <h4><a href="#" class="text-danger">To-do lists</a><button class="btn btn-default btn-sm discuss-btn"><span class="glyphicon glyphicon-plus"></span> 新建 to-do list</button></h4>
+                        <h4 class="f-ff1"><a href="#" class="text-danger">任务列表</a><button class="btn btn-default btn-sm discuss-btn"><span class="glyphicon glyphicon-plus"></span> 新建任务列表</button></h4>
                     </header>
                     <table class="table todo-table">
                         <thead>
@@ -154,7 +156,7 @@
                                 </td>
                             </tr>
                         <tr>
-                            <td colspan="2"><a href="#">新建一条to-do</a></td>
+                            <td colspan="2"><a href="#" class="text-danger">新建一条任务</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -176,13 +178,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2"><a href="#">新建一条to-do</a></td>
+                            <td colspan="2"><a href="#" class="text-danger">新建一条任务</a></td>
                         </tr>
                         </tbody>
                     </table>
-                    <a href="#">一条已完成</a>
+                    <a href="#" class="text-success">一条任务已完成</a>
                 </section>
-                <section>
+                <section class="fn-mb-5">
                     <header>
                         <h4><a href="#" class="text-danger">文件</a><button class="btn btn-default btn-sm discuss-btn"><span class="glyphicon glyphicon-plus"></span> 添加新文件</button></h4>
                     </header>
@@ -254,7 +256,7 @@
                         </div>
                     </div>
                 </section>
-                <section>
+                <section class="fn-mb-5">
                     <header>
                         <h4><a href="#" class="text-danger">文档</a><button class="btn btn-default btn-sm discuss-btn"><span class="glyphicon glyphicon-plus"></span> 添加新文档</button></h4>
                     </header>

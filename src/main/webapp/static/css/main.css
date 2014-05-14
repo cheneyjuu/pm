@@ -1,19 +1,22 @@
 body{
     font-family: "Hiragino Sans GB W3", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
     -webkit-font-smoothing:antialiased;
-    background-color: #fcfaf2;
+    /*background-color: #fcfaf2;*/
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     font-family: "Hiragino Sans GB W3", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
     -webkit-font-smoothing:antialiased;
 }
-a{
+.f-ff1{
+    font-family:"Microsoft YaHei",\5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53;
+}
+#header a{
     color: #181816;
 }
 a:hover{
     text-decoration: none;
     border-bottom: 1px solid #7c7a72;
-    color: #5b5b55;
+    color: #4183c4;
 }
 a.clean-link-decoration{
     border-bottom: none;
@@ -26,24 +29,31 @@ a.clean-link-decoration{
 #header{
     height: 60px;
     margin-bottom: 15px;
+    background-color: #f3f3f3;
+    text-shadow: 0 1px 0 #fff;
+    border-bottom: 1px solid #e5e5e5;
+    min-width: 1000px;
 }
 #header ul{
     height: 100%;
 }
 #header ul li{
-    line-height: 2em;
+    line-height: 2.3em;
     font-size: 1.2em;
 }
 #header ul li > a{
     font-weight: 500;
 }
+#header > .nav-pills{
+    padding-left: 15px;
+}
 .nav>li>a:hover, .nav>li>a:focus{
-    background-color: #fcfaf2;
+    background-color: #e4e4e4;
 }
-.navbar-default{
-    background-color: #f9f5e5;
-    border: none;
-}
+/*.navbar-default{*/
+    /*background-color: #f9f5e5;*/
+    /*border: none;*/
+/*}*/
 .panel-default>.panel-heading{
     background-color: #fcfaf2;
 }
@@ -55,6 +65,8 @@ a.clean-link-decoration{
 }
 .container{
     width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }
 .discuss-title{
     height: 50px;
@@ -98,5 +110,29 @@ input[type="file"]{
     height: 100px;
 }
 #content>.container{
-    padding: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/*margin function*/
+.fn-mb-5{
+    margin-bottom: 5%;
+}
+.fn-mb-1{
+    margin-bottom: 1.5%;
+}
+.fn-clm{
+    margin: 0;
+}
+/*clean table bottom border*/
+.fn-ctb-b{
+    border-bottom: 0;
+}
+/*padding 1 percent*/
+.fn-pp-1{
+    padding: 1%;
+}
+/*remove input focus outline*/
+input#title:focus {
+    outline: none;
 }

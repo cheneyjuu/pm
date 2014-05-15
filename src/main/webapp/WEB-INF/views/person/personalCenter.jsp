@@ -5,6 +5,7 @@
 <html lang="zh-cn">
 <head>
     <title>个人中心</title>
+    <link rel="stylesheet" href="${ctx}/static/css/personalCenter.css"/>
 </head>
 <body>
 <div class="row personal-container">

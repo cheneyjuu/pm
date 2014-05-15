@@ -1,0 +1,79 @@
+.personal-container{
+    padding: 15px;
+}
+.personal-container > .col-md-8{
+    width: 69%;
+    min-height: 600px;
+}
+.personal-container > .col-md-4{
+    width: 29%;
+    min-height: 150px;
+    margin-bottom: 2%;
+}
+.personal-container > div:first-child{
+    margin-right: 2%;
+}
+.personal-container .nav-pills{
+    /*border-bottom: 1px solid #cccccc;*/
+}
+.personal-container .work-container .nav-pills>li>a{
+    /*color: #1e1e1e;*/
+    font-size: 1.3em;
+}
+.personal-container .nav-pills>li>a:hover{
+    color: #000000;
+}
+.personal-container .nav-pills>li.active>a{
+    background-color: #ffffff;
+}
+.personal-container .nav-pills>li>a:hover{
+    border-bottom: 3px solid indianred;
+}
+.personal-container .nav-pills>li.active>a, .personal-container .nav-pills>li.active>a:hover, .personal-container .nav-pills>li.active>a:focus{
+    color: #000000;
+    border-bottom: none;
+}
+.personal-container .nav-pills .active{
+    border-bottom: 3px solid red;
+}
+.personal-container table>tbody>tr:last-child>td{
+    border-bottom: 1px solid #ddd;
+}
+.personal-container tbody>tr>td:first-child{
+    line-height: 4.5;
+}
+.personal-container tbody>tr>td:last-child{
+    line-height: 4.5;
+}
+.personal-container ul.task-list{
+    margin-top: 15px;
+}
+.personal-container ul.task-list li{
+    border-right: 1px solid #cccccc;
+}
+.personal-container ul.task-list li:last-child{
+    border-right: none;
+}
+.personal-container ul.task-list li a{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.personal-container ul.task-list li a:hover{
+    background-color: #ffffff;
+}
+.power-note{
+    height: 300px;
+}
+.power-note>h4{
+    padding-bottom: 15px;
+}
+.power-note .glyphicon.tips{
+    padding-top: 11%;
+    font-size: 6em;
+    color: #cccccc;
+}
+.power-note .tips{
+    padding-top: 3%;
+    font-size: 1.2em;
+    color: #cccccc;
+}

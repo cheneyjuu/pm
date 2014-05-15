@@ -16,11 +16,11 @@
         <%--</nav>--%>
     <%--</div>--%>
         <ul class="nav nav-pills">
+            <li><a href="${ctx}/p/index">个人中心</a></li>
             <li><a href="${ctx}/project/list">项目列表</a></li>
             <li><a href="#">日程</a></li>
             <li><a href="#">浏览</a></li>
             <li><a href="#">时间轴</a></li>
             <li><a href="#">用户管理</a></li>
-            <li><a href="#">个人中心</a></li>
         </ul>
 </div>

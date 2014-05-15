@@ -31,9 +31,6 @@
         .discuss-btn{
             margin-left: 20px;
         }
-        .user-head{
-            height: 32px;
-        }
         .table tbody tr td{
             line-height: 2.5em;
         }
@@ -112,7 +109,7 @@
                     </header>
                     <table class="table discuss-table">
                         <tr>
-                            <td><img src="${ctx}/static/images/example/08-023618_517.jpg" alt="user head" class="img-circle user-head"/></td>
+                            <td><img src="${ctx}/static/images/example/08-023618_517.jpg" alt="user head" class="img-circle user-head-s"/></td>
                             <td><span class="text-muted">张三</span></td>
                             <td>
                                 <div class="pull-right">
@@ -124,7 +121,7 @@
                             <td><a href="javascript:void(0);" class="clean-link-decoration"><span class="badge">42 条回复</span></a></td>
                         </tr>
                         <tr>
-                            <td><img src="${ctx}/static/images/example/08-023618_517.jpg" alt="user head" class="img-circle user-head"/></td>
+                            <td><img src="${ctx}/static/images/example/08-023618_517.jpg" alt="user head" class="img-circle user-head-s"/></td>
                             <td><span class="text-muted">李四</span></td>
                             <td>
                                 <b>关于公文管理移动开发的几点疑问？</b><span class="text-muted discuss-content">公文管理开发的时间节点。</span>

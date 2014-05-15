@@ -22,28 +22,28 @@
             </div>
 
             <a href="${ctx}/documents/details">
-                <div class="div-bordered">
+                <div class="div-bordered col-md-4">
                     <h4 class="text-center">需求文档标题</h4>
                     <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
                     <small><span class="text-muted">张三于2013年12月12日添加</span></small>
                 </div>
             </a>
             <a href="${ctx}/documents/details">
-                <div class="div-bordered">
+                <div class="div-bordered col-md-4">
                     <h4 class="text-center">需求文档标题</h4>
                     <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
                     <small><span class="text-muted">张三于2013年12月12日添加</span></small>
                 </div>
             </a>
             <a href="${ctx}/documents/details">
-                <div class="div-bordered">
+                <div class="div-bordered col-md-4">
                     <h4 class="text-center">需求文档标题</h4>
                     <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
                     <small><span class="text-muted">张三于2013年12月12日添加</span></small>
                 </div>
             </a>
             <a href="${ctx}/documents/details">
-                <div class="div-bordered">
+                <div class="div-bordered col-md-4">
                     <h4 class="text-center">需求文档标题</h4>
                     <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
                     <small><span class="text-muted">张三于2013年12月12日添加</span></small>

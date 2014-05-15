@@ -10,6 +10,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .f-ff1{
     font-family:"Microsoft YaHei",\5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53;
 }
+.number-ft{
+    font-family: arial;
+    font-size: 20px;
+    font-weight: bolder;
+}
 #header a{
     color: #181816;
 }
@@ -25,9 +30,20 @@ a.clean-link-decoration{
 .under-line{
     border-bottom: 1px solid darkred;
 }
+.under-line-gray{
+    border-bottom: 1px solid #cccccc;
+}
+.user-head-s{
+    height: 32px;
+}
+.user-head-m{
+    height: 64px;
+}
 /*nav*/
 #header{
     height: 60px;
+    margin-left: -15px;
+    margin-right: -15px;
     margin-bottom: 15px;
     background-color: #f3f3f3;
     text-shadow: 0 1px 0 #fff;
@@ -65,8 +81,6 @@ a.clean-link-decoration{
 }
 .container{
     width: 100%;
-    padding-left: 0;
-    padding-right: 0;
 }
 .discuss-title{
     height: 50px;
@@ -86,9 +100,9 @@ a.clean-link-decoration{
 .div-bordered{
     border: 1px solid #cccccc;
     padding: 15px;
-    margin-left: 1%;
-    margin-top: 1%;
-    width: 23.8%;
+    /*margin-left: 1%;*/
+    /*margin-top: 1%;*/
+    /*width: 23.8%;*/
     border-radius: 4px;
     -moz-border-radius: 4px;
     float: left;

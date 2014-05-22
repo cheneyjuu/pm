@@ -7,8 +7,10 @@ package com.baosight.pm.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -30,6 +32,7 @@ public class User extends IdEntity {
 	private String salt;
 	private String roles;
 	private Date registerDate;
+    private Set<Project> projects;
 
 	public User() {
 	}
@@ -112,4 +115,13 @@ public class User extends IdEntity {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
+    @ManyToMany (mappedBy = "users")
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
 }

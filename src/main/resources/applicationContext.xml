@@ -29,6 +29,10 @@
 			<props>
 				<!-- 命名规则 My_NAME->MyName -->
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
 			</props>
 		</property>
 	</bean>
@@ -56,28 +60,28 @@
  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
 	<!-- production环境 -->
- 	<beans profile="production">
- 		<context:property-placeholder ignore-unresolvable="true"
-			location="classpath*:/application.properties" />	
-		
-		<!-- 数据源配置, 使用Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
-			<!-- Connection Info -->
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-		
-			<!-- Connection Pooling Info -->
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-			<property name="minIdle" value="0" />
-			<property name="defaultAutoCommit" value="false" />
-		</bean>
-		
-		<!-- 数据源配置,使用应用服务器的数据库连接池 -->
-		<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
-	</beans>
+ 	<!--<beans profile="production">-->
+ 		<!--<context:property-placeholder ignore-unresolvable="true"-->
+			<!--location="classpath*:/application.properties" />	-->
+		<!---->
+		<!--&lt;!&ndash; 数据源配置, 使用Tomcat JDBC连接池 &ndash;&gt;-->
+		<!--<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">-->
+			<!--&lt;!&ndash; Connection Info &ndash;&gt;-->
+			<!--<property name="driverClassName" value="${jdbc.driver}" />-->
+			<!--<property name="url" value="${jdbc.url}" />-->
+			<!--<property name="username" value="${jdbc.username}" />-->
+			<!--<property name="password" value="${jdbc.password}" />-->
+		<!---->
+			<!--&lt;!&ndash; Connection Pooling Info &ndash;&gt;-->
+			<!--<property name="maxActive" value="${jdbc.pool.maxActive}" />-->
+			<!--<property name="maxIdle" value="${jdbc.pool.maxIdle}" />-->
+			<!--<property name="minIdle" value="0" />-->
+			<!--<property name="defaultAutoCommit" value="false" />-->
+		<!--</bean>-->
+		<!---->
+		<!--&lt;!&ndash; 数据源配置,使用应用服务器的数据库连接池 &ndash;&gt;-->
+		<!--&lt;!&ndash;<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />&ndash;&gt;-->
+	<!--</beans>-->
 	
 	<!-- local development环境 -->
 	<beans profile="development">
@@ -96,45 +100,45 @@
 	</beans>
 	
 	<!-- functional test 环境 -->
-	<beans profile="functional">
-		<context:property-placeholder ignore-resource-not-found="true"
-			location="classpath*:/application.properties,
-          			  classpath*:/application.functional.properties,
-          			  classpath*:/application.functional-local.properties" />	
+	<!--<beans profile="functional">-->
+		<!--<context:property-placeholder ignore-resource-not-found="true"-->
+			<!--location="classpath*:/application.properties,-->
+          			  <!--classpath*:/application.functional.properties,-->
+          			  <!--classpath*:/application.functional-local.properties" />	-->
 
-		<!-- Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-			<property name="defaultAutoCommit" value="false" />
-		</bean>
+		<!--&lt;!&ndash; Tomcat JDBC连接池 &ndash;&gt;-->
+		<!--<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">-->
+			<!--<property name="driverClassName" value="${jdbc.driver}" />-->
+			<!--<property name="url" value="${jdbc.url}" />-->
+			<!--<property name="username" value="${jdbc.username}" />-->
+			<!--<property name="password" value="${jdbc.password}" />-->
+			<!--<property name="defaultAutoCommit" value="false" />-->
+		<!--</bean>-->
 
-		<!-- 初始化数据表结构 -->
-		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-			<jdbc:script location="classpath:sql/${db.type}/schema.sql" />
-		</jdbc:initialize-database>	
-	</beans>
+		<!--&lt;!&ndash; 初始化数据表结构 &ndash;&gt;-->
+		<!--<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">-->
+			<!--<jdbc:script location="classpath:sql/${db.type}/schema.sql" />-->
+		<!--</jdbc:initialize-database>	-->
+	<!--</beans>-->
 	
 	<!-- unit test环境 -->
-	<beans profile="test">
-	 	<context:property-placeholder ignore-resource-not-found="true"
-			location="classpath*:/application.properties,
-          			  classpath*:/application.test.properties" />	
-		
-		<!-- Spring Simple连接池 -->
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-			<property name="driverClass" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-		</bean>
+	<!--<beans profile="test">-->
+	 	<!--<context:property-placeholder ignore-resource-not-found="true"-->
+			<!--location="classpath*:/application.properties,-->
+          			  <!--classpath*:/application.test.properties" />	-->
+		<!---->
+		<!--&lt;!&ndash; Spring Simple连接池 &ndash;&gt;-->
+		<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">-->
+			<!--<property name="driverClass" value="${jdbc.driver}" />-->
+			<!--<property name="url" value="${jdbc.url}" />-->
+			<!--<property name="username" value="${jdbc.username}" />-->
+			<!--<property name="password" value="${jdbc.password}" />-->
+		<!--</bean>-->
 
-		<!-- 初始化数据表结构 与默认数据-->
-		<!--<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">-->
-			<!--<jdbc:script location="classpath:sql/h2/schema.sql" />-->
-			<!--<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8"/>-->
-		<!--</jdbc:initialize-database>-->
-	</beans>
+		<!--&lt;!&ndash; 初始化数据表结构 与默认数据&ndash;&gt;-->
+		<!--&lt;!&ndash;<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">&ndash;&gt;-->
+			<!--&lt;!&ndash;<jdbc:script location="classpath:sql/h2/schema.sql" />&ndash;&gt;-->
+			<!--&lt;!&ndash;<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8"/>&ndash;&gt;-->
+		<!--&lt;!&ndash;</jdbc:initialize-database>&ndash;&gt;-->
+	<!--</beans>-->
 </beans>

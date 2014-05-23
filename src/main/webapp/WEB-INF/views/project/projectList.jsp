@@ -35,9 +35,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-default btn-lg">
+                <a href="/project/cf" class="btn btn-default btn-lg">
                     <span class="glyphicon glyphicon-plus"></span> 新建项目
-                </button>
+                </a>
                 <a href="#" class="center-block">从模板创建新项目</a>
             </div>
             <div class="col-md-10">

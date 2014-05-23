@@ -1,8 +1,14 @@
 package com.baosight.pm.web.project;
 
+import com.baosight.pm.entity.User;
+import com.baosight.pm.service.account.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * User: Juchen
@@ -12,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping (value = "/project")
 public class ProjectController {
+
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping (value = "list", method = RequestMethod.GET)
     public String list(){
@@ -24,7 +33,9 @@ public class ProjectController {
     }
 
     @RequestMapping (value = "cf")
-    public String createForm(){
-        return "project/createForm";
+    public String createForm(Model model){
+        List<User> userList = accountService.getAllUser();
+        model.addAttribute("userList", userList);
+        return "project/projectForm";
     }
 }

@@ -16,7 +16,7 @@ public class MarkdownController {
 
     @RequestMapping (value = "index")
     public String index(){
-        return "project/markdown";
+        return "document/markdown";
     }
 
     @ResponseBody

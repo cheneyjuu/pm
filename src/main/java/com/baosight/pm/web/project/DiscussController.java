@@ -14,6 +14,6 @@ public class DiscussController {
 
     @RequestMapping (value = "index")
     public String index(){
-        return "project/discussForm";
+        return "discuss/discussForm";
     }
 }

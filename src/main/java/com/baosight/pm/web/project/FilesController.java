@@ -12,6 +12,6 @@ public class FilesController {
 
     @RequestMapping (value = "index")
     public String index(){
-        return "project/filesIndex";
+        return "projectFile/filesIndex";
     }
 }

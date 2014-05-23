@@ -22,4 +22,9 @@ public class ProjectController {
     public String index(){
         return "project/projectIndex";
     }
+
+    @RequestMapping (value = "cf")
+    public String createForm(){
+        return "project/createForm";
+    }
 }

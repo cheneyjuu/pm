@@ -1,14 +1,9 @@
 package com.baosight.pm.web.project;
 
 import org.pegdown.Extensions;
-import org.pegdown.Parser;
 import org.pegdown.PegDownProcessor;
-import org.pegdown.ast.RootNode;
-import org.pegdown.plugins.PegDownPlugins;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.io.*;
 
 /**
  * User: Juchen
@@ -21,17 +16,17 @@ public class DocumentsController {
 
     @RequestMapping (value = "list")
     public String list(){
-        return "project/documentsList";
+        return "document/documentsList";
     }
 
     @RequestMapping (value = "create")
     public String createDocument(){
-        return "project/documentsForm";
+        return "document/documentsForm";
     }
 
     @RequestMapping (value = "details")
     public String details(){
-        return "project/documentDetails";
+        return "document/documentDetails";
     }
 
     public static void main(String[] args){

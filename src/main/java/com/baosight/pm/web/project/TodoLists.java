@@ -12,6 +12,6 @@ public class TodoLists {
 
     @RequestMapping (value = "index")
     public String index(){
-        return "project/todolistsIndex";
+        return "task/todolistsIndex";
     }
 }

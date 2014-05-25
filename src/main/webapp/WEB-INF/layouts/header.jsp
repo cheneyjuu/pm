@@ -16,6 +16,7 @@
         <%--</nav>--%>
     <%--</div>--%>
         <ul class="nav nav-pills">
+            <li class="logo"><img src="${ctx}/static/images/logo.png" alt="项目管理系统"/></li>
             <li><a href="${ctx}/p/index">个人中心</a></li>
             <li><a href="${ctx}/project/list">项目列表</a></li>
             <li><a href="#">日程</a></li>

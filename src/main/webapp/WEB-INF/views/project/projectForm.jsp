@@ -5,6 +5,11 @@
 <html lang="zh-cn">
 <head>
     <title>创建一个新项目</title>
+    <style>
+        #users > div{
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
 <div class="row">
@@ -38,9 +43,7 @@
                         <div class="col-md-3">
                             <a href="javascript:void(null);" class="btn btn-default">所有人</a>
                         </div>
-                        <div class="users" id="users">
-
-                        </div>
+                        <div class="users" id="users"></div>
                     </div>
                 </section>
             </form>
@@ -52,34 +55,30 @@
 </div>
 <script>
     $(function(){
-        var doms = [];
         $("#selectUsers").change(function(){
-            var current_id, current_text, current_dom;
+            var current_id, current_text;
 
             $(this).find("option:selected").each(function(){
                 current_id = $(this).val();
                 current_text = $(this).text();
             });
 
-            current_dom = "user-"+current_id;
-
-
-            <%--if (current_id){--%>
-                <%----%>
-                <%--$("#users").append("<div class='col-md-1 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(null)' class='label label-default text-center center-block'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");--%>
-            <%--}--%>
-            if ($("#users").children().length <= 0){
-                $("#users").append("<div class='col-md-1 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(null)' class='label label-default text-center center-block'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
-            } else {
-                $("#users").children().each(function(index, elem){
-                    if ($(elem).hasClass(current_dom) == false){
-                        $("#users").append("<div class='col-md-1 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(null)' class='label label-default text-center center-block'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
-                    }
-                });
+            if (current_id){
+                $("#users").append("<div class='col-md-1 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(0)' onclick='delUser(this)' class='label label-default text-center center-block del-user'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
+                $(this).find("option[value="+current_id+"]").remove();
             }
-
         });
     });
+
+    // 删除成员
+    function delUser(dom){
+        var value,text,option;
+        $(dom).parent().remove();
+        value = ($(dom).parent().attr("class").split(" ")[1]).split("-")[1];
+        text = $(dom).parent().find("h5").text();
+        option = "<option value="+value+">"+text+"</option>";
+        $("#selectUsers").append(option);
+    }
 </script>
 </body>
 </html>

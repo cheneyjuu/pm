@@ -1,18 +1,15 @@
-package com.baosight.pm.web.person;
+package com.baosight.pm.web.personal;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * User: Juchen
- * Date: 14-5-15
- * Time: 9:45
+ * Created by 臣 on 2014/5/15.
  */
 @Controller
 @RequestMapping (value = "/p")
 public class PersonalCenter {
-
-    @RequestMapping (value = "index")
+    @RequestMapping(value = "index")
     public String index(){
         return "person/personalCenter";
     }

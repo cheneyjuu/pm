@@ -55,7 +55,7 @@ a.clean-link-decoration{
 }
 #header ul li{
     height: 70px;
-    line-height: 70px;
+    line-height: 50px;
 }
 #header ul li > a{
     font-weight: 500;

@@ -47,6 +47,10 @@
         .todo-table > tbody > tr >td:first-child{
             padding-left: 20px;
         }
+        .project-container{
+            margin-left: 0;
+            margin-right: 0;
+        }
         .project-container .panel-heading h3, .project-container .panel-heading .col-md-4{
             margin-top: 10px;
         }

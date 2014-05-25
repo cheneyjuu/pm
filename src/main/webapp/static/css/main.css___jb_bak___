@@ -99,8 +99,6 @@ a.clean-link-decoration{
     width: 100%;
     margin-left: -15px;
     margin-right: -15px;
-    padding-left: 0;
-    padding-right: 0;
 }
 .discuss-title{
     height: 50px;
@@ -144,7 +142,7 @@ input[type="file"]{
     height: 100px;
 }
 #content>.container{
-    padding-left: 40px;
+    padding-left: 15px;
     padding-right: 15px;
 }
 
@@ -172,34 +170,6 @@ input#title:focus {
 }
 /*footer*/
 #footer{
-    min-height: 150px;
+    min-height: 300px;
     background-color: #2a2c2e;
-    color: #8e999d;
-}
-#footer .col-md-4{
-    height: 110px;
-    line-height: 40px;
-    margin-top: 20px;
-    border-right: 1px solid #8e999d;
-}
-#footer .col-md-4:last-child{
-    border-right: none;
-}
-#footer .footer-navigation{
-    width: 80%;
-    margin: 0 10%;
-}
-#footer .footer-navigation ul {
-    width: 50%;
-    float: left;
-    line-height: 20px;
-}
-#footer .footer-navigation ul li a{
-    color: #8e999d;
-}
-#footer .footer-navigation ul li a:hover{
-    border-bottom: none;
-}
-#footer .footer-navigation ul:last-child li a{
-    padding-left: 63%;
 }

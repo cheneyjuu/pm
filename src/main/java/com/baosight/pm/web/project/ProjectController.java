@@ -58,9 +58,6 @@ public class ProjectController {
         }
         project.setCreateTime(createTime);
         project.setUsers(userSet);
-//        String id = UUID.randomUUID().toString().replace("-","");
-        Long id = new Random(200).nextLong();
-        project.setId(id);
         projectService.save(project);
         return "project/projectForm";
     }

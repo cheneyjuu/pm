@@ -1,5 +1,7 @@
 package com.baosight.pm.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,8 +12,9 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "tbl_project")
-public class Project extends IdEntity{
+public class Project{
 
+    private String id;
     private Set<User> users;
     private String projectName;
     private String subName;
@@ -67,5 +70,17 @@ public class Project extends IdEntity{
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -16,15 +16,15 @@
     <div class="col-md-10 col-md-push-1">
         <div class="form-container">
             <h3>创建新项目</h3>
-            <form role="form">
+            <form action="${ctx}/project/c" method="post" role="form">
                 <section>
                     <div class="form-group">
                         <label class="sr-only" for="projectName">项目名称</label>
-                        <input type="text" class="form-control" id="projectName" placeholder="项目名称">
+                        <input type="text" name="projectName" class="form-control" id="projectName" placeholder="项目名称">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="projectIntro">项目描述</label>
-                        <textarea name="projectIntro" id="projectIntro" class="form-control" cols="30" rows="10" placeholder="简要介绍项目"></textarea>
+                        <textarea name="intro" id="projectIntro" class="form-control" cols="30" rows="10" placeholder="简要介绍项目"></textarea>
                     </div>
                 </section>
                 <section id="selectUserId">
@@ -34,7 +34,7 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <select name="selectUsers" id="selectUsers" class="form-control pull-left">
+                                    <select id="selectUsers" class="form-control pull-left">
                                         <option value="-1">选择成员</option>
                                         <c:forEach items="${userList}" var="user">
                                             <option value="${user.id}">${user.name}</option>
@@ -62,21 +62,31 @@
             <%--</section>--%>
         </div>
     </div>
+    <div class="col-md-12 fn-mt-5 text-center">
+        <button class="btn btn-default fn-ml-4" id="submitForm"><span class="glyphicon glyphicon-file"></span> 新建项目</button>
+    </div>
 </div>
 <script>
     $(function(){
         $("#selectUsers").change(function(){
             var current_id, current_text;
-
+            var begin_tag,end_tag;
             $(this).find("option:selected").each(function(){
                 current_id = $(this).val();
                 current_text = $(this).text();
+                begin_tag = "<input type='hidden' name='userId' value=";
+                end_tag = ">";
+                $("#selectUserId").append(begin_tag+current_id+end_tag);
             });
 
             if (current_id){
                 $("#users").append("<div class='col-md-2 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(0)' onclick='delUser(this)' class='label label-default text-center center-block del-user'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
                 $(this).find("option[value="+current_id+"]").remove();
             }
+        });
+
+        $("#submitForm").click(function(){
+            $("form").submit();
         });
     });
 

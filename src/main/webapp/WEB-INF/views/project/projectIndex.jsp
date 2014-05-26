@@ -15,8 +15,7 @@
                         <h3>项目名称</h3>
                         <p class="text-muted">项目描述。反对使用信黑，信黑是非常漂亮，也是我见过最漂亮的中文字，但这是版权字，请不要在web中使用。反对使用信黑，信黑是非常漂亮，也是我见过最漂亮的中文字，但这是版权字，请不要在web中使用。</p>
                     </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-5 col-md-push-1 pull-right project-action">
                         <a href="#" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-user"></span> 邀请成员</a>
                         <a href="#" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-cog"></span> 设置项目</a>
                         <a href="#" class="text-danger clean-link-decoration"><span class="glyphicon glyphicon-cog"></span> 删除项目</a>

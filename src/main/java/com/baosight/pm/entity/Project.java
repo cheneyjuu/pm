@@ -17,7 +17,7 @@ public class Project extends IdEntity{
     private String subName;
     private String intro;
     private String createTime;
-    private int status;
+    private int status;//1为有效, 0为失效, -1为删除状态
 
     public int getStatus() {
         return status;
@@ -60,7 +60,7 @@ public class Project extends IdEntity{
     }
 
     @ManyToMany
-    @JoinTable (name = "tbl_project_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
+    @JoinTable(name = "tbl_project_user", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     public Set<User> getUsers() {
         return users;
     }

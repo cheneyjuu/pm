@@ -9,10 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -116,7 +113,7 @@ public class User extends IdEntity {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-    @ManyToMany (mappedBy = "users")
+    @ManyToMany(mappedBy = "users")
     public Set<Project> getProjects() {
         return projects;
     }

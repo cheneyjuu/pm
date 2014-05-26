@@ -5,69 +5,6 @@
 <html lang="zh-cn">
 <head>
     <title>项目主页</title>
-    <style>
-        .navbar-collapse{
-            padding-left: 0;
-            padding-right: 0;
-        }
-        .panel-body{
-            min-height: 200px;
-        }
-        #project-setting{
-            display: none;
-        }
-        .list-unstyled{
-            padding-left: 15px;
-        }
-        .list-unstyled > li {
-            margin: 10px 0;
-        }
-        .list-unstyled > li > b{
-            padding-right: 10px;
-        }
-        section{
-            margin-bottom: 25px;
-        }
-        .discuss-btn{
-            margin-left: 20px;
-        }
-        .table tbody tr td{
-            line-height: 2.5em;
-        }
-        .discuss-content:before{
-            content: ' - ';
-        }
-        header{
-            margin-bottom: 20px;
-        }
-        .table>tbody>tr>td{
-            border: 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .todo-table > tbody > tr >td:first-child{
-            padding-left: 20px;
-        }
-        .project-container{
-            margin-left: 0;
-            margin-right: 0;
-        }
-        .project-container .panel-heading h3, .project-container .panel-heading .col-md-4{
-            margin-top: 10px;
-        }
-        .project-container .panel-heading p{
-            text-indent: 1em;
-        }
-        .project-container .panel-heading p:before{
-            content: " - ";
-        }
-        .project-container .panel-heading .col-md-4 a{
-            padding-right: 25px;
-        }
-        .panel-default{
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    </style>
 </head>
 <body>
     <div class="container project-container">

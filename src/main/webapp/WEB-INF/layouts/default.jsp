@@ -12,28 +12,23 @@
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<link href="${ctx}/static/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<%--<link href="${ctx}/static/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css" rel="stylesheet" />--%>
+<link href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <%--<link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />--%>
 <link href="${ctx}/static/css/main.css" type="text/css" rel="stylesheet" />
 <script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
-<%--<script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>--%>
-<%--<script src="${ctx}/static/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>--%>
-    <style>
-        .navbar-collapse{
-            padding: 0;
-        }
-    </style>
 <sitemesh:head/>
 </head>
 
 <body>
-	<div class="container">
-		<%@ include file="/WEB-INF/layouts/header.jsp"%>
+    <%@ include file="/WEB-INF/layouts/header.jsp"%>
+	<div class="container" id="container">
 		<div id="content">
 			<sitemesh:body/>
 		</div>
-		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 	</div>
-	<script src="${ctx}/static/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
+    <%@ include file="/WEB-INF/layouts/footer.jsp"%>
+	<%--<script src="${ctx}/static/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>--%>
+	<script src="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

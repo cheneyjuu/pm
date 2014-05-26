@@ -22,10 +22,23 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-md-push-1">
-                    关注我们
+                    <p>关注我们</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    function positionFooter(){
+        var client_height = document.documentElement.clientHeight;
+        var container_height = document.getElementById("container").clientHeight;
+        var header_height = document.getElementById("header").offsetHeight;
+        var footer_height = document.getElementById("footer").offsetHeight;
+        if (container_height < client_height){
+            $("#footer").css('position', 'absolute').css('top', container_height+header_height+footer_height).css('width', '100%').css('right', '0').css('left', '0');
+        }
+    }
+    $(function(){
+        positionFooter();
+    });
+</script>

@@ -73,7 +73,7 @@
     <div class="col-md-4 div-bordered power-note">
         <h4 class="under-line-gray"><span class="glyphicon glyphicon-th-list"></span> 今天日程</h4>
         <div>
-            <span class="glyphicon glyphicon-th-list center-block tips"></span>
+            <span class="glyphicon glyphicon-th-list center-block tips text-center"></span>
             <span class="tips center-block text-center">今天没有日程安排</span>
         </div>
     </div>

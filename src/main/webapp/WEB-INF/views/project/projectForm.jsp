@@ -27,23 +27,33 @@
                         <textarea name="projectIntro" id="projectIntro" class="form-control" cols="30" rows="10" placeholder="简要介绍项目"></textarea>
                     </div>
                 </section>
-                <section>
+                <section id="selectUserId">
                     <h4>指定项目成员</h4>
-                    <p class="text-muted">只有项目成员才能访问该项目的信息。你可以通过项目设置，随时调整成员列表</p>
-
+                    <p class="text-muted"><small>只有项目成员才能访问该项目的信息。你可以通过项目设置，随时调整成员列表</small></p>
                     <div class="row">
-                        <div class="col-md-9">
-                            <select name="selectUsers" id="selectUsers" class="form-control">
-                                <option value="-1">选择成员</option>
-                            <c:forEach items="${userList}" var="user">
-                                <option value="${user.id}">${user.name}</option>
-                            </c:forEach>
-                            </select>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <select name="selectUsers" id="selectUsers" class="form-control pull-left">
+                                        <option value="-1">选择成员</option>
+                                        <c:forEach items="${userList}" var="user">
+                                            <option value="${user.id}">${user.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <a href="javascript:void(null);" class="btn btn-default">所有人</a>
+                                </div>
+                                <div class="users" id="users"></div>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <a href="javascript:void(null);" class="btn btn-default">所有人</a>
+                        <div class="break-line"></div>
+                        <div class="col-md-5">
+                            或者通过邮件邀请：
+                            <div>
+                                <input type="email" id="title" /><a href="#" class="btn btn-default pull-right">邀请</a>
+                            </div>
                         </div>
-                        <div class="users" id="users"></div>
                     </div>
                 </section>
             </form>
@@ -64,7 +74,7 @@
             });
 
             if (current_id){
-                $("#users").append("<div class='col-md-1 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(0)' onclick='delUser(this)' class='label label-default text-center center-block del-user'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
+                $("#users").append("<div class='col-md-2 user-"+current_id+"'><img src='${ctx}/static/images/example/3.jpg' class='img-circle user-head-m center-block' /><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(0)' onclick='delUser(this)' class='label label-default text-center center-block del-user'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
                 $(this).find("option[value="+current_id+"]").remove();
             }
         });

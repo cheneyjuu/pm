@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-8 col-md-push-2">
                 <ul class="nav nav-pills">
-                    <li class="logo"><img src="${ctx}/static/images/logo.png" alt="项目管理系统"/></li>
+                    <li class="logo"><img src="${ctx}/static/images/Logo-red.png" alt="项目管理系统"/></li>
                     <li><a href="${ctx}/p/index" class="active">个人中心</a></li>
                     <li><a href="${ctx}/project/list">项目列表</a></li>
                     <li><a href="#">日程</a></li>

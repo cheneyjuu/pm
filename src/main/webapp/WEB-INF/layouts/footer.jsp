@@ -34,8 +34,8 @@
         var container_height = document.getElementById("container").clientHeight;
         var header_height = document.getElementById("header").offsetHeight;
         var footer_height = document.getElementById("footer").offsetHeight;
-        if (container_height < client_height){
-            $("#footer").css('position', 'absolute').css('top', container_height+header_height+footer_height).css('width', '100%').css('right', '0').css('left', '0');
+        if ((container_height+header_height+footer_height) < client_height){
+            $("#footer").css('position', 'absolute').css('top', client_height - footer_height).css('width', '100%').css('right', '0').css('left', '0');
         }
     }
     $(function(){

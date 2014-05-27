@@ -27,7 +27,6 @@
             <c:forEach items="${projectList}" var="p">
                 <div class="col-md-4 well">
                     <h3><a href="${ctx}/project/index">${p.projectName}</a></h3>
-                    <em>项目子标题</em>
                     <small class="center-block">${p.createTime}创建</small>
                     <a href="${ctx}/project/index">
                         <p class="text-muted">${p.intro}</p>

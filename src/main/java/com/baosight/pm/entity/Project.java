@@ -17,7 +17,6 @@ public class Project{
     private String id;
     private Set<User> users;
     private String projectName;
-    private String subName;
     private String intro;
     private String createTime;
     private int status;//1为有效, 0为失效, -1为删除状态
@@ -44,14 +43,6 @@ public class Project{
 
     public void setIntro(String intro) {
         this.intro = intro;
-    }
-
-    public String getSubName() {
-        return subName;
-    }
-
-    public void setSubName(String subName) {
-        this.subName = subName;
     }
 
     public String getProjectName() {

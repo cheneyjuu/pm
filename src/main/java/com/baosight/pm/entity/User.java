@@ -30,6 +30,8 @@ public class User extends IdEntity {
 	private String roles;
 	private Date registerDate;
     private Set<Project> projects;
+    private String userImage;
+    private String imagePath;
 
 	public User() {
 	}
@@ -120,5 +122,21 @@ public class User extends IdEntity {
 
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

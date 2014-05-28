@@ -225,3 +225,23 @@ input[type='email']{
 .project-action a{
     padding-right: 20px;
 }
+/*project list*/
+.project-list > .col-md-4{
+    margin-right: 1%;
+}
+.project-list, .project-list a, .project-list p{
+    color: #5e5e5e;
+}
+.project-list h3 a:hover{
+    border-bottom: 1px solid #d45;
+}
+.project-list p{
+    margin-top: 15px;
+}
+.project-list > .col-md-4:nth-child(3n){
+    margin-right: -2%;
+}
+.project-inbox{
+    font-size: 4em;
+    color: #B5BDC0;
+}

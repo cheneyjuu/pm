@@ -25,16 +25,17 @@
     <div class="col-md-10">
         <div class="row project-list">
             <c:forEach items="${projectUserList}" var="pu">
-                <div class="col-md-4 well">
-                    <h3><a href="${ctx}/project/index">${pu.project.projectName}</a></h3>
-                    <small class="center-block">${pu.project.createTime}创建</small>
+                <div class="col-md-4 well text-center">
                     <a href="${ctx}/project/index">
-                        <p class="text-muted">${pu.project.intro}</p>
+                        <span class="glyphicon glyphicon-inbox center-block project-inbox"></span>
+                        <h3><a href="${ctx}/project/index">${pu.project.projectName}</a></h3>
+                        <small class="center-block">${pu.project.createTime}创建</small>
+                        <a href="${ctx}/project/index">
+                            <p>${pu.project.intro}</p>
+                        </a>
                     </a>
-
                 </div>
             </c:forEach>
-        </div>
     </div>
 </div>
 </body>

@@ -1,9 +1,13 @@
 package com.baosight.pm.web.project;
 
 import com.baosight.pm.entity.Project;
+import com.baosight.pm.entity.ProjectUser;
 import com.baosight.pm.entity.User;
 import com.baosight.pm.service.account.AccountService;
+import com.baosight.pm.service.account.ShiroDbRealm;
 import com.baosight.pm.service.project.ProjectService;
+import com.baosight.pm.service.project.ProjectUserService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +32,14 @@ public class ProjectController {
     private AccountService accountService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ProjectUserService projectUserService;
 
     @RequestMapping (value = "list", method = RequestMethod.GET)
     public String list(Model model){
-        List<Project> projectList = projectService.list();
+        ShiroDbRealm.ShiroUser user = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
+
+        List<Project> projectList = projectService.listWithUser(user.id);
         model.addAttribute("projectList", projectList);
         return "project/projectList";
     }
@@ -54,13 +62,19 @@ public class ProjectController {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = simpleDateFormat.format(date);
-        Set<User> userSet = new HashSet<User>();
-        for (int i=0; i<userIdList.length; i++){
-            userSet.add(accountService.getUser(new Long(userIdList[i])));
-        }
+        Set<ProjectUser> projectUserSet = new HashSet<ProjectUser>();
         project.setCreateTime(createTime);
-        project.setUsers(userSet);
         projectService.save(project);
+
+        ProjectUser projectUser;
+        for (int i=0; i<userIdList.length; i++){
+            projectUser = new ProjectUser();
+            projectUser.setUser(accountService.getUser(new Long(userIdList[i])));
+            projectUser.setProject(project);
+            projectUserSet.add(projectUser);
+            projectUserService.save(projectUserSet);
+        }
+
         return "project/projectForm";
     }
 }

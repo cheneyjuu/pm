@@ -2,7 +2,11 @@ package com.baosight.pm.repository;
 
 import com.baosight.pm.entity.Project;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 /**
  * User: Juchen

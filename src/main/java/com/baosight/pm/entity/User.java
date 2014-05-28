@@ -29,7 +29,10 @@ public class User extends IdEntity {
 	private String salt;
 	private String roles;
 	private Date registerDate;
-    private Set<Project> projects;
+//    private Set<Project> projects;
+    @OneToMany(mappedBy = "user")
+    @JoinColumn(name = "user_id")
+    private Set<ProjectUser> projectUserSet;
     private String userImage;
     private String imagePath;
 
@@ -115,14 +118,14 @@ public class User extends IdEntity {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-    @ManyToMany(mappedBy = "users")
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
+//    @ManyToMany(mappedBy = "users")
+//    public Set<Project> getProjects() {
+//        return projects;
+//    }
+//
+//    public void setProjects(Set<Project> projects) {
+//        this.projects = projects;
+//    }
 
     public String getUserImage() {
         return userImage;

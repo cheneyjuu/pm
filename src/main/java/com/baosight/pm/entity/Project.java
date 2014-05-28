@@ -3,6 +3,7 @@ package com.baosight.pm.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -15,7 +16,10 @@ import java.util.Set;
 public class Project{
 
     private String id;
-    private Set<User> users;
+//    private Set<User> users;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Set<ProjectUser> projectUserSet = new HashSet<ProjectUser>();
     private String projectName;
     private String intro;
     private String createTime;
@@ -53,15 +57,15 @@ public class Project{
         this.projectName = projectName;
     }
 
-    @ManyToMany
-    @JoinTable(name = "tbl_project_user", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    @ManyToMany
+//    @JoinTable(name = "tbl_project_user", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 
     @Id
     @GeneratedValue(generator = "uuid")

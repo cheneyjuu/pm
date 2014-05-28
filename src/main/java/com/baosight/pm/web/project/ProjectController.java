@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,8 +48,10 @@ public class ProjectController {
         }
     }
 
-    @RequestMapping (value = "index", method = RequestMethod.GET)
-    public String index(){
+    @RequestMapping (value = "index/{projectId}", method = RequestMethod.GET)
+    public String index(@PathVariable(value = "projectId") String projectId, Model model){
+        Project project = projectService.findWithId(projectId);
+        model.addAttribute("project", project);
         return "project/projectIndex";
     }
 

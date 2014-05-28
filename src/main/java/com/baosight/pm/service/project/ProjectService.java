@@ -46,4 +46,15 @@ public class ProjectService {
             }
         });
     }
+
+    public Project findWithId(final String projectId){
+        return projectDao.findOne(new Specification<Project>() {
+            @Override
+            public Predicate toPredicate(Root<Project> projectRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Path<String> id = projectRoot.get("id");
+                criteriaQuery.where(criteriaBuilder.equal(id, projectId));
+                return null;
+            }
+        });
+    }
 }

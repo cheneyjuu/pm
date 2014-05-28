@@ -39,8 +39,8 @@ public class ProjectController {
     public String list(Model model){
         ShiroDbRealm.ShiroUser user = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
 
-        List<Project> projectList = projectService.listWithUser(user.id);
-        model.addAttribute("projectList", projectList);
+        List<ProjectUser> projectUserList = projectUserService.listWithUser(user.id);
+        model.addAttribute("projectUserList", projectUserList);
         return "project/projectList";
     }
 

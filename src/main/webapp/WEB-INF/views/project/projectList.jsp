@@ -24,16 +24,14 @@
     </div>
     <div class="col-md-10">
         <div class="row project-list">
-            <c:forEach items="${projectList}" var="p">
+            <c:forEach items="${projectUserList}" var="pu">
                 <div class="col-md-4 well">
-                    <h3><a href="${ctx}/project/index">${p.projectName}</a></h3>
-                    <small class="center-block">${p.createTime}创建</small>
+                    <h3><a href="${ctx}/project/index">${pu.project.projectName}</a></h3>
+                    <small class="center-block">${pu.project.createTime}创建</small>
                     <a href="${ctx}/project/index">
-                        <p class="text-muted">${p.intro}</p>
+                        <p class="text-muted">${pu.project.intro}</p>
                     </a>
-                    <c:forEach items="${p.users}" var="u">
-                        <a href="#">${u.name}</a>
-                    </c:forEach>
+
                 </div>
             </c:forEach>
         </div>

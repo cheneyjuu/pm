@@ -38,10 +38,13 @@ public class ProjectController {
     @RequestMapping (value = "list", method = RequestMethod.GET)
     public String list(Model model){
         ShiroDbRealm.ShiroUser user = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
-
-        List<ProjectUser> projectUserList = projectUserService.listWithUser(user.id);
-        model.addAttribute("projectUserList", projectUserList);
-        return "project/projectList";
+        if (user != null){
+            List<ProjectUser> projectUserList = projectUserService.listWithUser(user.id);
+            model.addAttribute("projectUserList", projectUserList);
+            return "project/projectList";
+        } else {
+            return "account/login";
+        }
     }
 
     @RequestMapping (value = "index", method = RequestMethod.GET)

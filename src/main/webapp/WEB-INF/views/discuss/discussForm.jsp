@@ -5,9 +5,11 @@
 <html lang="zh-cn">
 <head>
     <title>新建讨论内容</title>
-    <script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>
+    <%--<script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>--%>
     <script type="text/javascript" src="${ctx}/static/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="${ctx}/static/ueditor/ueditor.all.min.js"></script>
+    <link rel="stylesheet" href="${ctx}/static/webuploader/webuploader.css"/>
+    <script type="text/javascript" src="${ctx}/static/webuploader/webuploader.js"></script>
     <script type="text/javascript">
         $(function(){
             window.UEDITOR_HOME_URL = "${ctx}/static/ueditor/";
@@ -31,7 +33,13 @@
                 </div>
             </form>
             <hr/>
-            <span class="glyphicon glyphicon-paperclip"></span> 您还可以选择添加附件： <a href="#">从电脑选择 ...</a>
+            <div id="uploader" class="file-container">
+                <div id="thelist" class="uploader-list"></div>
+                <div class="btns">
+                    <div id="picker" class="pull-left"><span class="glyphicon glyphicon-paperclip"></span> 添加附件 ...</div>
+                    <button id="ctlBtn" class="btn btn-default fn-ml-4">开始上传</button>
+                </div>
+            </div>
             <hr/>
             <strong>您可以邀请其他人来参与：</strong>
             <ul>
@@ -72,6 +80,66 @@
             var del = window.confirm("确定要删除项目？项目删除后，可在回收站恢复！");
 
         });
+    });
+
+    var uploader = WebUploader.create({
+
+        auto: true,
+        // swf文件路径
+        swf: '${ctx}/static/webuploader/Uploader.swf',
+
+        // 文件接收服务端。
+        server: '${ctx}/discuss/upload',
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker',
+
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
+    });
+
+    // 当有文件被添加进队列的时候
+    uploader.on( 'fileQueued', function( file ) {
+        $("#thelist").append( '<div id="' + file.id + '" class="item">' +
+                '<h4 class="info">' + file.name + '</h4>' +
+                '<p class="state">等待上传...</p>' +
+                '</div>' );
+    });
+
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+                $percent = $li.find('.progress .progress-bar');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<div class="progress progress-striped active">' +
+                    '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                    '</div>' +
+                    '</div>').appendTo( $li ).find('.progress-bar');
+        }
+
+        $li.find('p.state').text('上传中');
+
+        $percent.css( 'width', percentage * 100 + '%' );
+    });
+
+    uploader.on( 'uploadAccept', function( file, response ) {
+        // 通过response._raw拿到上传的文件
+        console.log(response._raw);
+        if ( hasError ) {
+            // 通过return false来告诉组件，此文件上传有错。
+            return false;
+        }
+    });
+
+    uploader.on( 'uploadSuccess', function( file ) {
+        $( '#'+file.id ).find('p.state').text('已上传');
+    });
+
+    uploader.on( 'uploadError', function( file ) {
+        $( '#'+file.id ).find('p.state').text('上传出错');
     });
 </script>
 </body>

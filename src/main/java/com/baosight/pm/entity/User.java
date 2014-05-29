@@ -33,8 +33,12 @@ public class User extends IdEntity {
     @OneToMany(mappedBy = "user")
     @JoinColumn(name = "user_id")
     private Set<ProjectUser> projectUserSet;
+    // 用户头像属性
     private String userImage;
     private String imagePath;
+
+    private String email;
+    private String remark;//成员备注信息
 
 	public User() {
 	}
@@ -141,5 +145,21 @@ public class User extends IdEntity {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

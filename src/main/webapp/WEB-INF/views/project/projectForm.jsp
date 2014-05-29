@@ -62,7 +62,7 @@
             <%--</section>--%>
         </div>
     </div>
-    <div class="col-md-12 fn-mt-5 text-center">
+    <div class="col-md-12 fn-mt-5 fn-mb-5 text-center">
         <button class="btn btn-default fn-ml-4" id="submitForm"><span class="glyphicon glyphicon-file"></span> 新建项目</button>
     </div>
 </div>

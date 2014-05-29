@@ -2,6 +2,7 @@ body{
     font-family: "Hiragino Sans GB W3","Microsoft Yahei", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
     -webkit-font-smoothing:antialiased;
     background-color: #eeeff1;
+    background: url("../images/background.png");
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     font-family: "Hiragino Sans GB W3","Microsoft Yahei", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;

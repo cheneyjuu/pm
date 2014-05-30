@@ -24,6 +24,9 @@ public class Discuss {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public String getId() {
         return id;
@@ -63,5 +66,13 @@ public class Discuss {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

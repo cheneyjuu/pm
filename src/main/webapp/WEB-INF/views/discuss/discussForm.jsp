@@ -20,9 +20,9 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3><a href="${ctx}/project/index">项目名称</a></h3>
+            <h3><a href="${ctx}/project/index/${projectId}">项目名称</a></h3>
         </div>
-        <form action="${ctx}/discuss/c" method="post" id="discussForm">
+        <form action="${ctx}/discuss/c/${projectId}" method="post" id="discussForm">
             <div class="panel-body">
                 <input type="text" name="title" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/>
                 <hr/>

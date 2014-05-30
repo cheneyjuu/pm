@@ -22,47 +22,33 @@
         <div class="panel-heading">
             <h3><a href="${ctx}/project/index">项目名称</a></h3>
         </div>
-        <div class="panel-body">
-            <input type="text" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/>
-            <hr/>
-            <form method="post">
+        <form action="${ctx}/discuss/c" method="post" id="discussForm">
+            <div class="panel-body">
+                <input type="text" name="title" class="form-control input-lg discuss-title" placeholder="输入标题 ..."/>
+                <hr/>
                 <div class="control-group" id="areaDiv">
                     <div class="controls">
                         <textarea id="myEditor" name="content"></textarea>
                     </div>
                 </div>
-            </form>
-            <hr/>
-            <div id="uploader" class="file-container">
-                <div id="thelist" class="uploader-list"></div>
-                <div class="btns">
-                    <div id="picker" class="pull-left"><span class="glyphicon glyphicon-paperclip"></span> 添加附件 ...</div>
-                    <button id="ctlBtn" class="btn btn-default fn-ml-4">开始上传</button>
+                <hr/>
+                <div id="uploader" class="file-container">
+                    <div id="thelist" class="uploader-list"></div>
+                    <div class="btns">
+                        <div id="picker"><span class="glyphicon glyphicon-paperclip"></span> 上传附件 ...</div>
+                    </div>
                 </div>
+                <hr/>
+                <div class="center-block">
+                    <strong>您可以邀请其他人来参与：</strong>
+                    <ul>
+                        <li><a href="#">邀请项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
+                        <li><a href="#">邀请非项目参与人员</a> <small>被邀请的人只能看到此讨论信息</small></li>
+                    </ul>
+                </div>
+                <button class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
             </div>
-            <hr/>
-            <strong>您可以邀请其他人来参与：</strong>
-            <ul>
-                <li><a href="#">邀请项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
-                <li><a href="#">邀请非项目参与人员</a> <small>被邀请的人只能看到此讨论信息</small></li>
-            </ul>
-            <button class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
-        </div>
-        <div class="panel-footer">
-            <div id="project-operation">
-                <a href="#" class="text-muted">项目设置</a>
-                <a href="#" class="pull-right text-muted">删除项目</a>
-            </div>
-            <div id="project-setting">
-                    <span class="center-block">
-                        <label for="open"><input name="settingName" id="open" type="radio" checked="checked"/> <strong>开启</strong></label>
-                        <label for="close"><input name="settingName" id="close" type="radio"/> <strong>关闭</strong></label>
-                    </span>
-                    <span class="center-block">
-                        <a href="#" class="btn btn-primary btn-sm">保存</a> 或 <a href="#" class="btn btn-default btn-sm">取消</a>
-                    </span>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -128,14 +114,13 @@
     uploader.on( 'uploadAccept', function( file, response ) {
         // 通过response._raw拿到上传的文件
         console.log(response._raw);
-        if ( hasError ) {
-            // 通过return false来告诉组件，此文件上传有错。
-            return false;
-        }
+        $("#discussForm").append('<input type="hidden" name="fileName" value="' + response._raw +'" />');
     });
 
     uploader.on( 'uploadSuccess', function( file ) {
+        console.log(file.id);
         $( '#'+file.id ).find('p.state').text('已上传');
+        $( '#'+file.id).find('div.progress').remove();
     });
 
     uploader.on( 'uploadError', function( file ) {

@@ -11,43 +11,49 @@
 </head>
 
 <body>
-	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
-	<%
-	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-	if(error != null){
-	%>
-		<div class="alert alert-error input-medium controls">
-			<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
-		</div>
-	<%
-	}
-	%>
-		<div class="control-group">
-			<label for="username" class="control-label">名称:</label>
-			<div class="controls">
-				<input type="text" id="username" name="username"  value="${username}" class="input-medium required"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label for="password" class="control-label">密码:</label>
-			<div class="controls">
-				<input type="password" id="password" name="password" class="input-medium required"/>
-			</div>
-		</div>
-				
-		<div class="control-group">
-			<div class="controls">
-				<label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
-				<input id="submit_btn" class="btn btn-primary" type="submit" value="登录"/> <a class="btn" href="${ctx}/register">注册</a>
-			 	<span class="help-block">(管理员: <b>admin/admin</b>, 普通用户: <b>user/user</b>)</span>
-			</div>
-		</div>
-	</form>
+<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal col-md-6 col-md-push-3">
+    <%
+        String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+        if(error != null){
+    %>
+    <div class="alert alert-error input-medium controls">
+        <button class="close" data-dismiss="alert">×</button>登录失败，请重试.
+    </div>
+    <%
+        }
+    %>
+    <div class="form-group">
+        <label for="username" class="control-label col-sm-3">名称:</label>
+        <div class="col-sm-9">
+            <input type="text" id="username" name="username"  value="${username}" class="form-control required"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="control-label col-sm-3">密码:</label>
+        <div class="col-sm-9">
+            <input type="password" id="password" name="password" class="form-control required"/>
+        </div>
+    </div>
 
-	<script>
-		$(document).ready(function() {
-			$("#loginForm").validate();
-		});
-	</script>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input id="submit_btn" class="btn btn-primary" type="submit" value="登 录"/> <a class="btn" href="${ctx}/register">注 册</a>
+        </div>
+    </div>
+</form>
+<script>
+    $(function(){
+        var header_height = $("#header").height();
+        var footer_height = $("#footer").height();
+        var container_height = $("#container").height();
+        var client_height = document.documentElement.clientHeight - header_height - footer_height - container_height;
+        $("#loginForm").css("position", "relative").css("top",client_height /2 + "px");
+    });
+</script>
 </body>
 </html>

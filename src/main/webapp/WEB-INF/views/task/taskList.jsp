@@ -18,15 +18,15 @@
             <div class="row">
                 <div class="col-md-9 todo-lists">
                     <section id="createTaskSection">
-                        <input type="text" placeholder="输入任务标题" class="fn-border-bottom-dotted col-md-12"/>
-                        <input type="text" placeholder="补充说明(可选)" class="col-md-12 fn-cl-b"/>
+                        <input type="text" name="title" id="title" placeholder="输入任务标题" class="fn-border-bottom-dotted col-md-12"/>
+                        <input type="text" name="description" id="description" placeholder="补充说明(可选)" class="col-md-12 fn-cl-b"/>
                         <div class="clearfix"></div>
                         <div class="actions">
                             <button class="btn btn-sm btn-danger" id="addTaskBtn">添加任务</button>
                             <a href="javascript:void(null);" id="cancelTaskBtn">取消</a>
                         </div>
                     </section>
-                    <div>
+                    <section class="taskList">
                         <h4><a href="#">当前任务1</a></h4>
                         <div class="btn-group edit-btn">
                             <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
@@ -49,40 +49,10 @@
                                 <span class="badge">李四，5月20日截止</span>
                             </div>
                         </div>
-
                         <div class="add-todo">
                             <a href="#">添加一条子任务</a>
                         </div>
-                    </div>
-
-                    <div>
-                        <h4><a href="#">当前任务1</a></h4>
-                        <div class="btn-group edit-btn">
-                            <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
-                            <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span> 删除</button>
-                        </div>
-                        <div class="list-group checkbox">
-                            <div class="list-group-item">
-                                <label>
-                                    <input type="checkbox"/> 这是一条子任务
-                                </label>
-                                <span class="badge">张三，5月25日截止</span>
-                            </div>
-                        </div>
-
-                        <div class="list-group checkbox">
-                            <div class="list-group-item">
-                                <label>
-                                    <input type="checkbox"/> 这是一条子任务
-                                </label>
-                                <span class="badge">李四，5月20日截止</span>
-                            </div>
-                        </div>
-
-                        <div class="add-todo">
-                            <a href="#">添加一条子任务</a>
-                        </div>
-                    </div>
+                    </section>
                 </div>
 
                 <div class="col-md-3">
@@ -127,6 +97,19 @@
         });
         $("#cancelTaskBtn").click(function(){
             $("#createTaskSection").fadeOut();
+        });
+
+        $("#addTaskBtn").click(function(){
+            var _title = $("#createTaskSection > #title").val();
+            var _desc = $("#createTaskSection > #description").val();
+            $.ajax({
+                type : "POST",
+                url : "${ctx}/task/create/${task.project.id}",
+                data : {title : _title, description : _desc, parentId : 0},
+                success : function(result){
+
+                }
+            });
         });
     });
 </script>

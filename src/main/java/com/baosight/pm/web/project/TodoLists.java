@@ -14,4 +14,9 @@ public class TodoLists {
     public String index(){
         return "task/todolistsIndex";
     }
+
+    public String createForm(){
+
+        return "task/taskForm";
+    }
 }

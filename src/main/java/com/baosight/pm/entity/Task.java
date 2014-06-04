@@ -5,22 +5,24 @@
  *******************************************************************************/
 package com.baosight.pm.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotBlank;
 
 //JPA标识
 @Entity
 @Table(name = "tbl_task")
-public class Task extends IdEntity {
+public class Task{
 
+    private String id;
 	private String title;
 	private String description;
+    private String dueDay;
+    private String parentId;
 	private User user;
+    private Project project;
 
 	// JSR303 BeanValidator的校验规则
 	@NotBlank
@@ -40,7 +42,23 @@ public class Task extends IdEntity {
 		this.description = description;
 	}
 
-	// JPA 基于USER_ID列的多对一关系定义
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getDueDay() {
+        return dueDay;
+    }
+
+    public void setDueDay(String dueDay) {
+        this.dueDay = dueDay;
+    }
+
+    // JPA 基于USER_ID列的多对一关系定义
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	public User getUser() {
@@ -51,7 +69,29 @@ public class Task extends IdEntity {
 		this.user = user;
 	}
 
-	@Override
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @ManyToOne
+    @JoinColumn (name = "project_id")
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}

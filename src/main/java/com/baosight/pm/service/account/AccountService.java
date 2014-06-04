@@ -76,7 +76,7 @@ public class AccountService {
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 		userDao.delete(id);
-		taskDao.deleteByUserId(id);
+//		taskDao.deleteByUserId(id);
 
 	}
 

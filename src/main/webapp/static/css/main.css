@@ -158,6 +158,12 @@ input[type="file"]{
 .fn-pp-1{
     padding: 1%;
 }
+.red-color{
+    color: #d45;
+}
+.red-border{
+    border-color: #d45;
+}
 /**/
 .break-line{
     margin: 0 20px;
@@ -175,6 +181,14 @@ input[type='email']{
     background-color: #eeeff1;
     width: 80%;
 }
+.fn-border-bottom-dotted{
+    border: 0;
+    border-bottom: 1px dotted #2a2c2e;
+}
+.fn-bb-1{
+    border-bottom: none;
+}
+
 /*footer*/
 #footer{
     min-height: 180px;
@@ -245,4 +259,53 @@ input[type='email']{
 .project-inbox{
     font-size: 4em;
     color: #B5BDC0;
+}
+/*to do list*/
+.add-todo{
+    margin-left: 35px;
+}
+#currentTodos{
+    margin-top: 15px;
+}
+#currentTodos ul li a{
+    line-height: 24px;
+}
+.checkbox{
+    margin-left: 15px;
+}
+.todo-lists > div{
+    margin-top: 30px;
+}
+.todo-lists > div:first-child{
+    margin-top: 0px;
+}
+.todo-lists > div > h4{
+    display: inline-block;
+}
+.edit-btn{
+    margin-left: 20px;
+}
+.btn-group{
+    /*display: none;*/
+}
+.list-group.checkbox > .list-group-item{
+    padding: 10px 35px;
+}
+.todo-lists > #createTaskSection input{
+    display: inline-block;
+}
+.todo-lists > #createTaskSection .actions{
+    padding-top: 15px;
+    padding-left: 1em;
+}
+.todo-lists > #createTaskSection .actions button{
+    margin-right: 20px;
+}
+.todo-lists > #createTaskSection input[type=text]{
+    line-height: 2;
+    outline: none;
+}
+.todo-lists > #createTaskSection input.fn-cl-b{
+    border: 0;
+    font-size: 12px;
 }

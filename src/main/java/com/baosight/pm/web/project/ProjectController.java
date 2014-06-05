@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -63,7 +64,9 @@ public class ProjectController {
     }
 
     @RequestMapping (value = "c", method = RequestMethod.POST)
-    public String create(@Valid Project project, @RequestParam("userId") String userId){
+    public String create(@Valid Project project,
+                         @RequestParam("userId") String userId,
+                         RedirectAttributes redirectAttributes){
         String[] userIdList = userId.split(",");
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -80,7 +83,7 @@ public class ProjectController {
             projectUserSet.add(projectUser);
             projectUserService.save(projectUserSet);
         }
-
-        return "project/projectForm";
+        redirectAttributes.addFlashAttribute("message", "项目创建成功");
+        return "redirect:/project/index/"+project.getId();
     }
 }

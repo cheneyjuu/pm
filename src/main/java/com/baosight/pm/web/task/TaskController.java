@@ -5,6 +5,8 @@
  *******************************************************************************/
 package com.baosight.pm.web.task;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
@@ -82,12 +84,18 @@ public class TaskController {
         Project project = projectService.findWithId(projectId);
         ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
         if (shiroUser != null){
-            User user = accountService.getUser(shiroUser.id);
             if (project != null){
-                Task task = new Task();
-                task.setProject(project);
-                task.setUser(user);
-                model.addAttribute("task", task);
+                List<Task> taskList = taskService.listParentTask();
+                List<Task> children = null;
+                List<Task> newTaskList = new ArrayList<Task>();
+                for (Task task : taskList){
+                    task.setProject(project);
+                    children = taskService.listByParentId(task.getId());
+                    task.setChildrenTasks(children);
+                    newTaskList.add(task);
+                }
+                model.addAttribute("newTaskList", newTaskList);
+                model.addAttribute("project", project);
             }
         } else {
             return "account/login";

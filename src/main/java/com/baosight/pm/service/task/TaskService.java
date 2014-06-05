@@ -22,6 +22,8 @@ import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.persistence.SearchFilter.Operator;
 
+import javax.persistence.criteria.*;
+
 // Spring Bean的标识.
 @Component
 // 类中所有public函数都纳入事务管理的标识.
@@ -45,6 +47,28 @@ public class TaskService {
 	public List<Task> getAllTask() {
 		return (List<Task>) taskDao.findAll();
 	}
+
+    public List<Task> listParentTask(){
+        return taskDao.findAll(new Specification<Task>() {
+            @Override
+            public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Path<String> pid = root.get("parentId");
+                query.where(cb.equal(pid, "0"));
+                return null;
+            }
+        });
+    }
+
+    public List<Task> listByParentId(final String parentId){
+        return taskDao.findAll(new Specification<Task>() {
+            @Override
+            public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Path<String> pid = root.get("parentId");
+                query.where(cb.equal(pid, parentId));
+                return null;
+            }
+        });
+    }
 
 	public Page<Task> getUserTask(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {

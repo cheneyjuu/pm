@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html lang="zh-cn">
 <head>
@@ -9,7 +10,7 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3><a href="${ctx}/project/index/${task.project.id}">${task.project.projectName}</a></h3>
+            <h3><a href="${ctx}/project/index/${project.id}">${project.projectName}</a></h3>
         </div>
         <div class="panel-body">
             <div class="page-header">
@@ -17,7 +18,6 @@
             </div>
             <div class="row">
                 <div class="col-md-9 todo-lists">
-                    <input type="hidden" id="parentId" value="${task.id}"/>
                     <section id="createTaskSection">
                         <input type="text" name="title" id="title" placeholder="输入任务标题" class="fn-border-bottom-dotted col-md-12"/>
                         <input type="text" name="description" id="description" placeholder="补充说明(可选)" class="col-md-12 fn-cl-b"/>
@@ -26,16 +26,26 @@
                             <button class="btn btn-sm btn-danger" id="addTaskBtn">添加任务</button>
                             <a href="javascript:void(null);" id="cancelTaskBtn">取消</a>
                         </div>
+                        <hr/>
                     </section>
                     <section class="taskList" id="taskList">
-                        <ul class="list-unstyled default-task-list">
-                            <li>
-                                <input type="checkbox"/> <a href="javascript:void(null)">任务标题</a>
-                            </li>
-                        </ul>
-                        <div class="sub-task-container col-md-offset-1 hidden">
-                            <input type="text" placeholder="添加子任务" class="no-border no-outline"/>
-                        </div>
+                        <c:forEach items="${newTaskList}" var="tl">
+                            <div class="task-container" id="${tl.id}">
+                                <ul class="list-unstyled default-task-list">
+                                    <li>
+                                        <input type="checkbox"/> <a href="javascript:void(null)">${tl.title}</a>
+                                    </li>
+                                </ul>
+                                <c:if test="${fn:length(tl.childrenTasks) > 0}">
+                                    <div class="sub-task-container col-md-offset-1" id="${tl.id}">
+                                        <c:forEach items="${tl.childrenTasks}" var="ctl">
+                                            <div id="${ctl.id}"><input type="checkbox"><a href="javascript:void(null)">${ctl.title}</a></div>
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
+
+                            </div>
+                        </c:forEach>
                     </section>
                 </div>
 
@@ -74,6 +84,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    window.PARENTID;
     $(function(){
         $("#createTaskSection").hide();
         $("#createTaskBtn").click(function(){
@@ -83,30 +94,89 @@
             $("#createTaskSection").fadeOut();
         });
 
-        function requestServer(){
+        $("#addTaskBtn").click(function(){
             var _title = $("#createTaskSection > #title").val();
             var _desc = $("#createTaskSection > #description").val();
-            var parentId = $("#parentId").val() == "" ? 0 : $("#parentId").val();
+            var task_container =
+                    '<ul class="list-unstyled default-task-list">' +
+                    '<li><input type="checkbox"><a href="javascript:void(null)"></a></li>' +
+                    '</ul></div>';
             $.ajax({
                 type : "POST",
-                url : "${ctx}/task/create/${task.project.id}",
-                data : {title : _title, description : _desc, parentId : parentId},
+                url : "${ctx}/task/create/${project.id}",
+                data : {title : _title, description : _desc, parentId : 0},
                 success : function(result){
-                    alert(result);
-                    $("#parentId").val(result);
+                    window.PARENTID = result;
+                    task_container = '<div class="task-container" id="'+result +'">' + task_container;
+                    $("#taskList").append(task_container);
+                    $("#"+result).find("ul").find("a").text(_title);
                 }
             });
-        }
-
-        $("#addTaskBtn").click(function(){
-            requestServer();
         });
 
-        $("#taskList > ul > li > a").click(function(){
-            $("#taskList > ul").removeClass("default-task-list");
-            $("#taskList > ul").addClass("top-task-list");
-            $(".sub-task-container").removeClass("hidden");
+        $(".task-container").each(function(index){
+            var _this = this;
+            var pid = null;
+            var subTitle = null;
+
+            var sub_task_container = '<div class="sub-task-container col-md-offset-1" id="' + window.PARENTID +'">' +
+                                        '<input placeholder="添加子任务" class="no-border no-outline" type="text">' +
+                                      '</div>';
+
+            $(this).find("ul").find("a").click(function(){
+
+                 if ($(_this).find("ul").siblings().length == 0){
+                     $(_this).append(sub_task_container);
+                     $(".sub-task-container").find("input").not("[type='checkbox']").on("keypress", function(e){
+                         pid = $(_this).attr("id");
+                         subTitle = $(this).val();
+                         var _input = $(this);
+                         var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
+                                 '</div>';
+                         if (e.keyCode == 13) {
+                             $.ajax({
+                                 type : "POST",
+                                 url : "${ctx}/task/create/${project.id}",
+                                 data : {title : subTitle, description : "", parentId : pid},
+                                 success : function(result){
+                                     window.PARENTID = result;
+                                     task_inner = '<div id="'+result +'">' + task_inner;
+                                     $(_input).before(task_inner);
+                                     $("#"+result).find("a").text(subTitle);
+                                 }
+                             });
+                         }
+                     });
+                 } else {
+                     // 防止重复创建
+                     if ($(_this).find("ul").siblings().find("input").not("[type='checkbox']").length == 0){
+                         $(_this).find("ul").siblings().append("<input placeholder='添加子任务' class='no-border no-outline' type='text'>");
+                         $(_this).find("ul").siblings().find("input").not("[type='checkbox']").on("keypress", function(e){
+                             pid = $(_this).attr("id");
+                             subTitle = $(this).val();
+                             var _input = $(this);
+                             var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
+                                     '</div>';
+                             if (e.keyCode == 13) {
+                                 $.ajax({
+                                     type : "POST",
+                                     url : "${ctx}/task/create/${project.id}",
+                                     data : {title : subTitle, description : "", parentId : pid},
+                                     success : function(result){
+                                         window.PARENTID = result;
+                                         task_inner = '<div id="'+result +'">' + task_inner;
+                                         $(_input).before(task_inner);
+                                         $("#"+result).find("a").text(subTitle);
+                                     }
+                                 });
+                             }
+                         });
+                     }
+                 }
+
+            });
         });
+
     });
 </script>
 </body>

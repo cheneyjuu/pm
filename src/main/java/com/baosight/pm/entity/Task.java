@@ -7,9 +7,12 @@ package com.baosight.pm.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotBlank;
+
+import java.util.List;
 
 //JPA标识
 @Entity
@@ -23,6 +26,7 @@ public class Task{
     private String parentId;
 	private User user;
     private Project project;
+    private List<Task> childrenTasks;
 
 	// JSR303 BeanValidator的校验规则
 	@NotBlank
@@ -95,4 +99,14 @@ public class Task{
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
+    @Transient
+    @JsonIgnore
+    public List<Task> getChildrenTasks() {
+        return childrenTasks;
+    }
+
+    public void setChildrenTasks(List<Task> childrenTasks) {
+        this.childrenTasks = childrenTasks;
+    }
 }

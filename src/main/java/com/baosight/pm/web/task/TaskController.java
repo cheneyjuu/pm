@@ -112,7 +112,7 @@ public class TaskController {
         Project project = projectService.findWithId(projectId);
         newTask.setProject(project);
         taskService.saveTask(newTask);
-		return "true";
+		return newTask.getId();
 	}
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)

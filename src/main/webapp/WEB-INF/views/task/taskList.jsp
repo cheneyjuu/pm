@@ -17,6 +17,7 @@
             </div>
             <div class="row">
                 <div class="col-md-9 todo-lists">
+                    <input type="hidden" id="parentId" value="${task.id}"/>
                     <section id="createTaskSection">
                         <input type="text" name="title" id="title" placeholder="输入任务标题" class="fn-border-bottom-dotted col-md-12"/>
                         <input type="text" name="description" id="description" placeholder="补充说明(可选)" class="col-md-12 fn-cl-b"/>
@@ -26,31 +27,14 @@
                             <a href="javascript:void(null);" id="cancelTaskBtn">取消</a>
                         </div>
                     </section>
-                    <section class="taskList">
-                        <h4><a href="#">当前任务1</a></h4>
-                        <div class="btn-group edit-btn">
-                            <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
-                            <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span> 删除</button>
-                        </div>
-                        <div class="list-group checkbox">
-                            <div class="list-group-item">
-                                <label>
-                                    <input type="checkbox"/> 这是一条子任务
-                                </label>
-                                <span class="badge">张三，5月25日截止</span>
-                            </div>
-                        </div>
-
-                        <div class="list-group checkbox">
-                            <div class="list-group-item">
-                                <label>
-                                    <input type="checkbox"/> 这是一条子任务
-                                </label>
-                                <span class="badge">李四，5月20日截止</span>
-                            </div>
-                        </div>
-                        <div class="add-todo">
-                            <a href="#">添加一条子任务</a>
+                    <section class="taskList" id="taskList">
+                        <ul class="list-unstyled default-task-list">
+                            <li>
+                                <input type="checkbox"/> <a href="javascript:void(null)">任务标题</a>
+                            </li>
+                        </ul>
+                        <div class="sub-task-container col-md-offset-1 hidden">
+                            <input type="text" placeholder="添加子任务" class="no-border no-outline"/>
                         </div>
                     </section>
                 </div>
@@ -99,17 +83,29 @@
             $("#createTaskSection").fadeOut();
         });
 
-        $("#addTaskBtn").click(function(){
+        function requestServer(){
             var _title = $("#createTaskSection > #title").val();
             var _desc = $("#createTaskSection > #description").val();
+            var parentId = $("#parentId").val() == "" ? 0 : $("#parentId").val();
             $.ajax({
                 type : "POST",
                 url : "${ctx}/task/create/${task.project.id}",
-                data : {title : _title, description : _desc, parentId : 0},
+                data : {title : _title, description : _desc, parentId : parentId},
                 success : function(result){
-
+                    alert(result);
+                    $("#parentId").val(result);
                 }
             });
+        }
+
+        $("#addTaskBtn").click(function(){
+            requestServer();
+        });
+
+        $("#taskList > ul > li > a").click(function(){
+            $("#taskList > ul").removeClass("default-task-list");
+            $("#taskList > ul").addClass("top-task-list");
+            $(".sub-task-container").removeClass("hidden");
         });
     });
 </script>

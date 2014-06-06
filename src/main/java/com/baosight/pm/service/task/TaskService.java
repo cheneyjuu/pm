@@ -56,7 +56,7 @@ public class TaskService {
                 query.where(cb.equal(pid, "0"));
                 return null;
             }
-        });
+        }, new Sort(Direction.DESC, "createTime"));
     }
 
     public List<Task> listByParentId(final String parentId){

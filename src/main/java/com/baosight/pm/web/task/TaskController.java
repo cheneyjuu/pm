@@ -130,14 +130,17 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("task", taskService.getTask(id));
-		model.addAttribute("action", "update");
+    @ResponseBody
+	public String updateTask(@PathVariable("id") String id, Model model) {
+        Task task = taskService.getTask(id);
+        task.setStatus(1);
+        taskService.saveTask(task);
 		return "task/taskForm";
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("task") Task task, RedirectAttributes redirectAttributes) {
+        // 这里需要判断当前Task是不是第一级的，如果是，找到此任务的所有子任务并一同标记为已完成
 		taskService.saveTask(task);
 		redirectAttributes.addFlashAttribute("message", "更新任务成功");
 		return "redirect:/task/";
@@ -156,9 +159,9 @@ public class TaskController {
 	 */
 	@ModelAttribute
 	public void getTask(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model) {
-		if (id != -1) {
-			model.addAttribute("task", taskService.getTask(id));
-		}
+//		if (id != -1) {
+//			model.addAttribute("task", taskService.getTask(id));
+//		}
 	}
 
 	/**

@@ -32,8 +32,15 @@ public class TaskService {
 
 	private TaskDao taskDao;
 
-	public Task getTask(Long id) {
-		return taskDao.findOne(id);
+	public Task getTask(final String id) {
+		return taskDao.findOne(new Specification<Task>() {
+            @Override
+            public Predicate toPredicate(Root<Task> taskRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Path<String> tid = taskRoot.get("id");
+                criteriaQuery.where(criteriaBuilder.equal(tid, id));
+                return null;
+            }
+        });
 	}
 
 	public void saveTask(Task entity) {

@@ -206,6 +206,19 @@
         }
 
         addSubTask();
+
+        // 更新任务状态
+
+        $(".task-container").each(function(){
+            $(this).find(".sub-task-container > div").each(function(index){
+
+                $(this).find("input:checkbox").change(function(){
+                    console.log($(this).checked);
+                });;
+
+
+            });
+        });
     });
 </script>
 </body>

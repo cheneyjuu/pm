@@ -25,6 +25,7 @@ public class Task{
     private String createTime;
     private String dueDay;
     private String parentId;
+    private Integer status; //任务状态：1. 已完成 2. 进行中 3. 过期
 	private User user;
     private Project project;
     private List<Task> childrenTasks;
@@ -69,6 +70,14 @@ public class Task{
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     // JPA 基于USER_ID列的多对一关系定义

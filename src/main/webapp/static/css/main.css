@@ -1,5 +1,5 @@
 body{
-    font-family: "Hiragino Sans GB W3","Microsoft Yahei", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
+    /*font-family: "Hiragino Sans GB W3","Microsoft Yahei", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;*/
     -webkit-font-smoothing:antialiased;
     background-color: #eeeff1;
     background: url("../images/background.png");
@@ -318,33 +318,33 @@ section.taskList ul li a{
     padding: 15px;
 }
 .default-task-list{
-    background: #eeeff1;
     height: 2em;
-    line-height: 2em;
+    line-height: 2.5em;
+    margin-left: 30px;
 }
 .default-task-list li a {
-    text-decoration: underline;
     color: #2a2c2e;
-    font-size: 12px;
+    /*font-size: 12px;*/
 }
-.top-task-list{
-    background: #ffffff;
-    height: 3em;
-    border-bottom: 1px solid #cccccc;
-    line-height: 3em;
-}
-.top-task-list a{
-    color: #2a2c2e;
-    text-decoration: none;
+.task-container{
+    min-height: 3em;
+    background: #eeeff1;
+    border-radius: 4px;
+    box-shadow: 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px #ccc;
+    margin-bottom: 10px;
+    overflow: auto;
+    text-shadow: 0 1px #FFF;
 }
 .sub-task-container{
-    padding: 2em;
-    min-height: 4em;
+    padding: 1em;
+    padding-left: 5em;
     border-radius: 2px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    border: 1px solid #cccccc;
     background-color: #fafbfb;
+    line-height: 2em;
+    font-size: .9em;
 }
 .sub-task-container > input{
     width: 100%;

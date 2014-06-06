@@ -94,7 +94,21 @@
             $("#createTaskSection").fadeOut();
         });
 
+        // 添加任务按钮事件
         $("#addTaskBtn").click(function(){
+            addTask();
+        });
+        // 添加任务键盘事件
+        $("#createTaskSection > input").each(function(index){
+            $(this).keypress(function(e){
+                if (e.keyCode == 13){
+                    addTask();
+                }
+            });
+        });
+
+        // 添加任务函数
+        function addTask(){
             var _title = $("#createTaskSection > #title").val();
             var _desc = $("#createTaskSection > #description").val();
             var task_container =
@@ -108,75 +122,83 @@
                 success : function(result){
                     window.PARENTID = result;
                     task_container = '<div class="task-container" id="'+result +'">' + task_container;
-                    $("#taskList").append(task_container);
+                    $("#taskList").prepend(task_container);
                     $("#"+result).find("ul").find("a").text(_title);
+                    $("#createTaskSection > input").val("");
+                    addSubTask();
                 }
             });
-        });
+        }
 
-        $(".task-container").each(function(index){
-            var _this = this;
-            var pid = null;
-            var subTitle = null;
+        // 添加子任务函数
+        function addSubTask(){
+            $(".task-container").each(function(index){
+                var _this = this;
+                var pid = null;
+                var subTitle = null;
 
-            var sub_task_container = '<div class="sub-task-container col-md-offset-1" id="' + window.PARENTID +'">' +
-                                        '<input placeholder="添加子任务" class="no-border no-outline" type="text">' +
-                                      '</div>';
+                var sub_task_container = '<div class="sub-task-container col-md-offset-1" id="' + window.PARENTID +'">' +
+                        '<input placeholder="添加子任务" class="no-border no-outline" type="text">' +
+                        '</div>';
 
-            $(this).find("ul").find("a").click(function(){
+                $(this).find("ul").find("a").on("click", function(){
 
-                 if ($(_this).find("ul").siblings().length == 0){
-                     $(_this).append(sub_task_container);
-                     $(".sub-task-container").find("input").not("[type='checkbox']").on("keypress", function(e){
-                         pid = $(_this).attr("id");
-                         subTitle = $(this).val();
-                         var _input = $(this);
-                         var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
-                                 '</div>';
-                         if (e.keyCode == 13) {
-                             $.ajax({
-                                 type : "POST",
-                                 url : "${ctx}/task/create/${project.id}",
-                                 data : {title : subTitle, description : "", parentId : pid},
-                                 success : function(result){
-                                     window.PARENTID = result;
-                                     task_inner = '<div id="'+result +'">' + task_inner;
-                                     $(_input).before(task_inner);
-                                     $("#"+result).find("a").text(subTitle);
-                                 }
-                             });
-                         }
-                     });
-                 } else {
-                     // 防止重复创建
-                     if ($(_this).find("ul").siblings().find("input").not("[type='checkbox']").length == 0){
-                         $(_this).find("ul").siblings().append("<input placeholder='添加子任务' class='no-border no-outline' type='text'>");
-                         $(_this).find("ul").siblings().find("input").not("[type='checkbox']").on("keypress", function(e){
-                             pid = $(_this).attr("id");
-                             subTitle = $(this).val();
-                             var _input = $(this);
-                             var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
-                                     '</div>';
-                             if (e.keyCode == 13) {
-                                 $.ajax({
-                                     type : "POST",
-                                     url : "${ctx}/task/create/${project.id}",
-                                     data : {title : subTitle, description : "", parentId : pid},
-                                     success : function(result){
-                                         window.PARENTID = result;
-                                         task_inner = '<div id="'+result +'">' + task_inner;
-                                         $(_input).before(task_inner);
-                                         $("#"+result).find("a").text(subTitle);
-                                     }
-                                 });
-                             }
-                         });
-                     }
-                 }
+                    if ($(_this).find("ul").siblings().length == 0){
+                        $(_this).append(sub_task_container);
+                        $(".sub-task-container").find("input").not("[type='checkbox']").on("keypress", function(e){
+                            pid = $(_this).attr("id");
+                            subTitle = $(this).val();
+                            var _input = $(this);
+                            var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
+                                    '</div>';
+                            if (e.keyCode == 13) {
+                                $.ajax({
+                                    type : "POST",
+                                    url : "${ctx}/task/create/${project.id}",
+                                    data : {title : subTitle, description : "", parentId : pid},
+                                    success : function(result){
+                                        window.PARENTID = result;
+                                        task_inner = '<div id="'+result +'">' + task_inner;
+                                        $(_input).before(task_inner);
+                                        $("#"+result).find("a").text(subTitle);
+                                        $(_input).val("");
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        // 防止重复创建
+                        if ($(_this).find("ul").siblings().find("input").not("[type='checkbox']").length == 0){
+                            $(_this).find("ul").siblings().append("<input placeholder='添加子任务' class='no-border no-outline' type='text'>");
+                            $(_this).find("ul").siblings().find("input").not("[type='checkbox']").on("keypress", function(e){
+                                pid = $(_this).attr("id");
+                                subTitle = $(this).val();
+                                var _input = $(this);
+                                var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
+                                        '</div>';
+                                if (e.keyCode == 13) {
+                                    $.ajax({
+                                        type : "POST",
+                                        url : "${ctx}/task/create/${project.id}",
+                                        data : {title : subTitle, description : "", parentId : pid},
+                                        success : function(result){
+                                            window.PARENTID = result;
+                                            task_inner = '<div id="'+result +'">' + task_inner;
+                                            $(_input).before(task_inner);
+                                            $("#"+result).find("a").text(subTitle);
+                                            $(_input).val("");
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
 
+                });
             });
-        });
+        }
 
+        addSubTask();
     });
 </script>
 </body>

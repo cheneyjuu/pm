@@ -5,7 +5,9 @@
  *******************************************************************************/
 package com.baosight.pm.web.task;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -119,6 +121,10 @@ public class TaskController {
 		newTask.setUser(user);
         Project project = projectService.findWithId(projectId);
         newTask.setProject(project);
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createTime = simpleDateFormat.format(date);
+        newTask.setCreateTime(createTime);
         taskService.saveTask(newTask);
 		return newTask.getId();
 	}

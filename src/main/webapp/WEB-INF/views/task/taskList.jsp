@@ -37,7 +37,7 @@
                                     </li>
                                 </ul>
                                 <c:if test="${fn:length(tl.childrenTasks) > 0}">
-                                    <div class="sub-task-container col-md-offset-1" id="${tl.id}">
+                                    <div class="sub-task-container" id="${tl.id}">
                                         <c:forEach items="${tl.childrenTasks}" var="ctl">
                                             <div id="${ctl.id}"><input type="checkbox"><a href="javascript:void(null)">${ctl.title}</a></div>
                                         </c:forEach>
@@ -100,9 +100,11 @@
         });
         // 添加任务键盘事件
         $("#createTaskSection > input").each(function(index){
-            $(this).keypress(function(e){
+            $(this).keyup(function(e){
                 if (e.keyCode == 13){
                     addTask();
+                } else if (e.keyCode == 27){
+                    $("#createTaskSection").fadeOut();
                 }
             });
         });
@@ -137,15 +139,16 @@
                 var pid = null;
                 var subTitle = null;
 
-                var sub_task_container = '<div class="sub-task-container col-md-offset-1" id="' + window.PARENTID +'">' +
+                var sub_task_container = '<div class="sub-task-container" id="' + window.PARENTID +'">' +
                         '<input placeholder="添加子任务" class="no-border no-outline" type="text">' +
                         '</div>';
 
                 $(this).find("ul").find("a").on("click", function(){
 
+                    // 如果没有子任务时执行
                     if ($(_this).find("ul").siblings().length == 0){
                         $(_this).append(sub_task_container);
-                        $(".sub-task-container").find("input").not("[type='checkbox']").on("keypress", function(e){
+                        $(".sub-task-container").find("input").not("[type='checkbox']").on("keyup", function(e){
                             pid = $(_this).attr("id");
                             subTitle = $(this).val();
                             var _input = $(this);
@@ -164,13 +167,15 @@
                                         $(_input).val("");
                                     }
                                 });
+                            } else if (e.keyCode == 27){
+                                $(_input).parent().remove();
                             }
                         });
                     } else {
                         // 防止重复创建
                         if ($(_this).find("ul").siblings().find("input").not("[type='checkbox']").length == 0){
                             $(_this).find("ul").siblings().append("<input placeholder='添加子任务' class='no-border no-outline' type='text'>");
-                            $(_this).find("ul").siblings().find("input").not("[type='checkbox']").on("keypress", function(e){
+                            $(_this).find("ul").siblings().find("input").not("[type='checkbox']").on("keyup", function(e){
                                 pid = $(_this).attr("id");
                                 subTitle = $(this).val();
                                 var _input = $(this);
@@ -189,6 +194,8 @@
                                             $(_input).val("");
                                         }
                                     });
+                                } else if (e.keyCode == 27){
+                                    $(_input).remove();
                                 }
                             });
                         }

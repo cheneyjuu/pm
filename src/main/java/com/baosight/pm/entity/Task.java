@@ -22,6 +22,7 @@ public class Task{
     private String id;
 	private String title;
 	private String description;
+    private String createTime;
     private String dueDay;
     private String parentId;
 	private User user;
@@ -60,6 +61,14 @@ public class Task{
 
     public void setDueDay(String dueDay) {
         this.dueDay = dueDay;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     // JPA 基于USER_ID列的多对一关系定义

@@ -196,6 +196,7 @@ input[type='email']{
 }
 /*footer*/
 #footer{
+    width: 100%;
     min-height: 180px;
     background-color: #2a2c2e;
     color: #8e999d;
@@ -336,9 +337,16 @@ section.taskList ul li a{
     overflow: auto;
     text-shadow: 0 1px #FFF;
 }
+.task-container ul li{
+    width: 90%;
+    float: left;
+}
+.task-container ul button{
+    margin-top: .5em;
+    line-height: 1em;
+}
 .sub-task-container{
-    padding: 1em;
-    padding-left: 5em;
+    padding: 1em 1em 1em 5em;
     border-radius: 2px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;

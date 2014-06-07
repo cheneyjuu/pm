@@ -125,6 +125,7 @@ public class TaskController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = simpleDateFormat.format(date);
         newTask.setCreateTime(createTime);
+        newTask.setStatus(2);
         taskService.saveTask(newTask);
 		return newTask.getId();
 	}
@@ -132,15 +133,26 @@ public class TaskController {
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
     @ResponseBody
 	public String updateTask(@PathVariable("id") String id, Model model) {
+        // 这里需要判断当前Task是不是第一级的，如果是，找到此任务的所有子任务并一同标记为已完成
         Task task = taskService.getTask(id);
-        task.setStatus(1);
+        if (task != null){
+            if (!task.getParentId().equals("0")){
+                task.setStatus(1);
+            } else {
+                List<Task> taskList = taskService.listByParentId(id);
+                task.setStatus(1);
+                for (Task t : taskList){
+                    t.setStatus(1);
+                    taskService.saveTask(task);
+                }
+            }
+        }
         taskService.saveTask(task);
 		return "task/taskForm";
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("task") Task task, RedirectAttributes redirectAttributes) {
-        // 这里需要判断当前Task是不是第一级的，如果是，找到此任务的所有子任务并一同标记为已完成
 		taskService.saveTask(task);
 		redirectAttributes.addFlashAttribute("message", "更新任务成功");
 		return "redirect:/task/";

@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container">
+    <button class="btn btn-danger" id="hello">Hello</button>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3><a href="${ctx}/project/index/${project.id}">${project.projectName}</a></h3>
@@ -35,6 +36,7 @@
                                     <li>
                                         <input type="checkbox"/> <a href="javascript:void(null)">${tl.title}</a>
                                     </li>
+                                    <%--<button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> <small>删除</small></button>--%>
                                 </ul>
                                 <c:if test="${fn:length(tl.childrenTasks) > 0}">
                                     <div class="sub-task-container" id="${tl.id}">
@@ -85,6 +87,10 @@
 </div>
 <script type="text/javascript">
     window.PARENTID;
+    $(document).bind("contextmenu",function(e){
+        return false;
+    });
+
     $(function(){
         $("#createTaskSection").hide();
         $("#createTaskBtn").click(function(){
@@ -210,13 +216,42 @@
         // 更新任务状态
 
         $(".task-container").each(function(){
+
+            // 子任务选中事件
             $(this).find(".sub-task-container > div").each(function(index){
-
+                var subDiv = this;
+                var subId = null;
                 $(this).find("input:checkbox").change(function(){
-                    console.log($(this).checked);
-                });;
+                    subId = $(this).parent().attr("id");
+                    $.ajax({
+                        url : "${ctx}/task/update/"+subId,
+                        type : "GET",
+                        success : function(result){
+                            $(subDiv).remove();
+                        }
+                    });
+                });
+            });
 
+            // 任务选中事件
+            $(this).children("ul").find("input:checkbox").change(function(){
+                // 如果选择的父任务，将父任务和子任务直接删除，不再在页面上做全选操作
+                var parentDiv = $(this).parent().parent().parent();
+                var parentId = $(this).parent().parent().parent().attr("id");
+                $.ajax({
+                    type : "GET",
+                    url : "${ctx}/task/update/"+parentId,
+                    success : function(result){
+                        $(parentDiv).remove();
+                    }
+                });
+            });
 
+            $(this).children("ul").mousedown(function(e){
+                if (3 == e.which){
+                    var template = "<button><span class='glyphicon glyphicon-edit'></span> 删除</button>";
+                    $(this).popover({html : true, placement : "bottom", content: template});
+                }
             });
         });
     });

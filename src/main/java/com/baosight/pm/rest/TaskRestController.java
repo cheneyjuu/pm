@@ -52,7 +52,7 @@ public class TaskRestController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public Task get(@PathVariable("id") Long id) {
-		Task task = taskService.getTask(id);
+		Task task = null;// taskService.getTask(id);
 		if (task == null) {
 			String message = "任务不存在(id:" + id + ")";
 			logger.warn(message);

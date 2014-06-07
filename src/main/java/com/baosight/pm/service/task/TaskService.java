@@ -60,7 +60,8 @@ public class TaskService {
             @Override
             public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 Path<String> pid = root.get("parentId");
-                query.where(cb.equal(pid, "0"));
+                Path<Integer> status = root.get("status");
+                query.where(cb.and(cb.equal(pid, "0"), cb.notEqual(status, 1)));
                 return null;
             }
         }, new Sort(Direction.DESC, "createTime"));
@@ -71,7 +72,8 @@ public class TaskService {
             @Override
             public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 Path<String> pid = root.get("parentId");
-                query.where(cb.equal(pid, parentId));
+                Path<Integer> status = root.get("status");
+                query.where(cb.and(cb.equal(pid, parentId), cb.notEqual(status, 1)));
                 return null;
             }
         });

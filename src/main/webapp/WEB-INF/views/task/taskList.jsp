@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="container">
-    <button class="btn btn-danger" id="hello">Hello</button>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3><a href="${ctx}/project/index/${project.id}">${project.projectName}</a></h3>
@@ -19,7 +18,7 @@
             </div>
             <div class="row">
                 <div class="col-md-9 todo-lists">
-                    <section id="createTaskSection">
+                    <section id="createTaskSection" style="display: none;">
                         <input type="text" name="title" id="title" placeholder="输入任务标题" class="fn-border-bottom-dotted col-md-12"/>
                         <input type="text" name="description" id="description" placeholder="补充说明(可选)" class="col-md-12 fn-cl-b"/>
                         <div class="clearfix"></div>
@@ -34,15 +33,38 @@
                             <div class="task-container" id="${tl.id}">
                                 <ul class="list-unstyled default-task-list">
                                     <li>
-                                        <input type="checkbox"/> <a class="f-ff1 f-fw" href="javascript:void(null)">${tl.title}</a>
+                                        <input type="checkbox"/>
+                                        <c:choose>
+                                            <c:when test="${fn:length(tl.childrenTasks) > 0}">
+                                                <a class="f-ff1 f-fw" href="javascript:void(null)">${tl.title}</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="javascript:void(null)">${tl.title}</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <small class="text-muted">${tl.description}</small>
                                     </li>
+                                    <%--<li>--%>
+                                        <%--<div class="btn-group">--%>
+                                            <%--<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">--%>
+                                                <%--操作 <span class="caret"></span>--%>
+                                            <%--</button>--%>
+                                            <%--<ul class="dropdown-menu" role="menu">--%>
+                                                <%--<li><a href="#">编辑</a></li>--%>
+                                                <%--<li><a href="#">删除</a></li>--%>
+                                            <%--</ul>--%>
+                                        <%--</div>--%>
+                                    <%--</li>--%>
                                     <%--<button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> <small>删除</small></button>--%>
                                 </ul>
                                 <c:if test="${fn:length(tl.childrenTasks) > 0}">
                                     <div class="sub-task-container" id="${tl.id}">
+                                        <ul class="list-unstyled sub-task-list">
                                         <c:forEach items="${tl.childrenTasks}" var="ctl">
-                                            <div id="${ctl.id}"><input type="checkbox"><a href="javascript:void(null)">${ctl.title}</a></div>
+                                            <%--<div id="${ctl.id}" class=""><input type="checkbox"><a href="javascript:void(null)">${ctl.title}</a></div>--%>
+                                            <li id="${ctl.id}"><input type="checkbox"><a href="javascript:void(null)">${ctl.title}</a></li>
                                         </c:forEach>
+                                        </ul>
                                     </div>
                                 </c:if>
                             </div>
@@ -89,15 +111,17 @@
     </div>
 </div>
 <script type="text/javascript">
-    window.PARENTID;
+    var parentId = parentId;
     var event = event || window.event;
 
     $(function(){
-        $("#createTaskSection").hide();
+//        $("#createTaskSection").hide();
         $("#edit-list").hide();
+
         $("#createTaskBtn").click(function(){
             $("#createTaskSection").fadeIn();
         });
+
         $("#cancelTaskBtn").click(function(){
             $("#createTaskSection").fadeOut();
         });
@@ -107,7 +131,7 @@
             addTask();
         });
         // 添加任务键盘事件
-        $("#createTaskSection > input").each(function(index){
+        $("#createTaskSection").children("input").each(function(index){
             $(this).keyup(function(e){
                 if (e.keyCode == 13){
                     addTask();
@@ -119,18 +143,18 @@
 
         // 添加任务函数
         function addTask(){
-            var _title = $("#createTaskSection > #title").val();
-            var _desc = $("#createTaskSection > #description").val();
+            var _title = $("#createTaskSection").children("#title").val();
+            var _desc = $("#createTaskSection").children("#description").val();
             var task_container =
                     '<ul class="list-unstyled default-task-list">' +
-                    '<li><input type="checkbox"><a class="f-ff1 f-fw" href="javascript:void(null)"></a></li>' +
+                    '<li><input type="checkbox"><a href="javascript:void(null)"></a><small class="text-muted">'+_desc+'</small></li>' +
                     '</ul></div>';
             $.ajax({
                 type : "POST",
                 url : "${ctx}/task/create/${project.id}",
                 data : {title : _title, description : _desc, parentId : 0},
                 success : function(result){
-                    window.PARENTID = result;
+                    parentId = result;
                     task_container = '<div class="task-container" id="'+result +'">' + task_container;
                     $("#taskList").prepend(task_container);
                     $("#"+result).find("ul").find("a").text(_title);
@@ -143,63 +167,66 @@
         // 添加子任务函数
         function addSubTask(){
             $(".task-container").each(function(index){
-                var _this = this;
+                var oTaskContainer= this;
                 var pid = null;
                 var subTitle = null;
 
-                var sub_task_container = '<div class="sub-task-container" id="' + window.PARENTID +'">' +
+                var tplSubTaskContainer = '<div class="sub-task-container" id="' + parentId +'">' +
+                        '<ul class="list-unstyled sub-task-list"></ul>' +
                         '<input placeholder="添加子任务" class="no-border no-outline" type="text">' +
                         '</div>';
 
                 $(this).find("ul").find("a").on("click", function(){
 
                     // 如果没有子任务时执行
-                    if ($(_this).find("ul").siblings().length == 0){
-                        $(_this).append(sub_task_container);
+                    if ($(oTaskContainer).find("ul").siblings().length == 0){
+                        $(oTaskContainer).append(tplSubTaskContainer);
                         $(".sub-task-container").find("input").not("[type='checkbox']").on("keyup", function(e){
-                            pid = $(_this).attr("id");
+                            pid = $(oTaskContainer).attr("id");
                             subTitle = $(this).val();
                             var _input = $(this);
                             var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
-                                    '</div>';
+                                    '</li>';
                             if (e.keyCode == 13) {
                                 $.ajax({
                                     type : "POST",
                                     url : "${ctx}/task/create/${project.id}",
                                     data : {title : subTitle, description : "", parentId : pid},
                                     success : function(result){
-                                        window.PARENTID = result;
-                                        task_inner = '<div id="'+result +'">' + task_inner;
-                                        $(_input).before(task_inner);
+                                        parentId = result;
+                                        task_inner = '<li id="'+result +'">' + task_inner;
+                                        $(_input).siblings("ul").prepend(task_inner);
                                         $("#"+result).find("a").text(subTitle);
                                         $(_input).val("");
+                                        $(oTaskContainer).find("ul.default-task-list").find("a").addClass("f-ff1").addClass("f-fw");
                                     }
                                 });
                             } else if (e.keyCode == 27){
-                                $(_input).parent().remove();
+                                $(_input).remove();
                             }
                         });
                     } else {
                         // 防止重复创建
-                        if ($(_this).find("ul").siblings().find("input").not("[type='checkbox']").length == 0){
-                            $(_this).find("ul").siblings().append("<input placeholder='添加子任务' class='no-border no-outline' type='text'>");
-                            $(_this).find("ul").siblings().find("input").not("[type='checkbox']").on("keyup", function(e){
-                                pid = $(_this).attr("id");
+                        if ($(oTaskContainer).find("ul").siblings().find("input").not("[type='checkbox']").length == 0){
+                            $(oTaskContainer).find(">ul").siblings().append("<input placeholder='添加子任务' class='no-border no-outline' type='text'>");
+                            $(oTaskContainer).find("ul").siblings().find("input").not("[type='checkbox']").on("keyup", function(e){
+                                pid = $(oTaskContainer).attr("id");
                                 subTitle = $(this).val();
                                 var _input = $(this);
                                 var task_inner = '<input type="checkbox"><a href="javascript:void(null)"></a>' +
-                                        '</div>';
+                                        '</li>';
                                 if (e.keyCode == 13) {
                                     $.ajax({
                                         type : "POST",
                                         url : "${ctx}/task/create/${project.id}",
                                         data : {title : subTitle, description : "", parentId : pid},
                                         success : function(result){
-                                            window.PARENTID = result;
-                                            task_inner = '<div id="'+result +'">' + task_inner;
-                                            $(_input).before(task_inner);
+                                            parentId = result;
+                                            task_inner = '<li id="'+result +'">' + task_inner;
+                                            $(_input).siblings("ul").prepend(task_inner);
                                             $("#"+result).find("a").text(subTitle);
                                             $(_input).val("");
+                                            $(oTaskContainer).find("ul.default-task-list").find("a").addClass("f-ff1").addClass("f-fw");
                                         }
                                     });
                                 } else if (e.keyCode == 27){
@@ -208,7 +235,6 @@
                             });
                         }
                     }
-
                 });
             });
         }
@@ -219,9 +245,12 @@
 
         $(".task-container").each(function(){
 
+            var oTaskContainer = this;
+
             // 子任务选中事件
-            $(this).find(".sub-task-container > div").each(function(index){
-                var subDiv = this;
+            $(oTaskContainer).find(".sub-task-container > ul > li").each(function(index){
+                var oSubList = this;
+                var oSubTaskContainer = $(this).parent().parent();
                 var subId = null;
                 $(this).find("input:checkbox").change(function(){
                     subId = $(this).parent().attr("id");
@@ -229,7 +258,8 @@
                         url : "${ctx}/task/update/"+subId,
                         type : "GET",
                         success : function(result){
-                            $(subDiv).remove();
+                            $(oSubList).remove();
+                            // 这里需要判断子任务是否为空，如果为空，则还原任务样式
                         }
                     });
                 });
@@ -249,21 +279,32 @@
                 });
             });
 
-            $(this).children("ul").mousedown(function(e){
-                var _this = this;
-                $(document).bind("contextmenu",function(e){
-                    return false;
-                });
-                $(this).bind("contextmenu", function(e){
-                    if (e.which == 3){
-                        $("#edit-list").show();
-                        var x = e.pageX - document.getElementById("container").offsetLeft;
-                        var y = e.pageY - document.getElementById("container").offsetTop;
-                        console.log(y);
-                        $("#edit-list").css("position", "absolute").css("left", x+"px").css("top", y+"px");
-                    }
-                });
+
+            // 鼠标移入“任务列表”时，显示“编辑”、“删除”按钮组
+            var tplButtonGroup = '<div class="btn-group btn-group-sm">' +
+                    '<button type="button" id="editTaskBtn" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span> 编辑</button>' +
+                    '<button type="button" id="trashTaskBtn" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 删除</button>' +
+                    '</div>';
+            // 这里应该加一个计时器，如果鼠标进入时间超过1秒，则显示“操作"按钮
+            $(oTaskContainer).children("ul").mouseenter(function(){
+                $(this).append("<li class='pull-right btn-group-container'>"+tplButtonGroup+"</li>");
             });
+            $(oTaskContainer).children("ul").mouseleave(function(){
+                if ($(this).find("li.btn-group-container").length > 0){
+                    $(this).find("li.btn-group-container").remove();
+                }
+            });
+
+            if ($(oTaskContainer).children(".sub-task-container").length > 0){
+                $(oTaskContainer).children(".sub-task-container").children("ul").children("li").mouseenter(function(){
+                    $(this).append(tplButtonGroup);
+                    $(this).children(".btn-group").addClass("pull-right");
+                });
+                $(oTaskContainer).children(".sub-task-container").children("ul").children("li").mouseleave(function(){
+                    $(this).children(".btn-group").remove();
+                });
+            }
+
         });
     });
 </script>

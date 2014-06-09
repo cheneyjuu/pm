@@ -319,7 +319,7 @@ input[type='email']{
     border: 0;
     font-size: 12px;
 }
-section.taskList ul li a{
+section.taskList > .task-container > ul > li > a{
     padding: 15px;
 }
 .default-task-list{
@@ -335,27 +335,31 @@ section.taskList ul li a{
     min-height: 3em;
     /*background: #eeeff1;*/
     /*border-radius: 4px;*/
-    box-shadow: 0 1px #ccc;
+    /*box-shadow: 0 1px #ccc;*/
     -moz-box-shadow: 0 1px #ccc;
     margin-bottom: 10px;
-    overflow: auto;
+    /*overflow: auto;*/
     text-shadow: 0 1px #FFF;
 }
-.task-container ul li{
-    width: 90%;
-    float: left;
+.task-container > ul > li{
+    /*width: 90%;*/
+    /*float: left;*/
+    display: inline-block;
 }
-.task-container ul button{
+/*.task-container > ul > li:last-child{*/
+    /*float: right;*/
+/*}*/
+.task-container > ul > button{
     margin-top: .5em;
     line-height: 1em;
 }
 .sub-task-container{
-    padding: 1em 1em 1em 5em;
+    padding: 0 0 0 5em;
     /*border-radius: 2px;*/
     /*-webkit-border-radius: 2px;*/
     /*-moz-border-radius: 2px;*/
     /*background-color: #fafbfb;*/
-    line-height: 2em;
+    line-height: 2.4em;
     font-size: .9em;
 }
 .sub-task-container > input{
@@ -363,9 +367,9 @@ section.taskList ul li a{
     font-size: 12px;
     background-color: #fafbfb;
 }
-.sub-task-container > div > input{
+.sub-task-container > ul > li > input{
     margin-right: 2em;
 }
-.sub-task-container > div > a{
+.sub-task-container > ul > li > a{
     color: #2a2c2e;
 }

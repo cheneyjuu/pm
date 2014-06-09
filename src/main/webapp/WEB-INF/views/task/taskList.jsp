@@ -34,7 +34,7 @@
                             <div class="task-container" id="${tl.id}">
                                 <ul class="list-unstyled default-task-list">
                                     <li>
-                                        <input type="checkbox"/> <a href="javascript:void(null)">${tl.title}</a>
+                                        <input type="checkbox"/> <a class="f-ff1 f-fw" href="javascript:void(null)">${tl.title}</a>
                                     </li>
                                     <%--<button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> <small>删除</small></button>--%>
                                 </ul>
@@ -45,9 +45,12 @@
                                         </c:forEach>
                                     </div>
                                 </c:if>
-
                             </div>
                         </c:forEach>
+                        <ul class="edit-list list-unstyled" id="edit-list">
+                            <li><a href="#" class="btn btn-default">编辑</a></li>
+                            <li><a href="#" class="btn btn-danger">删除</a></li>
+                        </ul>
                     </section>
                 </div>
 
@@ -87,12 +90,11 @@
 </div>
 <script type="text/javascript">
     window.PARENTID;
-    $(document).bind("contextmenu",function(e){
-        return false;
-    });
+    var event = event || window.event;
 
     $(function(){
         $("#createTaskSection").hide();
+        $("#edit-list").hide();
         $("#createTaskBtn").click(function(){
             $("#createTaskSection").fadeIn();
         });
@@ -121,7 +123,7 @@
             var _desc = $("#createTaskSection > #description").val();
             var task_container =
                     '<ul class="list-unstyled default-task-list">' +
-                    '<li><input type="checkbox"><a href="javascript:void(null)"></a></li>' +
+                    '<li><input type="checkbox"><a class="f-ff1 f-fw" href="javascript:void(null)"></a></li>' +
                     '</ul></div>';
             $.ajax({
                 type : "POST",
@@ -248,10 +250,19 @@
             });
 
             $(this).children("ul").mousedown(function(e){
-                if (3 == e.which){
-                    var template = "<button><span class='glyphicon glyphicon-edit'></span> 删除</button>";
-                    $(this).popover({html : true, placement : "bottom", content: template});
-                }
+                var _this = this;
+                $(document).bind("contextmenu",function(e){
+                    return false;
+                });
+                $(this).bind("contextmenu", function(e){
+                    if (e.which == 3){
+                        $("#edit-list").show();
+                        var x = e.pageX - document.getElementById("container").offsetLeft;
+                        var y = e.pageY - document.getElementById("container").offsetTop;
+                        console.log(y);
+                        $("#edit-list").css("position", "absolute").css("left", x+"px").css("top", y+"px");
+                    }
+                });
             });
         });
     });

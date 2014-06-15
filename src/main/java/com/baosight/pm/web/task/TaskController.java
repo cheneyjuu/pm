@@ -83,9 +83,9 @@ public class TaskController {
 
     @RequestMapping (value = "list/{projectId}", method = RequestMethod.GET)
     public String list(@PathVariable (value = "projectId") String projectId ,Model model){
-        Project project = projectService.findWithId(projectId);
         ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
         if (shiroUser != null){
+            Project project = projectService.findWithId(projectId);
             if (project != null){
                 List<Task> taskList = taskService.listParentTask();
                 List<Task> children = null;

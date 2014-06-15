@@ -29,7 +29,7 @@
                     <li><a href="${ctx}/discuss/index/${projectId}" class="clean-link-decoration">讨论</a></li>
                     <li><a href="${ctx}/task/list/${projectId}" class="clean-link-decoration">TODOS</a></li>
                     <li><a href="${ctx}/files/index" class="clean-link-decoration">文件</a></li>
-                    <li><a href="${ctx}/documents/list" class="clean-link-decoration">文档</a></li>
+                    <li><a href="${ctx}/documents/list/${projectId}" class="clean-link-decoration">文档</a></li>
                     <%--<li><a href="#">事件</a></li>--%>
                 </ul>
             </section>

@@ -1,10 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <title>文档列表</title>
+    <style>
+        .document-container a{
+            display: inline-block;
+            float: left;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -20,43 +29,29 @@
                     <a href="#"><span class="label label-info">所有标签</span></a>
                 </span>
             </div>
-
-            <a href="${ctx}/documents/details">
-                <div class="div-bordered col-md-4">
-                    <h4 class="text-center">需求文档标题</h4>
-                    <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
-                    <small><span class="text-muted">张三于2013年12月12日添加</span></small>
-                </div>
-            </a>
-            <a href="${ctx}/documents/details">
-                <div class="div-bordered col-md-4">
-                    <h4 class="text-center">需求文档标题</h4>
-                    <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
-                    <small><span class="text-muted">张三于2013年12月12日添加</span></small>
-                </div>
-            </a>
-            <a href="${ctx}/documents/details">
-                <div class="div-bordered col-md-4">
-                    <h4 class="text-center">需求文档标题</h4>
-                    <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
-                    <small><span class="text-muted">张三于2013年12月12日添加</span></small>
-                </div>
-            </a>
-            <a href="${ctx}/documents/details">
-                <div class="div-bordered col-md-4">
-                    <h4 class="text-center">需求文档标题</h4>
-                    <p class="text-muted">百慕大三角真的存在吗？麦田怪圈到底是谁干的？UFO真的是外星人吗？大脚野人真的存在吗？进化论可以解释一切物种的起源吗？处于今天这个信息爆炸的时代中，我们接收到的信息除了真实的信息之外，还有很多谎言，谣言，不实的学说。我们如何能够去伪存真， ...</p>
-                    <small><span class="text-muted">张三于2013年12月12日添加</span></small>
-                </div>
-            </a>
+            <div class="row document-container">
+                <c:forEach items="${documentPage.content}" var="document">
+                    <a class="col-md-4" href="${ctx}/documents/details/${projectId}/${document.id}">
+                        <h4 class="text-center">${document.title}</h4>
+                        <p class="text-muted">
+                                ${document.description}
+                        </p>
+                        <small><span class="text-muted">${document.author.name}于${document.createTime}添加</span></small>
+                    </a>
+                </c:forEach>
+            </div>
         </div>
-        <div class="panel-footer"></div>
+        <div class="panel-footer">
+            <c:if test="${fn:length(documentPage.content) > 0}">
+                <tags:pagination page="${documentPage}" paginationSize="12"/>
+            </c:if>
+        </div>
     </div>
 </div>
 <script>
     $(function(){
         $("#create-btn").click(function(){
-            window.location.href="${ctx}/documents/create";
+            window.location.href="${ctx}/documents/createForm/${projectId}";
         });
     });
 </script>

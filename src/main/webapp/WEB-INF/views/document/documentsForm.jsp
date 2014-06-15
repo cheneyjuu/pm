@@ -10,6 +10,9 @@
         /*.table>tbody>tr>td{*/
             /*border-bottom: 1px solid #ddd;*/
         /*}*/
+        .container{
+            width: 100%;
+        }
         .code-container > span{
             cursor: pointer;
         }
@@ -156,20 +159,27 @@
             </div>
         </div>
         <div class="panel-body">
+            <form action="${ctx}/documents/create/${projectId}" method="post">
+                <div class="form-group">
+                    <label for="documentDescription">项目描述</label><textarea name="description" id="documentDescription" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="row document-content">
+                    <div class="col-md-6 clean-padding-r clean-padding-l">
 
-            <div class="row document-content">
-                <div class="col-md-6 clean-padding-r clean-padding-l">
-                    <input class="input-no-bordered title" id="title" type="text" placeholder="请输入标题..."/>
-                    <ul class="toolbar">
-                        <li class="pull-right"><a href="javascript:void(0)" class="text-muted resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a></li>
-                        <li class="pull-right"><a href="javascript:void(0);" class="text-muted resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a></li>
-                    </ul>
-                    <textarea id="text-input" class="form-control" rows="25"></textarea>
+                            <input type="text" name="title" id="title" class="input-no-bordered title" placeholder="请输入标题..."/>
+                            <ul class="toolbar">
+                                <li class="pull-right"><a href="javascript:void(0)" class="text-muted resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a></li>
+                                <li class="pull-right"><a href="javascript:void(0);" class="text-muted resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a></li>
+                            </ul>
+                            <textarea id="text-input" class="form-control" rows="25"></textarea>
+                            <textarea name="article" id="text-article" class="form-control" rows="25"></textarea>
+
+                    </div>
+                    <div class="col-md-6 clean-padding-l clean-padding-r">
+                        <div id="preview" class="well"></div>
+                    </div>
                 </div>
-                <div class="col-md-6 clean-padding-l clean-padding-r">
-                    <div id="preview" class="well"></div>
-                </div>
-            </div>
+            </form>
             <hr/>
             <div class="submit-container">
                 <strong>您可以将文档发送给：</strong>
@@ -177,7 +187,7 @@
                     <li><a href="#">项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
                     <li><a href="#">非项目参与人员</a> <small>被邀请的人只能看到此文档</small></li>
                 </ul>
-                <button class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
+                <button id="subFormBtn" class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
             </div>
         </div>
         <div class="panel-footer"></div>
@@ -195,6 +205,8 @@
 //    new Editor(document.getElementById("text-input"), document.getElementById("preview"));
 
     $(function(){
+
+        $("#text-article").hide();
 
         // 让textarea可以使用制表符(TAB)
         var onTextareaKeydown = function(e){
@@ -340,6 +352,12 @@
                     $("table").addClass("table").addClass("table-bordered");
                 }
             });
+        });
+
+        // 提交表单
+        $("#subFormBtn").click(function(){
+            $("#text-article").val($("#preview").html());
+            $("form").submit();
         });
     });
 </script>

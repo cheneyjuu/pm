@@ -281,12 +281,18 @@
 
 
             // 鼠标移入“任务列表”时，显示“编辑”、“删除”按钮组
-            var tplButtonGroup = '<div class="btn-group btn-group-sm">' +
+            var editTaskObj = {};
+            var tplButtonGroup =
                     '<button type="button" id="editTaskBtn" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span> 编辑</button>' +
                     '<button type="button" id="trashTaskBtn" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 删除</button>' +
                     '</div>';
             // 这里应该加一个计时器，如果鼠标进入时间超过1秒，则显示“操作"按钮
             $(oTaskContainer).children("ul").mouseenter(function(){
+                var taskId = $(this).parent().attr("id");
+                var taskList = $(this).children("li");
+                editTaskObj.taskName = $(taskList).find("a").text();
+                editTaskObj.taskDescription = $(taskList).find("small").text();
+                tplButtonGroup = '<div class="btn-group btn-group-sm" data-flag="' + taskId + '">' + tplButtonGroup;
                 $(this).append("<li class='pull-right btn-group-container'>"+tplButtonGroup+"</li>");
             });
             $(oTaskContainer).children("ul").mouseleave(function(){
@@ -295,10 +301,18 @@
                 }
             });
 
+            var editSubTaskObj = {};
             if ($(oTaskContainer).children(".sub-task-container").length > 0){
                 $(oTaskContainer).children(".sub-task-container").children("ul").children("li").mouseenter(function(){
+                    var subTaskId = $(this).attr("id");
+                    editSubTaskObj.taskName = $(this).children("a").text();
+                    tplButtonGroup = '<div class="btn-group btn-group-sm" data-flag="' + subTaskId +'">' + tplButtonGroup;
                     $(this).append(tplButtonGroup);
                     $(this).children(".btn-group").addClass("pull-right");
+                    // 编辑按钮点击事件
+                    $(this).children(".btn-group").find("#editTaskBtn").click(function(){
+
+                    });
                 });
                 $(oTaskContainer).children(".sub-task-container").children("ul").children("li").mouseleave(function(){
                     $(this).children(".btn-group").remove();

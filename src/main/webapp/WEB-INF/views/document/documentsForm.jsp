@@ -122,46 +122,44 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3><a href="${ctx}/project/index">项目名称</a><a href="javascript:void(0);" id="toggleTools" class="pull-right"><span class="icon-help"></span> 帮助</a></h3>
-            <div class="help-container">
-                <table class="table tools-table">
-                    <tr>
-                        <td>
-                            <ul class="nav nav-pills">
-                                <li class="disabled"><a href="#">插入：</a></li>
-                                <li class="dropdown">
-                                    <a id="drop1" role="button" data-toggle="dropdown" href="#">标题 <b class="caret"></b></a>
-                                    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">一级标题</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">二级标题</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">三级标题</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">四级标题</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">五级标题</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">六级标题</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0);">段落和换行</a></li>
-                                <li><a href="javascript:void(0);">区块引用</a></li>
-                                <li><a href="javascript:void(0);">无序列表</a></li>
-                                <li><a href="javascript:void(0);">有序列表</a></li>
-                                <li><a href="javascript:void(0);">代码区块</a></li>
-                                <li><a href="javascript:void(0);">分隔线</a></li>
-                                <li><a href="javascript:void(0);">链接</a></li>
-                                <li><a href="javascript:void(0);">粗体</a></li>
-                                <li><a href="javascript:void(0);">代码</a></li>
-                                <li><a href="javascript:void(0);">图片</a></li>
-                                <li><a href="javascript:void(0);">自动链接</a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-                <textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>
-            </div>
+            <%--createRichTextBtn<div class="help-container">--%>
+                <%--<table class="table tools-table">--%>
+                    <%--<tr>--%>
+                        <%--<td>--%>
+                            <%--<ul class="nav nav-pills">--%>
+                                <%--<li class="disabled"><a href="#">插入：</a></li>--%>
+                                <%--<li class="dropdown">--%>
+                                    <%--<a id="drop1" role="button" data-toggle="dropdown" href="#">标题 <b class="caret"></b></a>--%>
+                                    <%--<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop1">--%>
+                                        <%--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">一级标题</a></li>--%>
+                                        <%--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">二级标题</a></li>--%>
+                                        <%--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">三级标题</a></li>--%>
+                                        <%--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">四级标题</a></li>--%>
+                                        <%--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">五级标题</a></li>--%>
+                                        <%--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">六级标题</a></li>--%>
+                                    <%--</ul>--%>
+                                <%--</li>--%>
+                                <%--<li><a href="javascript:void(0);">段落和换行</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">区块引用</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">无序列表</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">有序列表</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">代码区块</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">分隔线</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">链接</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">粗体</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">代码</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">图片</a></li>--%>
+                                <%--<li><a href="javascript:void(0);">自动链接</a></li>--%>
+                            <%--</ul>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                <%--</table>--%>
+                <%--<textarea name="example-code" id="example-code" rows="6" class="form-control" disabled="disabled">语法示例</textarea>--%>
+            <%--</div>--%>
         </div>
         <div class="panel-body">
             <form action="${ctx}/documents/create/${projectId}" method="post">
-                <div class="form-group">
-                    <label for="documentDescription">项目描述</label><textarea name="description" id="documentDescription" class="form-control" rows="5"></textarea>
-                </div>
+                <input type="hidden" name="type" value="1"/>
                 <div class="row document-content">
                     <div class="col-md-6 clean-padding-r clean-padding-l">
 
@@ -170,13 +168,16 @@
                                 <li class="pull-right"><a href="javascript:void(0)" class="text-muted resize-small"><span class="glyphicon glyphicon-resize-small"></span> 恢复</a></li>
                                 <li class="pull-right"><a href="javascript:void(0);" class="text-muted resize-full"><span class="glyphicon glyphicon-resize-full"></span> 全屏</a></li>
                             </ul>
-                            <textarea id="text-input" class="form-control" rows="25"></textarea>
+                            <textarea name="originArticle" id="text-input" class="form-control" rows="25"></textarea>
                             <textarea name="article" id="text-article" class="form-control" rows="25"></textarea>
 
                     </div>
                     <div class="col-md-6 clean-padding-l clean-padding-r">
                         <div id="preview" class="well"></div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="documentDescription">项目描述</label><textarea name="description" id="documentDescription" class="form-control" rows="5"></textarea>
                 </div>
             </form>
             <hr/>
@@ -186,7 +187,7 @@
                     <li><a href="#">项目参与人员</a> <small>被邀请的人员可以和您一起协作完成任务</small></li>
                     <li><a href="#">非项目参与人员</a> <small>被邀请的人只能看到此文档</small></li>
                 </ul>
-                <button id="subFormBtn" class="btn btn-default btn-success btn-md post-btn"> 提 交 </button>
+                <button id="subFormBtn" class="btn btn-default btn-success btn-md post-btn"><span class="glyphicon glyphicon-ok"></span> 提 交 </button>
             </div>
         </div>
         <div class="panel-footer"></div>
@@ -194,19 +195,8 @@
 </div>
 
 <script>
-//    function Editor(input, preview) {
-//        this.update = function () {
-//            preview.innerHTML = markdown.toHTML(input.value);
-//        };
-//        input.editor = this;
-//        this.update();
-//    }
-//    new Editor(document.getElementById("text-input"), document.getElementById("preview"));
-
     $(function(){
-
         $("#text-article").hide();
-
         // 让textarea可以使用制表符(TAB)
         var onTextareaKeydown = function(e){
             if(e.keyCode == 9){

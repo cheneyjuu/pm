@@ -1,0 +1,39 @@
+.clean-margin {
+  margin-left: -15px;
+}
+.f-fz1 {
+  font-size: 17.5px;
+}
+.black-color {
+  color: #111111;
+}
+.text-white {
+  color: #ffffff;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.pt-10 {
+  padding-top: 10px;
+}
+.pt-20 {
+  padding-top: 20px;
+}
+.pr-10 {
+  padding-right: 10px;
+}
+.pr-20 {
+  padding-right: 20px;
+}
+.text-indent {
+  text-indent: 2em;
+}

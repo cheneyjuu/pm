@@ -3,9 +3,11 @@
 	<excludes>
 		<pattern>/static/*</pattern>
 		<pattern>/api/*</pattern>
+        <pattern>/dash/</pattern>
 	</excludes>
 	
 	<decorator name="default" page="default.jsp">
 		<pattern>/*</pattern>
+		<pattern>/login</pattern>
 	</decorator>
 </decorators>

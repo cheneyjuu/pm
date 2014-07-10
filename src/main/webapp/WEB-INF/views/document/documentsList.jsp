@@ -8,50 +8,78 @@
 <head>
     <title>文档列表</title>
     <style>
-        .document-container a{
-            display: inline-block;
-            float: left;
+        .document-container h4 > a{
+            color: #ffffff
+        }
+        .document-container .panel-body a{
             text-decoration: none;
+        }
+        .modify-btn{
+            line-height: 1.2em;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3><a href="${ctx}/project/index">项目名称</a></h3>
-        </div>
-        <div class="panel-body">
-            <div class="page-header">
-                <h4>所有文档 <button class="btn btn-default btn-sm add-todo" id="create-btn"><span class="glyphicon glyphicon-plus"></span> 添加新文档</button></h4>
-                <span class="pull-right">
-                    <small>根据标签查看文件</small>
-                    <a href="#"><span class="label label-info">所有标签</span></a>
-                </span>
-            </div>
-            <div class="row document-container">
-                <c:forEach items="${documentPage.content}" var="document">
-                    <a class="col-md-4" href="${ctx}/documents/details/${projectId}/${document.id}">
-                        <h4 class="text-center">${document.title}</h4>
-                        <p class="text-muted">
-                                ${document.description}
-                        </p>
-                        <small><span class="text-muted">${document.author.name}于${document.createTime}添加</span></small>
-                    </a>
-                </c:forEach>
+    <section>
+        <div class="row">
+            <div class="col-md-6"><h4 class="pull-left"><span class="glyphicon glyphicon-th-list"></span> 所有文档</h4></div>
+            <div class="col-md-6">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-file"></span>  新建文档 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" id="createMarkDownBtn">MarkDown文档</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="createRichTextBtn">富文本文档</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="panel-footer">
-            <c:if test="${fn:length(documentPage.content) > 0}">
-                <tags:pagination page="${documentPage}" paginationSize="12"/>
-            </c:if>
-        </div>
+    </section>
+
+    <div class="row">
+        <c:forEach items="${documentPage.content}" var="document">
+            <div class="col-md-4 document-list">
+                <input type="hidden" value="${document.id}"/>
+                <input type="hidden" value="${document.type}"/>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h4 class="text-center"><a href="${ctx}/documents/details/${projectId}/${document.id}">${document.title}</a></h4></div>
+                    <div class="panel-body"><p><a href="${ctx}/documents/details/${projectId}/${document.id}" class="text-muted">${document.description}</a></p></div>
+                    <div class="panel-footer">
+                        <small class="text-muted">${document.author.name}于${document.createTime}添加</small>
+                        <a href="javascript:void(null)" class="btn btn-sm btn-info pull-right modify-btn"><span class="glyphicon glyphicon-pencil"></span> 修改</a>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+    <div>
+        <c:if test="${fn:length(documentPage.content) > 0}">
+            <tags:pagination page="${documentPage}" paginationSize="12"/>
+        </c:if>
     </div>
 </div>
 <script>
     $(function(){
-        $("#create-btn").click(function(){
+        $("#createMarkDownBtn").click(function(){
             window.location.href="${ctx}/documents/createForm/${projectId}";
+        });
+        $("#createRichTextBtn").click(function(){
+            window.location.href="${ctx}/documents/createRichText/${projectId}";
+        });
+
+        $('.document-list').each(function(){
+            var id = $(this).find('input[type="hidden"]').first().val();
+            var type = $(this).find('input[type="hidden"]').last().val();
+            $(this).find('.modify-btn').click(function(){
+                if (type == 1){
+                    window.location.href="${ctx}/documents/update/"+id;
+                } else if (type == 2){
+                    window.location.href="${ctx}/documents/updateRichText/"+id;
+                }
+            });
         });
     });
 </script>

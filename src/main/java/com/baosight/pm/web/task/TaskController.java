@@ -62,24 +62,16 @@ public class TaskController {
 		sortTypes.put("title", "标题");
 	}
 
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
-//			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
-//			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, Model model,
-//			ServletRequest request) {
-//		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
-//		Long userId = getCurrentUserId();
-//
-//		Page<Task> tasks = taskService.getUserTask(userId, searchParams, pageNumber, pageSize, sortType);
-//
-//		model.addAttribute("tasks", tasks);
-//		model.addAttribute("sortType", sortType);
-//		model.addAttribute("sortTypes", sortTypes);
-//		// 将搜索条件编码成字符串，用于排序，分页的URL
-//		model.addAttribute("searchParams", Servlets.encodeParameterStringWithPrefix(searchParams, "search_"));
-//
-//		return "task/taskList";
-//	}
+    @RequestMapping (value = "index/{taskId}")
+    public String index(@PathVariable ("taskId") String taskId,
+                        Model model){
+        Task task = taskService.getTask(taskId);
+        model.addAttribute("task", task);
+        List<Task> taskList = taskService.listByProject(task.getProject().getId());
+        model.addAttribute("taskList", taskList);
+        model.addAttribute("projectId", task.getProject().getId());
+        return "task/taskIndex";
+    }
 
     @RequestMapping (value = "list/{projectId}", method = RequestMethod.GET)
     public String list(@PathVariable (value = "projectId") String projectId ,Model model){

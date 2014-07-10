@@ -1,0 +1,92 @@
+.clean-margin {
+  margin-left: -15px;
+}
+.f-fz1 {
+  font-size: 17.5px;
+}
+.black-color {
+  color: #111111;
+}
+.text-white {
+  color: #ffffff;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.pt-10 {
+  padding-top: 10px;
+}
+.pt-20 {
+  padding-top: 20px;
+}
+.pr-10 {
+  padding-right: 10px;
+}
+.pr-20 {
+  padding-right: 20px;
+}
+.text-indent {
+  text-indent: 2em;
+}
+.clear-left-margin {
+  margin-left: -15px;
+}
+.clear-right-margin {
+  margin-right: -15px;
+}
+.clear-left-padding {
+  padding-left: 0;
+}
+.clear-right-padding {
+  padding-right: 0;
+}
+.full-height {
+  height: 100%;
+}
+.dark-color {
+  background-color: #2b303e;
+}
+.nav-sidebar a {
+  color: #ffffff;
+}
+.nav-sidebar a:hover {
+  color: #f1f1f1;
+  text-decoration: none;
+  border-bottom: none;
+}
+.nav-sidebar > .nav > li > .nav-child {
+  margin-top: 10px;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: #3B3F4D;
+}
+.nav > li > a.zero-padding {
+  padding-left: 0;
+}
+.nav > li > a.inline {
+  display: inline;
+}
+.nav > li > a.inline:hover {
+  background-color: #2b303e;
+}
+.row > header {
+  height: 4em;
+  background-color: #2b303e;
+}
+.row > header a {
+  display: inline-block;
+  line-height: 2em;
+  margin-left: 2em;
+  margin-top: .5em;
+  font-size: 1.5em;
+}

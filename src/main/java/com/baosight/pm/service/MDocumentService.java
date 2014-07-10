@@ -10,10 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 /**
  * User: Juchen
@@ -31,10 +28,12 @@ public class MDocumentService {
         documentDao.save(document);
     }
 
-    public Page<MDocument> documentPage(int pageNumber, int pageSize){
+    public Page<MDocument> documentPage(int pageNumber, int pageSize, final String projectId){
         return documentDao.findAll(new Specification<MDocument>() {
             @Override
             public Predicate toPredicate(Root<MDocument> mDocumentRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Path<String> _projectId = mDocumentRoot.get("project").get("id");
+                criteriaQuery.where(criteriaBuilder.equal(_projectId, projectId));
                 return null;
             }
         }, new PageRequest(pageNumber - 1, pageSize));

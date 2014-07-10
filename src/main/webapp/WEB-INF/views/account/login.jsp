@@ -8,6 +8,11 @@
 <html>
 <head>
 	<title>登录页</title>
+    <style>
+        body{
+            background-image: url("/static/images/blur-bg-light.png");
+        }
+    </style>
 </head>
 
 <body>
@@ -48,11 +53,10 @@
 </form>
 <script>
     $(function(){
-        var header_height = $("#header").height();
-        var footer_height = $("#footer").height();
-        var container_height = $("#container").height();
-        var client_height = document.documentElement.clientHeight - header_height - footer_height - container_height;
-        $("#loginForm").css("position", "relative").css("top",client_height /2 + "px");
+        var clientHeight = document.documentElement.clientHeight;
+        var formHeight = $('form').innerHeight();
+        var position = clientHeight/2-formHeight/2;
+        $('form').css('margin-top',position+'px');
     });
 </script>
 </body>

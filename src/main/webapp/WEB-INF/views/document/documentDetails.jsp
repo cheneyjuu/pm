@@ -12,6 +12,11 @@
             <div class="panel-heading">
                 <h3><a href="${ctx}/project/index/${projectId}">项目名称</a>  <small><a href="${ctx}/documents/list/${projectId}">文档列表</a></small></h3>
             </div>
+            <c:if test="${document.type == 2}">
+                <div class="page-header">
+                    <h3 class="text-center">${document.title}</h3>
+                </div>
+            </c:if>
             <div class="panel-body">
                 ${document.article}
             </div>

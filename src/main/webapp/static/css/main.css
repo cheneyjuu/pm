@@ -1,12 +1,13 @@
 body{
-    /*font-family: "Hiragino Sans GB W3","Microsoft Yahei", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;*/
     -webkit-font-smoothing:antialiased;
-    background-color: #eeeff1;
-    background: url("../images/background.png");
+    background-color: #EEEFF2;
+    height: 100%;
 }
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
-    font-family: "Hiragino Sans GB W3","Microsoft Yahei", "WenQuanYi Micro Hei", Verdana, Aril, sans-serif;
-    -webkit-font-smoothing:antialiased;
+.container-fluid{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 .f-ff1{
     font-family:"Microsoft YaHei",\5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53;
@@ -64,14 +65,14 @@ a.clean-link-decoration{
 .nav-pills>li>a {
     border-radius: 0;
 }
-.nav>li>a{
-    padding: 8px 15px;
-}
-.nav>li>a:hover, .nav>li>a:focus{
-    background-color: #2a2c2e;
-    color: #FFF;
-    border-bottom: 3px solid #d45;
-}
+/*.nav>li>a{*/
+    /*padding: 8px 15px;*/
+/*}*/
+/*.nav>li>a:hover, .nav>li>a:focus{*/
+    /*background-color: #2a2c2e;*/
+    /*color: #FFF;*/
+    /*border-bottom: 3px solid #d45;*/
+/*}*/
 #header ul li a.active{
     border-bottom: 3px solid #d45;
     color: #ffffff;
@@ -132,7 +133,7 @@ input[type="file"]{
 }
 #content>.container{
     padding-left: 40px;
-    padding-right: 15px;
+    /*padding-right: 15px;*/
 }
 
 /*margin function*/

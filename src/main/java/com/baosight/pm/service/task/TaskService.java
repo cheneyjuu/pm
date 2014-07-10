@@ -79,6 +79,17 @@ public class TaskService {
         });
     }
 
+    public List<Task> listByProject(final String projectId){
+        return taskDao.findAll(new Specification<Task>() {
+            @Override
+            public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Path<String> pid = root.get("project").get("id");
+                criteriaQuery.where(criteriaBuilder.equal(pid, projectId));
+                return null;
+            }
+        }, new Sort(Sort.Direction.DESC, "createTime"));
+    }
+
 	public Page<Task> getUserTask(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);

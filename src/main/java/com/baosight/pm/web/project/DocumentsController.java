@@ -7,6 +7,7 @@ import com.baosight.pm.service.MDocumentService;
 import com.baosight.pm.service.account.AccountService;
 import com.baosight.pm.service.account.ShiroDbRealm;
 import com.baosight.pm.service.project.ProjectService;
+import com.baosight.pm.service.task.TaskService;
 import org.apache.shiro.SecurityUtils;
 import org.pegdown.Extensions;
 import org.pegdown.PegDownProcessor;
@@ -14,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -42,6 +40,8 @@ public class DocumentsController {
     private AccountService accountService;
     @Autowired
     private MDocumentService documentService;
+    @Autowired
+    private TaskService taskService;
 
     @RequestMapping (value = "list/{projectId}")
     public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
@@ -49,9 +49,10 @@ public class DocumentsController {
                        Model model){
         ShiroDbRealm.ShiroUser user = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
         if (user != null){
-            Page<MDocument> documentPage = documentService.documentPage(pageNumber, PAGE_SIZE);
+            Page<MDocument> documentPage = documentService.documentPage(pageNumber, PAGE_SIZE, projectId);
             model.addAttribute("documentPage", documentPage);
             model.addAttribute("projectId", projectId);
+            model.addAttribute("taskList", taskService.listByProject(projectId));
             return "document/documentsList";
         } else{
             return "account/login";
@@ -62,7 +63,16 @@ public class DocumentsController {
     public String createDocument(@PathVariable (value = "projectId") String projectId,
                                  Model model){
         model.addAttribute("projectId", projectId);
+        model.addAttribute("taskList", taskService.listByProject(projectId));
         return "document/documentsForm";
+    }
+
+    @RequestMapping (value = "createRichText/{projectId}")
+    public String createRichText(@PathVariable (value = "projectId") String projectId,
+                                 Model model){
+        model.addAttribute("projectId", projectId);
+        model.addAttribute("taskList", taskService.listByProject(projectId));
+        return "document/richTextForm";
     }
 
     @RequestMapping (value = "create/{projectId}", method = RequestMethod.POST)
@@ -83,9 +93,10 @@ public class DocumentsController {
             documentService.save(document);
             redirectAttributes.addFlashAttribute("message", "文档添加成功");
 
-            Page<MDocument> documentPage = documentService.documentPage(1, PAGE_SIZE);
+            Page<MDocument> documentPage = documentService.documentPage(1, PAGE_SIZE, projectId);
             model.addAttribute("documentPage", documentPage);
             model.addAttribute("projectId", projectId);
+            model.addAttribute("taskList", taskService.listByProject(projectId));
             return "redirect:/documents/list/"+projectId;
         } else{
             return "account/login";
@@ -100,10 +111,36 @@ public class DocumentsController {
         if (document != null){
             model.addAttribute("document", document);
             model.addAttribute("projectId", projectId);
+            model.addAttribute("taskList", taskService.listByProject(projectId));
             return "document/documentDetails";
         } else {
             redirectAttributes.addFlashAttribute("message", "文档不存在，可能已被删除。");
             return "error/404";
+        }
+    }
+
+    @RequestMapping (value = "update/{id}")
+    public String updateForm(@PathVariable (value = "id") String id, Model model){
+        model.addAttribute("document", documentService.findOne(id));
+        return "document/updateForm";
+    }
+
+    @RequestMapping (value = "updateRichText/{id}")
+    public String updateRichText(@PathVariable (value = "id") String id, Model model){
+        model.addAttribute("document", documentService.findOne(id));
+        return "document/updateRichTextForm";
+    }
+
+    @RequestMapping (value = "update")
+    public String update(@Valid @ModelAttribute("document") MDocument document){
+        documentService.save(document);
+        return "redirect:/documents/details/"+document.getProject().getId()+"/"+document.getId();
+    }
+
+    @ModelAttribute
+    public void getDocument(@RequestParam (value = "documentId", required = false) String documentId, Model model){
+        if (null != documentId){
+            model.addAttribute("document", documentService.findOne(documentId));
         }
     }
 

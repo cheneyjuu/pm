@@ -8,6 +8,12 @@
 </head>
 <body>
     <div class="container project-container">
+        <c:if test="${not empty message}">
+            <div class="alert alert-success fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                <strong>${message}</strong>
+            </div>
+        </c:if>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
@@ -15,10 +21,11 @@
                         <h3>${project.projectName}</h3>
                         <p class="text-muted">${project.intro}</p>
                     </div>
-                    <div class="col-md-5 col-md-push-1 pull-right project-action">
-                        <a href="#" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-user"></span> 邀请成员</a>
+                    <div class="col-md-5 pull-right project-action">
+                        <a href="#" id="inviteUsersId" data-toggle="modal" data-target="#myModal" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-user"></span> 邀请成员</a>
                         <a href="#" class="text-muted clean-link-decoration"><span class="glyphicon glyphicon-cog"></span> 设置项目</a>
                         <a href="#" class="text-danger clean-link-decoration"><span class="glyphicon glyphicon-cog"></span> 删除项目</a>
+
                     </div>
                 </div>
             </div>
@@ -199,21 +206,36 @@
                     </header>
                 </section>
             </div>
-            <%--<div class="panel-footer">--%>
-                <%--<div id="project-operation">--%>
-                    <%--<a href="#" class="text-muted">项目设置</a>--%>
-                    <%--<a href="#" class="pull-right text-muted">删除项目</a>--%>
-                <%--</div>--%>
-                <%--<div id="project-setting">--%>
-                    <%--<span class="center-block">--%>
-                        <%--<label for="open"><input name="settingName" id="open" type="radio" checked="checked"/> <strong>开启</strong></label>--%>
-                        <%--<label for="close"><input name="settingName" id="close" type="radio"/> <strong>关闭</strong></label>--%>
-                    <%--</span>--%>
-                    <%--<span class="center-block">--%>
-                        <%--<a href="#" class="btn btn-primary btn-sm">保存</a> 或 <a href="#" class="btn btn-default btn-sm">取消</a>--%>
-                    <%--</span>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">邀请成员</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="${ctx}/project/invite" id="inviteForm" method="post" class="form">
+                        <input type="hidden" name="projectId" value="${project.id}"/>
+                        <div class="form-group">
+                            <select name="users" id="selectUsers" class="form-control">
+                                <option value="-1">--选择成员--</option>
+                                <c:forEach items="${userList}" var="user">
+                                    <option value="${user.id}">${user.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="users" id="users"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" id="inviteUserBtn" class="btn btn-primary">邀请</button>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -228,6 +250,44 @@
                 var del = window.confirm("确定要删除项目？项目删除后，可在回收站恢复！");
 
             });
+
+            // 邀请成员
+            $("#selectUsers").change(function(){
+                var current_id, current_text;
+                var begin_tag,end_tag;
+                $(this).find("option:selected").each(function(){
+                    current_id = $(this).val();
+                    current_text = $(this).text();
+                    begin_tag = "<input type='hidden' name='userId' value=";
+                    end_tag = ">";
+                    $("#selectUserId").append(begin_tag+current_id+end_tag);
+                });
+
+                if (current_id){
+                    $('.modal-body').css('height', '150px');
+                    $("#users").append("<div class='col-md-2 user-"+current_id+"'><h5 class='text-center'>"+current_text+"</h5> <a href='javascript:void(0)' onclick='delUser(this)' class='label label-default text-center center-block del-user'> <span class='glyphicon glyphicon-trash'></span>删除</a></div>");
+                    $('.modal-body > form').append('<input type="hidden" name="userIdList" class="user-'+current_id+'" value="'+current_id+'">');
+                    $(this).find("option[value="+current_id+"]").remove();
+                }
+            });
+        });
+        // 删除成员
+        function delUser(dom){
+            var value,text,option;
+            $(dom).parent().remove();
+            value = ($(dom).parent().attr("class").split(" ")[1]).split("-")[1];//user id
+            text = $(dom).parent().find("h5").text();//user name
+            option = "<option value="+value+">"+text+"</option>";
+            $("#selectUsers").append(option);
+            if ($('#users').children().length == 0){
+                $('.modal-body').css('height', '70px');
+            }
+            //删除对应的hidden value
+            $('.modal-body > form').find('.user-'+value).remove();
+        }
+
+        $('#inviteUserBtn').click(function(){
+            $('#inviteForm').submit();
         });
     </script>
 </body>

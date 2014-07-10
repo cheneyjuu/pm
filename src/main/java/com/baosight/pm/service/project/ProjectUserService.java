@@ -4,6 +4,7 @@ import com.baosight.pm.entity.ProjectUser;
 import com.baosight.pm.entity.User;
 import com.baosight.pm.repository.ProjectUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
@@ -32,9 +33,10 @@ public class ProjectUserService {
             @Override
             public Predicate toPredicate(Root<ProjectUser> projectUserRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 Path<Long> userId = projectUserRoot.get("user").get("id");
-                criteriaQuery.where(criteriaBuilder.equal(userId, uid));
+                Path<String> projectId = projectUserRoot.get("project").get("id");
+                criteriaQuery.where(criteriaBuilder.equal(userId, uid)).groupBy(projectId);
                 return null;
             }
-        });
+        }, new Sort(Sort.Direction.DESC, "id"));
     }
 }

@@ -24,7 +24,9 @@ public class MDocument {
     @JoinColumn(name = "user_id")
     private User author;
     private String createTime;
+    private String originArticle;
     private String article;
+    private int type;//文档类型，1代表MarkDown，2代表服文本
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
@@ -61,6 +63,14 @@ public class MDocument {
         this.createTime = createTime;
     }
 
+    public String getOriginArticle() {
+        return originArticle;
+    }
+
+    public void setOriginArticle(String originArticle) {
+        this.originArticle = originArticle;
+    }
+
     public String getArticle() {
         return article;
     }
@@ -75,6 +85,14 @@ public class MDocument {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public Project getProject() {
